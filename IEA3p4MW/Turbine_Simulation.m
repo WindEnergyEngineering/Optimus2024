@@ -16,7 +16,7 @@ Parameter                       = DefaultParameter_Storage(Parameter);
 % Time
 dt                              = 1/80;
 Parameter.Time.dt               = dt;   % [s] simulation time step              
-Parameter.Time.TMax             = 5*60;   % [s] simulation length
+Parameter.Time.TMax             = 4000;   % [s] simulation length
 
 %% Loop over Operation Points
 
@@ -61,22 +61,23 @@ figure
 subplot(411)
 hold on;box on;grid on;
 plot(simout.tout,v_0)
-ylabel('v_0')
+ylabel('v_0 [m/s]')
 legend(strcat(num2str(OPs'),' m/s')) 
 
 subplot(412)
 hold on;box on;grid on;
 plot(simout.tout,P_dem./1000)
-ylabel('P_dem')
+ylabel('P_{dem} [MW]')
 
 subplot(413)
 hold on;box on;grid on;
 plot(simout.tout,Power_el./1000)
 ylabel('Power [kW]')
-legend(strcat(num2str(OPs'),' m/s'))
+% legend(strcat(num2str(OPs'),' m/s'))
 
 subplot(414)
 hold on;box on;grid on;
 plot(simout.tout,Energy_el./Parameter.Storage.Capacity*100)
-ylabel('Energy Storage Level [%]')
-legend(strcat(num2str(OPs'),' m/s')) 
+ylabel('Storage Lvl. [%]')
+xlabel('Time [s]')
+% legend(strcat(num2str(OPs'),' m/s')) 
