@@ -11,15 +11,16 @@ clearvars;close all;clc;
 Parameter                       = DefaultParameter_SLOW2DOF;
 Parameter                       = DefaultParameter_PitchActuator(Parameter);
 Parameter                       = DefaultParameter_FBv1_ADv14(Parameter);
+Parameter                       = DefaultParameter_Storage(Parameter);
 
 % Time
 dt                              = 1/80;
 Parameter.Time.dt               = dt;   % [s] simulation time step              
-Parameter.Time.TMax             = 60;   % [s] simulation length
+Parameter.Time.TMax             = 5*60;   % [s] simulation length
 
 %% Loop over Operation Points
 
-OPs = [12 16 20 24];
+OPs = [20];
 nOP = length(OPs);
 
 for iOP=1:nOP
@@ -29,7 +30,11 @@ for iOP=1:nOP
 
     % wind for this OP
     Disturbance.v_0.time            = [0; 30; 30+dt;  60];       % [s]      time points to change wind speed
-    Disturbance.v_0.signals.values  = [0;  0;   0.1; 0.1]+OP;    % [m/s]    wind speeds
+    Disturbance.v_0.signals.values  = [0;  0;   0.0; 0.0]+OP;    % [m/s]    wind speeds
+
+    % Battery storage scenario
+    Selector = 1;
+    Disturbance.P_dem = Scenarios(Selector,Parameter.Time.TMax,dt);
 
     % Initial Conditions from SteadyStates for this OP
     SteadyStates = load('SteadyStates_FBv1_SLOW2DOF','v_0','Omega','theta','M_g','x_T');                       
@@ -37,13 +42,13 @@ for iOP=1:nOP
     Parameter.IC.theta          	= interp1(SteadyStates.v_0,SteadyStates.theta,OP,'linear','extrap');
     Parameter.IC.M_g          	    = interp1(SteadyStates.v_0,SteadyStates.M_g,  OP,'linear','extrap');
     Parameter.IC.x_T          	    = interp1(SteadyStates.v_0,SteadyStates.x_T,  OP,'linear','extrap');
-
+    
     % Processing SLOW for this OP
-    sim('FBv1_SLOW2DOF.mdl')
+    simout = sim('FBv1_SLOW2DOF.mdl');
     
     % collect simulation Data
-    Omega(:,iOP) = logsout.get('y').Values.Omega.Data;
-    Power_el(:,iOP) = logsout.get('y').Values.P_el.Data;
+    Omega(:,iOP) = simout.logsout.get('y').Values.Omega.Data;
+    Power_el(:,iOP) = simout.logsout.get('y').Values.P_el.Data;
  
 end
 
@@ -53,12 +58,12 @@ figure
 
 subplot(211)
 hold on;box on;grid on;
-plot(tout,Omega*60/2/pi)
+plot(simout.tout,Omega*60/2/pi)
 ylabel('\Omega [rpm]')
 legend(strcat(num2str(OPs'),' m/s'))
 
 subplot(212)
 hold on;box on;grid on;
-plot(tout,Power_el./1000)
+plot(simout.tout,Power_el./1000)
 ylabel('Power [kW]')
 legend(strcat(num2str(OPs'),' m/s')) 
