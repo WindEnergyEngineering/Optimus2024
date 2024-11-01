@@ -49,21 +49,34 @@ for iOP=1:nOP
     % collect simulation Data
     Omega(:,iOP) = simout.logsout.get('y').Values.Omega.Data;
     Power_el(:,iOP) = simout.logsout.get('y').Values.P_el.Data;
- 
+    Energy_el(:,iOP) = simout.logsout.get('z').Values.E_storage.Data;
+    v_0(:,iOP) = simout.logsout.get('d').Values.v_0.Data;
+    P_dem(:,iOP) = simout.logsout.get('z').Values.P_dem.Data;
 end
 
 
 %% PostProcessing SLOW
 figure
 
-subplot(211)
+subplot(411)
 hold on;box on;grid on;
-plot(simout.tout,Omega*60/2/pi)
-ylabel('\Omega [rpm]')
-legend(strcat(num2str(OPs'),' m/s'))
+plot(simout.tout,v_0)
+ylabel('v_0')
+legend(strcat(num2str(OPs'),' m/s')) 
 
-subplot(212)
+subplot(412)
+hold on;box on;grid on;
+plot(simout.tout,P_dem./1000)
+ylabel('P_dem')
+
+subplot(413)
 hold on;box on;grid on;
 plot(simout.tout,Power_el./1000)
 ylabel('Power [kW]')
+legend(strcat(num2str(OPs'),' m/s'))
+
+subplot(414)
+hold on;box on;grid on;
+plot(simout.tout,Energy_el./Parameter.Storage.Capacity*100)
+ylabel('Energy Storage Level [%]')
 legend(strcat(num2str(OPs'),' m/s')) 
