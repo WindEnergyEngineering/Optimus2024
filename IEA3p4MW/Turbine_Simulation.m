@@ -16,7 +16,7 @@ Parameter                       = DefaultParameter_Storage(Parameter);
 % Time
 dt                              = 1/80;
 Parameter.Time.dt               = dt;   % [s] simulation time step              
-Parameter.Time.TMax             = 4000;   % [s] simulation length
+Parameter.Time.TMax             = 5*60;   % [s] simulation length
 
 %% Loop over Operation Points
 
@@ -33,8 +33,8 @@ for iOP=1:nOP
     Disturbance.v_0.signals.values  = [0;  0;   0.0; 0.0]+OP;    % [m/s]    wind speeds
 
     % Battery storage scenario
-    Selector = 1;
-    Disturbance.P_dem = Scenarios(Selector,Parameter.Time.TMax,dt);
+    Select = 3;
+    Disturbance.P_dem = Scenarios(Select,Parameter.Time.TMax,dt);
 
     % Initial Conditions from SteadyStates for this OP
     SteadyStates = load('SteadyStates_FBv1_SLOW2DOF','v_0','Omega','theta','M_g','x_T');                       
@@ -57,12 +57,14 @@ end
 
 %% PostProcessing SLOW
 figure
-
 subplot(411)
 hold on;box on;grid on;
 plot(simout.tout,v_0)
 ylabel('v_0 [m/s]')
 legend(strcat(num2str(OPs'),' m/s')) 
+
+Select_str = num2str(Select);
+title("Scenario " + Select_str)
 
 subplot(412)
 hold on;box on;grid on;
