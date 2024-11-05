@@ -13,6 +13,10 @@ switch Selector
         demand = 3.6e6/2;
         P_dem.time            = [0; (TMax/2); (TMax/2)+dt;  TMax];      % [s] time points to change power demand
         P_dem.signals.values  = [demand;  demand;   demand; demand];    % [MW]    Power
+    case 4 % operation below rated power and higher demand from grid
+        demand = 3.6e6/2;
+        P_dem.time            = [0; (TMax/2); (TMax/2)+dt;  TMax];      % [s] time points to change power demand
+        P_dem.signals.values  = [demand;  demand;   demand*2; demand*2];    % [MW]    Power
     otherwise
         disp('No matching scenario found for the given input');
 end
