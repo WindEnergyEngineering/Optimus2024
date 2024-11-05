@@ -94,7 +94,7 @@ for wind_file in wind_files:
     if not os.path.exists(main_directory):
         os.makedirs(output_directory)
 
-    dlc_directory = os.path.join(output_directory, 'DLC61')
+    dlc_directory = os.path.join(output_directory, 'DLC13')
 
     # Check if the DLC directory exists; if not, create it
     if not os.path.exists(dlc_directory):
