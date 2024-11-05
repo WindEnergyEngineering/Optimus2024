@@ -33,7 +33,7 @@ for iOP=1:nOP
     Disturbance.v_0.signals.values  = [0;  0;   0.0; 0.0]+OP;    % [m/s]    wind speeds
 
     % Battery storage scenario
-    Select = 1;
+    Select = 2;
     Disturbance.P_dem = Scenarios(Select,Parameter.Time.TMax,dt);
 
     % Initial Conditions from SteadyStates for this OP
