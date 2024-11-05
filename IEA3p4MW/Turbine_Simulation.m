@@ -16,7 +16,7 @@ Parameter                       = DefaultParameter_Storage(Parameter);
 % Time
 dt                              = 1/80;
 Parameter.Time.dt               = dt;   % [s] simulation time step              
-Parameter.Time.TMax             = 5*60;   % [s] simulation length
+Parameter.Time.TMax             = 60;   % [s] simulation length
 
 %% Loop over Operation Points
 
@@ -33,7 +33,7 @@ for iOP=1:nOP
     Disturbance.v_0.signals.values  = [0;  0;   0.0; 0.0]+OP;    % [m/s]    wind speeds
 
     % Battery storage scenario
-    Select = 3;
+    Select = 1;
     Disturbance.P_dem = Scenarios(Select,Parameter.Time.TMax,dt);
 
     % Initial Conditions from SteadyStates for this OP
