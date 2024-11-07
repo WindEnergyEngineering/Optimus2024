@@ -1,0 +1,94 @@
+% -----------------------------
+% Script: Generates a set of time series for rotor-effective wind speed.
+% Exercise 06 of Master Course 
+% "Controller Design for Wind Turbines and Wind Farms"
+% ----------------------------------
+
+clearvars;close all;clc;
+
+%% Configuration
+
+% Parameter 
+Parameter.Turbine.R                     = 65;       % [m] rotor radius
+Parameter.Time.dt                       = 0.1;      % [s] simulation time step            
+Parameter.Time.TMax                     = 3600;     % [s] simulation lenght
+Parameter.TurbSim.IRef                  = 0.14;     % [-] ClassB
+
+% windfield
+[windfield.grid.Y,windfield.grid.Z]     = meshgrid(-68:8:68);
+
+%% Generate Disturbances
+figure
+hold on;box on
+xlabel('t [s]')
+ylabel('v_0 [m/s]')
+
+% Mean wind speeds for DLC 1.2
+URef_v      = [3:1:12];
+nURef       = length(URef_v);
+
+% loop over wind speeds
+for iURef = 1:nURef
+    
+    % Generate Rotor-Effective Wind Speed
+    URef                        = URef_v(iURef);
+    Parameter.TurbSim.URef      = URef;
+    Parameter.TurbSim.RandSeed 	= URef; % to be different for every URef
+    fprintf('Generating %d m/s!\n',URef)
+    Disturbance                 = GenerateRotorEffectiveWindSpeed(windfield,Parameter);
+    
+    % plot and save
+    plot(Disturbance.v_0.time,Disturbance.v_0.signals.values);
+    drawnow
+    save(['wind\URef_',num2str(URef,'%02d'),'_Disturbance'],'Disturbance','windfield','Parameter')    
+    
+end
+%% 
+
+v = [3 3 3 4 4 5 5 6 6 5 7 9 9 10 11 12 10 9 8 6 6 5 5 4 4];
+
+
+for i = min(v):max(v)
+    load(['wind\URef_',num2str(i,'%02d'),'_Disturbance.mat'], 'Disturbance');
+    v_length = length(Disturbance.v_0.signals.values);
+    v_table([1:v_length],i) = Disturbance.v_0.signals.values;
+    
+end
+
+Disturbance.v_0.signals.values = [];
+ for j = 1:length(v)
+    Disturbance.v_0.signals.values = [Disturbance.v_0.signals.values; v_table(:,v(j))];
+     
+
+ end
+Disturbance.v_0.time = [0:0.1:25*3600-0.1];
+save('wind\shittyWind1_Disturbance','Disturbance','windfield','Parameter')  
+figure
+p = plot(v_Disturbance,'x-','MarkerIndices',[36000:36000:length(v_Disturbance)]);
+%p.MarkerFaceColor = [1 0.5 0];
+p.MarkerSize = 8;
+p.MarkerEdgeColor = [1 0.5 0];
+hold on;
+%q = plot([36001:36000:(length(v_Disturbance)-35999)],'x');
+
+%end7 = v7.Disturbance.v_0.signals.values(end);
+
+%[~,closestIndex] = min(abs(end7-v9.Disturbance.v_0.signals.values));
+
+%closestIndex = closestIndex + 10000;
+
+%vn = [v7.Disturbance.v_0.signals.values 
+%    circshift(v9.Disturbance.v_0.signals.values,closestIndex)];
+%t_new = [0:Parameter.Time.dt:2*Parameter.Time.TMax-Parameter.Time.dt];
+
+
+%% Plot ressults
+figure;
+plot(t_new,vn)
+title('circ shifted')
+
+figure;
+noshift = [v7.Disturbance.v_0.signals.values 
+    v9.Disturbance.v_0.signals.values];
+plot(t_new,noshift)
+title('added')
