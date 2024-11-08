@@ -43,11 +43,12 @@ for iURef = 1:nURef
     save(['wind\URef_',num2str(URef,'%02d'),'_Disturbance'],'Disturbance','windfield','Parameter')    
     
 end
-%% 
-
-v = [3 3 3 4 4 5 5 6 6 5 7 9 9 10 11 12 10 9 8 6 6 5 5 4 4];
+%% Post Processing Disturbance
+% Mean windspeed used can be manually adjusted
+v = [3 3 3 4 4 5 5 6 6 5 7 9 9 10 11 12 10 9 8 6 6 5 5 4 4];               % v [m/s}
 %v = [3 4];
 
+% load only needed Disturbance time series 
 for i = min(v):max(v)
     load(['wind\URef_',num2str(i,'%02d'),'_Disturbance.mat'], 'Disturbance');
     v_length = length(Disturbance.v_0.signals.values);
@@ -56,66 +57,54 @@ for i = min(v):max(v)
 end
 
 Disturbance.v_0.signals.values = [];
+% shift the series circular
 for j = 1:length(v)
     v_actual      = v_table(:,v(j));
+    % Start series
     if j == 1
-    Disturbance.v_0.signals.values = [v_actual]; %Disturbance.v_0.signals.values;   
+    Disturbance.v_0.signals.values = [v_actual]; %Disturbance.v_0.signals.values;  
+    % later series
     else
         v_old           = v_table(end,v(j-1));
         v_oldMinusOne   = v_table(end-1,v(j-1));
         dv_old          = abs((v_old-v_oldMinusOne));
         d_absolute      = abs(v_old-v_actual);
-
+        
+        % Error band for wind threshold !!! adjustable !!!
         v_threshold      = 0.1;
-        vdot_threshold   = 0.0005;
+        %vdot_threshold   = 0.005;
     
-        IndexAbsValues = find(d_absolute <= v_threshold);       
+        IndexAbsValues = find(d_absolute <= v_threshold); 
+        % Derivative approache 
         %dv = diff(v_actual(IndexAbsValues));
 
         %d_dot = dv_old - dv;
         %IndexDotValues = find(d_dot <= abs(vdot_threshold));
         
-        vn = circshift(v_actual, IndexAbsValues(1));
+        % Number of censecutive values nedded !!! adjustable !!!
+        thresholdRegion = 30;
+        startIndex = find_consecutive_region(IndexAbsValues, thresholdRegion);
+        
+        % final circular shifting
+        vn = circshift(v_actual, startIndex);
+        % store results
         Disturbance.v_0.signals.values = [Disturbance.v_0.signals.values; vn];
     end
-    
-    
-
-    
-
-
-    %Disturbance.v_0.signals.values = [Disturbance.v_0.signals.values; v_table(:,v(j))];
 
 end
+% store results
 Disturbance.v_0.time = [0:0.1:25*3600-0.1];
-save('wind\shittyWind1_Disturbance','Disturbance','windfield','Parameter')  
+save('wind\shittyWind1_Disturbance','Disturbance','windfield','Parameter')
+
+% plot results
 figure
-%plot(Disturbance.v_0.signals.values)
+
 p = plot(Disturbance.v_0.signals.values,'x-','MarkerIndices',[36000:36000:length(Disturbance.v_0.signals.values)]);
 p.MarkerFaceColor = [1 0.5 0];
 p.MarkerSize = 8;
 p.MarkerEdgeColor = [1 0.5 0];
-%hold on;
-%q = plot([36001:36000:(length(v_Disturbance)-35999)],'x');
-
-%end7 = v7.Disturbance.v_0.signals.values(end);
-
-%[~,closestIndex] = min(abs(end7-v9.Disturbance.v_0.signals.values));
-
-%closestIndex = closestIndex + 10000;
-
-%vn = [v7.Disturbance.v_0.signals.values 
-%    circshift(v9.Disturbance.v_0.signals.values,closestIndex)];
-%t_new = [0:Parameter.Time.dt:2*Parameter.Time.TMax-Parameter.Time.dt];
+title('Combined timeseries of Scenario X')
+ylabel('v_0 [m/s]')
+xlabel('time [ds]')
 
 
-%% Plot ressults
-figure;
-plot(t_new,vn)
-title('circ shifted')
-
-figure;
-noshift = [v7.Disturbance.v_0.signals.values 
-    v9.Disturbance.v_0.signals.values];
-plot(t_new,noshift)
-title('added')
