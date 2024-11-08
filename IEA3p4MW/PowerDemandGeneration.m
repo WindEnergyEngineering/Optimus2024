@@ -38,7 +38,9 @@ p_end_i     = 3600*15;
 delta = abs(p_end_i - p_begin_i);
 curtailment_time = p_begin_i:dt:p_end_i;
 
-parabel = X(1)*(curtailment_time).^2 + X(2)*curtailment_time + X(3);
+c_square = curtailment_time.^2;
+
+parabel = X(1)*c_square + X(2)*curtailment_time + X(3);
 figure;
 plot(parabel)
 
