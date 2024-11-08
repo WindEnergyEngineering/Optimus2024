@@ -7,10 +7,10 @@
 * ------------------
 * Static parameters
 * ------------------
-Parameter.CPC.Omega_g_rated           = 119.3848
-Parameter.VSC.M_g_rated               = 28797.6324
+Parameter.CPC.Omega_g_rated           = 47.973
+Parameter.VSC.M_g_rated               = 114340
 Parameter.CPC.theta_min               = 0.020944
-Parameter.VSC.Omega_g_1d5             = 81.262
+Parameter.VSC.Omega_g_1d5             = 32.6511
 Parameter.VSC.k                       = 1.9
 * ------------------
 * Dynamic parameters
