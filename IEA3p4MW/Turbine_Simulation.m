@@ -27,7 +27,6 @@ for iOP=1:nOP
     
     % get Operation Point
     OP = OPs(iOP);
-
     % wind for this OP
     %Disturbance.v_0.time            = [0; 30; 30+dt;  60];       % [s]      time points to change wind speed
     %Disturbance.v_0.signals.values  = [0;  0;   0.0; 0.0]+OP;    % [m/s]    wind speeds
