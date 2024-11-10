@@ -1,7 +1,7 @@
 clear;close all;clc;
 % grid demand curve
 
-P_dem = 3.369e6; % [MW]
+P_dem = 3.36924e6; % [MW]
 curtailment_rate = 0.06; %
 curtailment_duration = 4*3600; % [s]
 
