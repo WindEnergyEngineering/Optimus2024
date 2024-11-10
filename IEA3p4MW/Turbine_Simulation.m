@@ -16,7 +16,7 @@ Parameter                       = DefaultParameter_Storage(Parameter);
 % Time
 dt                              = 0.1;
 Parameter.Time.dt               = dt;   % [s] simulation time step              
-Parameter.Time.TMax             = 24*3600;   % [s] simulation length
+Parameter.Time.TMax             = 25*3600;   % [s] simulation length
 
 %% Loop over Operation Points
 
@@ -33,7 +33,7 @@ for iOP=1:nOP
     load('wind\shittyWind1_Disturbance','Disturbance')
 
     % Battery storage scenario
-    Select = 3;
+    Select = 5;
     Disturbance.P_dem = Scenarios(Select,Parameter.Time.TMax,dt);
 
     % Initial Conditions from SteadyStates for this OP
@@ -61,7 +61,7 @@ subplot(411)
 hold on;box on;grid on;
 plot(simout.tout./3600,v_0)
 ylabel('v_0 [m/s]')
-legend(strcat(num2str(OPs'),' m/s')) 
+% legend(strcat(num2str(OPs'),' m/s')) 
 
 Select_str = num2str(Select);
 title("Scenario " + Select_str)
@@ -81,5 +81,5 @@ subplot(414)
 hold on;box on;grid on;
 plot(simout.tout./3600,Energy_el./Parameter.Storage.Capacity*100)
 ylabel('Storage Lvl. [%]')
-xlabel('Time [s]')
+xlabel('Time [h]')
 % legend(strcat(num2str(OPs'),' m/s')) 

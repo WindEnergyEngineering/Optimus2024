@@ -22,6 +22,7 @@ figure
 hold on;box on
 xlabel('t [s]')
 ylabel('v_0 [m/s]')
+title('Realistic Wind Time Series for different mean wind speeds')
 
 % Mean wind speeds for DLC 1.2
 URef_v      = [3:1:12];
