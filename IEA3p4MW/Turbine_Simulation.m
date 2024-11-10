@@ -14,9 +14,9 @@ Parameter                       = DefaultParameter_FBv1_ADv14(Parameter);
 Parameter                       = DefaultParameter_Storage(Parameter);
 
 % Time
-dt                              = 1/80;
+dt                              = 0.1;
 Parameter.Time.dt               = dt;   % [s] simulation time step              
-Parameter.Time.TMax             = 5*60;   % [s] simulation length
+Parameter.Time.TMax             = 25*3600;   % [s] simulation length
 
 %% Loop over Operation Points
 
@@ -27,13 +27,12 @@ for iOP=1:nOP
     
     % get Operation Point
     OP = OPs(iOP);
-
     % wind for this OP
-    Disturbance.v_0.time            = [0; 30; 30+dt;  60];       % [s]      time points to change wind speed
+    Disturbance.v_0.time            = [0; Parameter.Time.TMax/2; Parameter.Time.TMax/2+dt;  Parameter.Time.TMax];       % [s]      time points to change wind speed
     Disturbance.v_0.signals.values  = [0;  0;   0.0; 0.0]+OP;    % [m/s]    wind speeds
-
+    
     % Battery storage scenario
-    Select = 4;
+    Select = 5;
     Disturbance.P_dem = Scenarios(Select,Parameter.Time.TMax,dt);
 
     % Initial Conditions from SteadyStates for this OP
