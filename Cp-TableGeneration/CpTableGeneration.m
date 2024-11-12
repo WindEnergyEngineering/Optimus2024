@@ -1,7 +1,7 @@
 clear all; close all; clc;
 
 %% Open File
-InputFile  = 'Blade_111_WindSpeed936.txt';
+InputFile  = 'Blade_111_WidSpeed1016.txt';
 
 %% PostProcessing QBlade Output
 fid         = fopen(InputFile);
