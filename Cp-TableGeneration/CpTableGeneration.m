@@ -1,7 +1,7 @@
 clear all; close all; clc;
 
 %% Open File
-InputFile  = 'Blade_111_WindsSPeed94.txt';
+InputFile  = 'Blade_111_WindSpeed936.txt';
 
 %% PostProcessing QBlade Output
 fid         = fopen(InputFile);
@@ -74,7 +74,7 @@ writematrix(Ct_table,OutputFile,'Delimiter','tab','WriteMode','append');
 fid = fopen(OutputFile,'a');
 fprintf(fid,'\n');
 fprintf(fid,'\n');
-fprintf(fid,'%s\n','#  Thrust coefficient');
+fprintf(fid,'%s\n','# Torque coefficient');
 fclose(fid);
 writematrix(Cq_table,OutputFile,'Delimiter','tab','WriteMode','append');
   
