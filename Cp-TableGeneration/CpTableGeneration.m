@@ -24,19 +24,19 @@ fclose(fid);
 TSR = unique(TSR)';
 
 % find unique PITCH
-PITCH = unique(PITCH)';
+PITCH = unique(PITCH);
 
 % Cp table generation
 % u = length(TSR)/length(unique(TSR)); 
-Cp_table = reshape(CP,[length(PITCH),length(TSR)]);
+Cp_table = reshape(CP,[length(TSR),length(PITCH)]);
 
 % Ct table generation
 % u = length(TSR)/length(unique(TSR)); 
-Ct_table = reshape(CT,[length(PITCH),length(TSR)]);
+Ct_table = reshape(CT,[length(TSR),length(PITCH)]);
 
 % Cq table generation
 % u = length(TSR)/length(unique(TSR)); 
-Cq_table = reshape(CM,[length(PITCH),length(TSR)]);
+Cq_table = reshape(CM,[length(TSR),length(PITCH)]);
 
 
 %% Creating .mat file for use in SLOW model 
