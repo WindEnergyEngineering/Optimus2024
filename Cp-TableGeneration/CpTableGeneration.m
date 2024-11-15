@@ -24,7 +24,7 @@ fclose(fid);
 TSR = unique(TSR)';
 
 % find unique PITCH
-PITCH = unique(PITCH);
+PITCH = unique(PITCH)*pi/180;
 
 % Cp table generation
 % u = length(TSR)/length(unique(TSR)); 
