@@ -9,7 +9,7 @@ Parameter.Turbine.SS             	= load('PowerAndThrustCoefficients_ADv14','c_P
 
 Parameter.Turbine.i               	= 1/97;             % [-]       gearbox ratio, from ElastoDyn.dat:1/GBRatio  
 Parameter.Turbine.r_GB              = 1/Parameter.Turbine.i;
-Parameter.Turbine.R              	= 65;               % [m]       Rotor radius, from ElastoDyn.dat: TipRad  
+Parameter.Turbine.R              	= 178/2;            % [m]       Rotor radius, from ElastoDyn.dat: TipRad  
 
 % drive-train dynamics
 J_G                               	= 500;              % [kgm^2]	Generator Inertia About High-Speed Shaft, from ElastoDyn.dat: GenIner 

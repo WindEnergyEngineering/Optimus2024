@@ -81,7 +81,7 @@ switch CalculationName
         
         % Region wind speeds produced by HowToFindRegionWindSpeed.m
         % legend  = ["rated"    "1"     "1.5"       "2.5"];
-        v_regions = [24.4862    2.7052    6.3873    6.8536]; % [m/s]
+        v_regions = [7.9310    4.1550    5.7911    6.2138]; % [m/s]
 
         % find v_rated
         v_0_min                         = 0;
