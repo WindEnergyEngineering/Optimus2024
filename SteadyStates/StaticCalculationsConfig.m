@@ -94,7 +94,7 @@ switch CalculationName
         k                               = Parameter.VSC.k;  
         Omega                           = Parameter.VSC.Omega_g_1d5/Parameter.Turbine.r_GB;
         M_g                             = 0;
-        Parameter.VSC.v_1               = 2.7052;   % the calculation are done in the function 'HowToFindRegionWindSpeed' 
+        Parameter.VSC.v_1               = 3.0;      % the calculation are done in the function 'HowToFindRegionWindSpeed' 
                                                     % the value from section %%Optimization using fminbnd used
         % find v_1d5
         v_0_min                         = 0;

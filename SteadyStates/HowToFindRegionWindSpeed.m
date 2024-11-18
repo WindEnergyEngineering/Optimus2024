@@ -11,8 +11,8 @@ v_0_min                                 = 0;
 v_0_max                                 = 30;        
 theta                                   = Parameter.CPC.theta_min;
 k                                       = Parameter.VSC.k;  
-             Omega                           = Parameter.VSC.Omega_g_1d5/Parameter.Turbine.r_GB;
-        M_g                             = 0;   
+Omega                           = Parameter.VSC.Omega_g_1d5/Parameter.Turbine.r_GB;
+M_g                             = 0;   
 %% Brute Force Optimization       
 for  iv_0=1:length(v_0)        
     Residual(iv_0)=OmegaDot(Omega,theta,M_g,v_0(iv_0),Parameter); 
