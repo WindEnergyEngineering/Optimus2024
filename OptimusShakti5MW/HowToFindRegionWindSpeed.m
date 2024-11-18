@@ -1,11 +1,15 @@
 % -----------------------------
-% Script: Finds rated wind speed.
+% Script: Finding wind speed for all regions, including rated.
+% Optimus Project 2024/2025
+% Authors: Felix Lehmann, Karan Soni, Julius Preuschoff
+% Script based on:
 % Exercise 08 of Master Course 
 % "Controller Design for Wind Turbines and Wind Farms"
+% by Prof. David Schlipf
 % ----------------------------------
 clearvars;clc;close all;
 %% Find rated wind speed
-clearvars;clc;close all;
+clearvars;close all;
 Parameter                       	    = DefaultParameter_SLOW2DOF;
 Parameter                               = DefaultParameter_FBv1_ADv14(Parameter);   
 v_0                                     = 0:.1:30; % [m/s]
@@ -15,7 +19,7 @@ theta                                   = Parameter.CPC.theta_min;
 k                                       = Parameter.VSC.k;  
 
 regions = ["rated" "1" "1.5" "2.5"];
-v_regions = NaN;
+v_regions = NaN; % [m/s]
 for r = 1:1:length(regions)
 region = regions(r);
 switch region
