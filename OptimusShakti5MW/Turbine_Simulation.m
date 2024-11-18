@@ -42,8 +42,10 @@ for iOP=1:nOP
     sim('FBv1_SLOW2DOF.mdl')
     
     % collect simulation Data
-    Omega(:,iOP) = logsout.get('y').Values.Omega.Data;
+    Omega(:,iOP)    = logsout.get('y').Values.Omega.Data;
     Power_el(:,iOP) = logsout.get('y').Values.P_el.Data;
+    lambda(:,iOP)   = logsout.get('y').Values.lambda.Data;
+    v_0(:,iOP)      = logsout.get('d').Values.v_0.Data;
  
 end
 
@@ -51,14 +53,26 @@ end
 %% PostProcessing SLOW
 figure
 
-subplot(211)
+subplot(411)
 hold on;box on;grid on;
 plot(tout,Omega*60/2/pi)
 ylabel('\Omega [rpm]')
 legend(strcat(num2str(OPs'),' m/s'))
 
-subplot(212)
+subplot(412)
 hold on;box on;grid on;
 plot(tout,Power_el./1000)
 ylabel('Power [kW]')
+legend(strcat(num2str(OPs'),' m/s'))
+
+subplot(413)
+hold on;box on;grid on;
+plot(tout,lambda)
+ylabel('\lambda [-]')
+legend(strcat(num2str(OPs'),' m/s'))
+
+subplot(414)
+hold on;box on;grid on;
+plot(tout,v_0)
+ylabel('v_0 [m/s]')
 legend(strcat(num2str(OPs'),' m/s')) 
