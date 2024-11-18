@@ -6,7 +6,7 @@ Parameter.CPC.theta_K                   = deg2rad(20);                      % [r
 Parameter.CPC.kp                        = 0.025;                          	% [s]       % proportional gain, brute-force-optimized
 Parameter.CPC.Ti                        = 10;                               % [s]       % integral gain, brute-force-optimized
 
-Parameter.CPC.Omega_g_rated             = rpm2radPs(11.753)/Parameter.Turbine.i; % [rad/s]  % rated generator speed, from Pietro
+Parameter.CPC.Omega_g_rated             = rpm2radPs(8.584)/Parameter.Turbine.i; % [rad/s]  % rated generator speed, from Pietro
 Parameter.CPC.theta_min                 = deg2rad(1.2);                     % [rad]     % pitch angle in region 1-2.5, brute-force optimized
 
 %% Torque Controller
