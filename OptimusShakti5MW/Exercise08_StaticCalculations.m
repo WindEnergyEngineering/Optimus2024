@@ -5,7 +5,6 @@
 % ----------------------------------
 %% 1. Initialitzation 
 clearvars; close all;clc;
-
 %% 2. Config
 [v_0,FlagPITorqueControl,Parameter]    = StaticCalculationsConfig;
 
