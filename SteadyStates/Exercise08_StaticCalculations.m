@@ -138,10 +138,10 @@ Weights         = Distribution/sum(Distribution); % relative frequency
 
 if FlagPITorqueControl == 1
     AEP_advanced = sum(P.*Weights)*8760;
-    save("SteadyStatesNREL5MW_FBSWE_SLOW_stud.mat","M_g","Omega","theta","v_0","x_T","P")
+    %save("SteadyStatesNREL5MW_FBSWE_SLOW_stud.mat","M_g","Omega","theta","v_0","x_T","P")
 else
     AEP_basic = sum(P.*Weights)*8760;
-    save("SteadyStatesNREL5MW_FBNREL_SLOW_stud.mat","M_g","Omega","theta","v_0","x_T","P")
+    %save("SteadyStatesNREL5MW_FBNREL_SLOW_stud.mat","M_g","Omega","theta","v_0","x_T","P")
 end 
 
 
