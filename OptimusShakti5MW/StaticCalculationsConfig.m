@@ -81,7 +81,7 @@ switch CalculationName
         
         % Region wind speeds produced by HowToFindRegionWindSpeed.m
         % legend  = ["rated"    "1"     "1.5"       "2.5"];
-        v_regions = [7.9310    4.1550    5.7911    6.2138]; % [m/s]
+        v_regions = [ 9.5775    3.0345    6.3874    9.3838]; % [m/s] 3.4 Turbine works well
 
         % find v_rated
         v_0_min                         = 0;
