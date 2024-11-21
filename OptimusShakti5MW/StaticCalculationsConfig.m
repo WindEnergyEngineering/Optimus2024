@@ -81,7 +81,7 @@ switch CalculationName
         
         % Region wind speeds produced by HowToFindRegionWindSpeed.m
         % legend  = ["rated"    "1"     "1.5"       "2.5"];
-        v_regions = [8.9058    2.9260    6.0001    8.8001]; % [m/s] Omega_rated = 440 rpm, Omega_g_1d5 = 300 rpm
+        v_regions = [ 9.5775    3.0345    6.3874    9.3838]; % [m/s] 3.4 Turbine works well
 
         % find v_rated
         v_0_min                         = 0;

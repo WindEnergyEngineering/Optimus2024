@@ -14,7 +14,7 @@ Parameter.Turbine.R              	= 178/2;            % [m]       Rotor radius, 
 % drive-train dynamics
 J_G                               	= 500;              % [kgm^2]	Generator Inertia About High-Speed Shaft, from ElastoDyn.dat: GenIner 
 J_R                                	= 35799464;         % [kgm^2]	Rotor Inertia About High-Speed Shaft, from ED.sum file
-Parameter.Turbine.J                	= (J_R+J_G/Parameter.Turbine.i^2);%*1.5; % first guess 21/11/24 fle 
+Parameter.Turbine.J                	= J_R+J_G/Parameter.Turbine.i^2;
 Parameter.Turbine.eta_gb            = 0.955;            % [-]       Gearbox efficiency, from ElastoDyn.dat: GBoxEff
 
 % fore-aft tower dynamics  
