@@ -41,6 +41,7 @@ Cq_table = reshape(CM,[length(PITCH),length(TSR)]);
 
 %% Creating .mat file for use in SLOW model 
 name = 'PowerAndThrustCoefficients_SHAKTI_v1';
+
 info    = ['Created from Qblade for the Optimus 5MW Shakti with script CpTableGeneration.'];
 c_P     = Cp_table;
 c_T     = Ct_table;
@@ -62,3 +63,4 @@ xlabel('\theta [deg]')
 ylabel('\lambda')
 zlabel('c_P')
 title('NREL 3.4 MW')
+
