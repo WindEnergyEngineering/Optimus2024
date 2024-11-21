@@ -1,7 +1,7 @@
 clear all; close all; clc;
 
 %% Open File
-InputFile  = 'Blade_111_WidSpeed1016.txt';
+InputFile  = 'Blade_1711_coeff_1061.txt';
 
 %% PostProcessing QBlade Output
 fid         = fopen(InputFile);
@@ -28,15 +28,15 @@ PITCH = unique(PITCH)*pi/180;
 
 % Cp table generation
 % u = length(TSR)/length(unique(TSR)); 
-Cp_table = reshape(CP,[length(TSR),length(PITCH)]);
+Cp_table = reshape(CP,[length(PITCH),length(TSR)]);
 
 % Ct table generation
 % u = length(TSR)/length(unique(TSR)); 
-Ct_table = reshape(CT,[length(TSR),length(PITCH)]);
+Ct_table = reshape(CT,[length(PITCH),length(TSR)]);
 
 % Cq table generation
 % u = length(TSR)/length(unique(TSR)); 
-Cq_table = reshape(CM,[length(TSR),length(PITCH)]);
+Cq_table = reshape(CM,[length(PITCH),length(TSR)]);
 
 
 %% Creating .mat file for use in SLOW model 
@@ -47,4 +47,18 @@ c_T     = Ct_table;
 lambda  = TSR;
 theta   = PITCH;
 save(name,'info','c_P','c_T','lambda','theta')
+%%
+figure
+surf(lambda,rad2deg(theta),c_P)
+xlabel('\theta [deg]')
+ylabel('\lambda')
+zlabel('c_P')
+title('from QBlade')
 
+SS = load('PowerAndThrustCoefficients_ADv14','c_P','c_T','theta','lambda');
+figure
+surf(rad2deg(SS.theta),SS.lambda,SS.c_P)
+xlabel('\theta [deg]')
+ylabel('\lambda')
+zlabel('c_P')
+title('NREL 3.4 MW')
