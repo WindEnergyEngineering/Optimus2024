@@ -6,7 +6,7 @@ Parameter.CPC.theta_K                   = deg2rad(20);                      % [r
 Parameter.CPC.kp                        = 0.025;                          	% [s]       % proportional gain, brute-force-optimized
 Parameter.CPC.Ti                        = 10;                               % [s]       % integral gain, brute-force-optimized
 
-Parameter.CPC.Omega_g_rated             = rpm2radPs(458);                   % [rad/s]   % rated generator speed, from Shakti 20/11/24 fle
+Parameter.CPC.Omega_g_rated             = rpm2radPs(440);                   % [rad/s]   % rated generator speed, from Shakti 20/11/24 fle
 Parameter.CPC.theta_min                 = deg2rad(1.2);                     % [rad]     % pitch angle in region 1-2.5, brute-force optimized
 
 %% Torque Controller
@@ -18,7 +18,7 @@ Parameter.VSC.k                         = .5 * Parameter.General.rho * pi ... % 
                                           (8.75^3 * Parameter.Turbine.r_GB^3);
 
 P_a_rated  = 5.42e6;                                                        % [W]       % maximal aerodynamic power (can be changed for de- or up-rating), from Shakti(presentation week8) 20/11/24 fle
-Parameter.VSC.M_g_rated                 = 1.14e+5;%P_a_rated/Parameter.CPC.Omega_g_rated*Parameter.Turbine.eta_gb;  % [Nm] rated generator torque, from Shakti(excel) 21/11/24 fle
+Parameter.VSC.M_g_rated                 = P_a_rated/Parameter.CPC.Omega_g_rated*Parameter.Turbine.eta_gb;  % [Nm] rated generator torque, from Shakti(excel) 21/11/24 fle
 Parameter.VSC.i_G_max                   = 1.1;                              % [-]       % ratio for maximum generator torque, standard value
 Parameter.VSC.M_g_max                   = Parameter.VSC.M_g_rated*Parameter.VSC.i_G_max;
 Parameter.VSC.Omega_g_1d5               = rpm2radPs(300);                   % [rad/s]   % generator speed during region 1.5, from Shakti(excel) 20/11/24 fle         

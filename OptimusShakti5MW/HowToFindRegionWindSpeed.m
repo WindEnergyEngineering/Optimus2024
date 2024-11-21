@@ -55,7 +55,7 @@ ylabel('rotor acceleration [rpm/s]')
 % Optimization using fminbnd
 fun = @(v)(OmegaDot(Omega,theta,M_g,v,Parameter))^2;
 v1 = 2.5;
-v2 = 30;
+v2 = 12;
 [v,Omega_dot_Sq,exitflag] = fminbnd(fun,v1,v2,optimset('Display','none'));
 v_regions(r) = v;
 end
