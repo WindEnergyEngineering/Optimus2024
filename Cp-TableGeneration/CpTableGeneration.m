@@ -1,7 +1,7 @@
 clear all; close all; clc;
 
 %% Open File
-InputFile  = 'Blade_1711_coeff.txt';
+InputFile  = 'Blade_1711_coeff_1061.txt';
 
 %% PostProcessing QBlade Output
 fid         = fopen(InputFile);
@@ -40,7 +40,7 @@ Cq_table = reshape(CM,[length(TSR),length(PITCH)]);
 
 
 %% Creating .mat file for use in SLOW model 
-name = 'PowerAndThrustCoefficients_SHAKTI_v2';
+name = 'PowerAndThrustCoefficients_SHAKTI_v3';
 info    = ['Created from Qblade for the Optimus 5MW Shakti with script CpTableGeneration.'];
 c_P     = Cp_table;
 c_T     = Ct_table;
