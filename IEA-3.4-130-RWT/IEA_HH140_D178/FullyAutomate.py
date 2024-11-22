@@ -7,16 +7,10 @@ import sys
 
 # List of dictionaries, each containing the script name and its directory
 scripts = [
-    {"script": "DLC51.py", "directory": r"C:\Users\Araz\Desktop\Flensburg\Big P\295\V5\Opt_20_295\Autorun4Samaan\Autorun forme_VII\DLC5.1\DLC51"},
-    {"script": "DLC61.py", "directory": r"C:\Users\Araz\Desktop\Flensburg\Big P\295\V5\Opt_20_295\Autorun4Samaan\Autorun forme_VII\DLC6.1_+8\DLC61"},
-    {"script": "DLC61.py", "directory": r"C:\Users\Araz\Desktop\Flensburg\Big P\295\V5\Opt_20_295\Autorun4Samaan\Autorun forme_VII\DLC6.1_-8\DLC61"},
-    {"script": "DLC71.py", "directory": r"C:\Users\Araz\Desktop\Flensburg\Big P\295\V5\Opt_20_295\Autorun4Samaan\Autorun forme_VII\DLC7.1_30\DLC71"},
-    {"script": "DLC71.py", "directory": r"C:\Users\Araz\Desktop\Flensburg\Big P\295\V5\Opt_20_295\Autorun4Samaan\Autorun forme_VII\DLC7.1_60\DLC71"},
-    {"script": "DLC71.py", "directory": r"C:\Users\Araz\Desktop\Flensburg\Big P\295\V5\Opt_20_295\Autorun4Samaan\Autorun forme_VII\DLC7.1_90\DLC71"},
-    {"script": "DLC71.py", "directory": r"C:\Users\Araz\Desktop\Flensburg\Big P\295\V5\Opt_20_295\Autorun4Samaan\Autorun forme_VII\DLC7.1_120\DLC71"},
-    {"script": "DLC71.py", "directory": r"C:\Users\Araz\Desktop\Flensburg\Big P\295\V5\Opt_20_295\Autorun4Samaan\Autorun forme_VII\DLC7.1_150\DLC71"},
-    {"script": "DLC71.py", "directory": r"C:\Users\Araz\Desktop\Flensburg\Big P\295\V5\Opt_20_295\Autorun4Samaan\Autorun forme_VII\DLC7.1_180\DLC71"},
-    {"script": "DLC111.py", "directory": r"C:\Users\Araz\Desktop\Flensburg\Big P\295\V5\Opt_20_295\Autorun4Samaan\Autorun forme_VII\DLC11.1\DLC111"}
+    {"script": "CaBru_DLC_12.py", "directory": r"C:\Users\carlo\Documents\GitHub\Optimus2024\IEA-3.4-130-RWT\IEA_HH140_D178\DLC_1_2"},
+    {"script": "CaBru_DLC_14.py", "directory": r"C:\Users\carlo\Documents\GitHub\Optimus2024\IEA-3.4-130-RWT\IEA_HH140_D178\DLC_1_4"},
+    {"script": "CaBru_DLC_51.py", "directory": r"C:\Users\carlo\Documents\GitHub\Optimus2024\IEA-3.4-130-RWT\IEA_HH140_D178\DLC_5_1"},
+    {"script": "CaBru_DLC_61.py", "directory": r"C:\Users\carlo\Documents\GitHub\Optimus2024\IEA-3.4-130-RWT\IEA_HH140_D178\DLC_6_1"},
 ]
 
 for script_info in scripts:
@@ -65,3 +59,4 @@ for script_info in scripts:
     print("=" * 40)
 
 print("All scripts completed.")
+
