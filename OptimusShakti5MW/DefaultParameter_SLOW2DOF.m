@@ -2,10 +2,10 @@ function [Parameter] = DefaultParameter_SLOW2DOF
 % DS on 11-Jun-2020
 
 %% General          
-Parameter.General.rho               = 1.225;         	% [kg/m^3]  air density, from Optimus200XL_AeroDyn_Blade.dat
+Parameter.General.rho               = 1.12;         	% [kg/m^3]  air density, from requirments list
 
 %% Turbine
-Parameter.Turbine.SS             	= load('PowerAndThrustCoefficients_ADv14.mat','c_P','c_T','theta','lambda'); % from simulations
+Parameter.Turbine.SS             	= load('PowerAndThrustCoefficients_SHAKTI_v5.mat','c_P','c_T','theta','lambda'); % from simulations
 
 Parameter.Turbine.i               	= 1/53.25;          % [-]       gearbox ratio, from ElastoDyn.dat:1/GBRatio, from Shakti(german) 20/11/24 fle  
 Parameter.Turbine.r_GB              = 1/Parameter.Turbine.i;

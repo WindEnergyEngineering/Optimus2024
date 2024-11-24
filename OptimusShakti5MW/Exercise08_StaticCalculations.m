@@ -48,7 +48,7 @@ for iv_0=1:length(v_0)
     %% 4.2 Determin Static Values
     switch Region %
         case {'1'} %Determin Omega and M_g in Region 1, where theta is fixed: adjusted by fle (15.11.24)
-            Omega_min   = rpm2radPs(7);
+            Omega_min   = rpm2radPs(0);
             Omega_max   = Parameter.VSC.Omega_g_1d5/Parameter.Turbine.r_GB;
             M_g_j       = 0;
             theta_j     = Parameter.CPC.theta_min;
@@ -79,7 +79,7 @@ for iv_0=1:length(v_0)
 
         case {'2','StateFeedback'} % Determin Omega and M_g in Region 2 (or 1-2.5 for state feedback), where theta is fixed 
             % Exercise 8.1b: adjusted by fle (12.11.24)
-            Omega_min   = rpm2radPs(7); % to avoid Stall
+            Omega_min   = rpm2radPs(5); % to avoid Stall
             Omega_max   = Parameter.CPC.Omega_g_rated/Parameter.Turbine.r_GB;
             theta_j     = Parameter.CPC.theta_min;
 
