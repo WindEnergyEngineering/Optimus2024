@@ -15,7 +15,6 @@ Parameter                               = DefaultParameter_FBv1_ADv14(Parameter)
 v_0                                     = 0:.1:30; % [m/s]
 v_0_min                                 = 0;
 v_0_max                                 = 30;        
-theta                                   = Parameter.CPC.theta_min;
 k                                       = Parameter.VSC.k;  
 
 regions = ["rated" "1" "1.5" "2.5"];
@@ -24,15 +23,19 @@ for r = 1:1:length(regions)
 region = regions(r);
 switch region
     case 'rated'
+        theta                                   = deg2rad(7);               % first guess peak shaping, from fle 25/11/24
         Omega = Parameter.CPC.Omega_g_rated/Parameter.Turbine.r_GB;
         M_g   = Parameter.VSC.M_g_rated;
     case '1'
+        theta                                   = Parameter.CPC.theta_min;
         Omega = Parameter.VSC.Omega_g_1d5/Parameter.Turbine.r_GB;
         M_g   = 0;  
     case '1.5'
+        theta                                   = Parameter.CPC.theta_min;
         Omega = Parameter.VSC.Omega_g_1d5/Parameter.Turbine.r_GB;
         M_g   = k*(Omega*Parameter.Turbine.r_GB)^2;
     case '2.5'
+        theta                                   = Parameter.CPC.theta_min;
         Omega = Parameter.CPC.Omega_g_rated/Parameter.Turbine.r_GB;
         M_g   = k*(Omega*Parameter.Turbine.r_GB)^2; 
     otherwise

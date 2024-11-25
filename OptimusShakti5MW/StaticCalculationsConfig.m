@@ -33,10 +33,12 @@
 %
 % (c) Universitaet Stuttgart
 
-function [v_0,FlagPITorqueControl,Parameter] = StaticCalculationsConfig
+function [v_0,FlagPITorqueControl,FlagPS,Parameter] = StaticCalculationsConfig
 
 
-CalculationName  = 'NREL5MW_FBSWE';       
+CalculationName  = 'NREL5MW_FBSWE'; 
+
+FlagPS           = 1; % Peak shaving 1 = on, 0 = off
 
 switch CalculationName
 	case {'NREL5MW_FBNREL'}      
@@ -82,7 +84,9 @@ switch CalculationName
         % Region wind speeds produced by HowToFindRegionWindSpeed.m
         % legend  = ["rated"    "1"     "1.5"       "2.5"];
         % v_regions = [ 9.5775    3.0345    6.3874    9.3838]; % [m/s] 3.4 Turbine works well
-        v_regions = [9.2157    2.7049    5.9931    8.5601];     % [m/s] 5MW SHAKTI, C_p Version 5 Omega_g_rated = 428.5 rpm
+%         v_regions = [9.2157    2.7049    5.9931    8.5601];     % [m/s] 5MW SHAKTI, C_p Version 5 Omega_g_rated = 428.5 rpm
+        v_regions = [10.5211    2.7049    5.9931    8.5601];     % [m/s] 5MW SHAKTI, C_p Version 5 Omega_g_rated = 428.5 rpm, peak shaping
+        
         % find v_rated
         v_0_min                         = 0;
         v_0_max                         = 30;        

@@ -6,7 +6,7 @@
 %% 1. Initialitzation 
 clearvars; close all;clc;
 %% 2. Config
-[v_0,FlagPITorqueControl,Parameter]    = StaticCalculationsConfig;
+[v_0,FlagPITorqueControl,FlagPS,Parameter]    = StaticCalculationsConfig;
 
 %% 3. Allocation
 Omega               = zeros(1,length(v_0));
@@ -94,9 +94,13 @@ for iv_0=1:length(v_0)
 
         case {'2.5'} %Determin M_g in Region 2.5, where theta and Omega_g is fixed: adjusted by fle (15.11.24)
             Omega_j     = Parameter.CPC.Omega_g_rated/Parameter.Turbine.r_GB;
-            theta_j     = Parameter.CPC.theta_min;
+            if FlagPS ==1 % for peak shaving
+                theta_j     = interp1(Parameter.CPC.PS(:,1),Parameter.CPC.PS(:,2),v_0i);                
+            else
+                theta_j     = Parameter.CPC.theta_min;
+            end            
             M_g_min     = 0;
-            M_g_max     = Parameter.VSC.M_g_max;
+            M_g_max     = Parameter.VSC.M_g_rated; % M_g_rated for PS otherwise M_g_max is producing a small overswing in M and P
 
             [M_g(iv_0),Omega_dot_Sq(iv_0),exitflag(iv_0)] = ...
                 fminbnd(@(M_g) (OmegaDot(Omega_j,theta_j,M_g,v_0i,Parameter))^2,...
@@ -109,7 +113,11 @@ for iv_0=1:length(v_0)
         case '3' % Determin theta in Region 3, where Omega and M_g are fixed   
             % Exercise 8.1b: adjusted by fle (12.11.24)
             Omega_j     = Parameter.CPC.Omega_g_rated/Parameter.Turbine.r_GB;
-            theta_min   = Parameter.CPC.theta_min;
+            if FlagPS==1 % for PS
+                theta_min   = Parameter.CPC.theta_PS;
+            else
+                theta_min   = Parameter.CPC.theta_min;
+            end
             theta_max   = max(Parameter.Turbine.SS.theta(:));
             M_g_j       = Parameter.VSC.M_g_rated;
 
@@ -135,12 +143,13 @@ P           = M_g*Parameter.Generator.eta_el.*Omega*Parameter.Turbine.r_GB;
 Distribution    = k/C*(v_0/C).^(k-1).*exp(-(v_0/C).^k);
 Weights         = Distribution/sum(Distribution); % relative frequency
 
-if FlagPITorqueControl == 1
-    AEP_advanced = sum(P.*Weights)*8760;
-    %save("SteadyStatesNREL5MW_FBSWE_SLOW_stud.mat","M_g","Omega","theta","v_0","x_T","P")
+
+if FlagPS == 1
+    AEP_PS = sum(P.*Weights)*8760;
+    save("SteadyStatesShakti5MW_PS.mat","v_0","x_T","AEP_PS")
 else
-    AEP_basic = sum(P.*Weights)*8760;
-    %save("SteadyStatesNREL5MW_FBNREL_SLOW_stud.mat","M_g","Omega","theta","v_0","x_T","P")
+    AEP_classic = sum(P.*Weights)*8760;
+    save("SteadyStatesShakti5MW_classic.mat","v_0","x_T","AEP_classic")
 end 
 
 
@@ -168,6 +177,7 @@ hold on;grid on;box on;
 plot(v_0,x_T,'.')
 xlabel('v_0 [m/s]')
 ylabel('x_T [m]')
+
 
 figure('Name','P')
 hold on;grid on;box on;

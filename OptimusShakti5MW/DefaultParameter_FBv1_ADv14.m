@@ -8,7 +8,8 @@ Parameter.CPC.Ti                        = 10;                               % [s
 
 Parameter.CPC.Omega_g_rated             = rpm2radPs(428.5);                 % [rad/s]   % rated generator speed, from Shakti - Geno team 24/11/24 fle
 Parameter.CPC.theta_min                 = deg2rad(1.2);                     % [rad]     % pitch angle in region 1-2.5, brute-force optimized
-
+Parameter.CPC.theta_PS                  = deg2rad(7);                       % [rad]     % peak shifting, first guess, from fle 25/11/24
+Parameter.CPC.PS                        = [8.5601 Parameter.CPC.theta_min; 10.5211 Parameter.CPC.theta_PS];
 %% Torque Controller
 Parameter.VSC.kp                        = 3000;                             % [Nm/(rad/s)]  % proportional gain, first guess
 Parameter.VSC.Ti                        = 2.5;                              % [s]           % integral gain, first guess
