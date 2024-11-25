@@ -15,7 +15,7 @@ M_g                 = zeros(1,length(v_0));
 Omega_dot_Sq        = zeros(1,length(v_0));
 exitflag            = zeros(1,length(v_0));
 % Weilbull parameters
-C                   = 2/sqrt(pi)*10;% [m/s] TC I
+C                   = 2/sqrt(pi)*7.5;% [m/s] TC III
 k                   = 2;            % [-]
 
 %% 4. Loop over wind speeds to determine omega, theta, M_g
@@ -81,8 +81,12 @@ for iv_0=1:length(v_0)
             % Exercise 8.1b: adjusted by fle (12.11.24)
             Omega_min   = rpm2radPs(5); % to avoid Stall
             Omega_max   = Parameter.CPC.Omega_g_rated/Parameter.Turbine.r_GB;
-            theta_j     = Parameter.CPC.theta_min;
-
+             if FlagPS ==1 % for peak shaving
+                theta_j     = interp1(Parameter.CPC.PS(:,1),Parameter.CPC.PS(:,2),v_0i);                
+            else
+                theta_j     = Parameter.CPC.theta_min;
+            end
+           
             [Omega_j,Omega_dot_Sq(iv_0),exitflag(iv_0)] = ...
                 fminbnd(@(Omega) (OmegaDot(Omega,theta_j,v_0i,Parameter))^2,...
                 Omega_min,Omega_max,optimset('Display','none'));
@@ -151,8 +155,6 @@ else
     AEP_classic = sum(P.*Weights)*8760;
     save("SteadyStatesShakti5MW_classic.mat","v_0","x_T","AEP_classic")
 end 
-
-
 %% 6. Plot
 figure('Name','Omega')
 hold on;grid on;box on;
@@ -177,7 +179,6 @@ hold on;grid on;box on;
 plot(v_0,x_T,'.')
 xlabel('v_0 [m/s]')
 ylabel('x_T [m]')
-
 
 figure('Name','P')
 hold on;grid on;box on;

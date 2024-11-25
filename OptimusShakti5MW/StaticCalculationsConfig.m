@@ -41,31 +41,7 @@ CalculationName  = 'NREL5MW_FBSWE';
 FlagPS           = 1; % Peak shaving 1 = on, 0 = off
 
 switch CalculationName
-	case {'NREL5MW_FBNREL'}      
-        %% Case by DS on 24-Nov-2019
 
-  
-        % Default
-        Parameter                       	= DefaultParameter_SLOW2DOF;
-        Parameter                           = DefaultParameter_FBv1_ADv14(Parameter);           
-
-        
-        % NonlinearStateFeedback
-     	Parameter.VSC.NonlinearStateFeedback    = @VSControlNREL5MW;        
-        FlagPITorqueControl         	= 1; % 0: only State Feedback, 1: PI controlled in region 1.5 and 2.5
-        
-        % Wind speeds
-        v_0         = 3.5:.1:30; % [m/s]
-        
-        % find v_rated
-        v_0_min                         = 0;
-        v_0_max                         = 30;        
-        Omega                           = Parameter.CPC.Omega_g_rated/Parameter.Turbine.r_GB;
-        theta                           = Parameter.CPC.theta_min;  
-        M_g                             = Parameter.VSC.M_g_rated;
-        Parameter.VSC.v_rated         	= 9.5778;  % the calculation are done in the function 'HowToFindRatedWindSpeed' 
-                                                    % the value from section %%Optimization using fminuncis used
-        
     case {'NREL5MW_FBSWE'}        
         % Exercise 8.2a: adjusted by fle (12.11.24)
         
@@ -85,7 +61,7 @@ switch CalculationName
         % legend  = ["rated"    "1"     "1.5"       "2.5"];
         % v_regions = [ 9.5775    3.0345    6.3874    9.3838]; % [m/s] 3.4 Turbine works well
 %         v_regions = [9.2157    2.7049    5.9931    8.5601];     % [m/s] 5MW SHAKTI, C_p Version 5 Omega_g_rated = 428.5 rpm
-        v_regions = [10.5211    2.7049    5.9931    8.5601];     % [m/s] 5MW SHAKTI, C_p Version 5 Omega_g_rated = 428.5 rpm, peak shaping
+        v_regions = [10.5211    2.7049    5.9931    8.875];     % [m/s] 5MW SHAKTI, C_p Version 5 Omega_g_rated = 428.5 rpm, peak shaping
         
         % find v_rated
         v_0_min                         = 0;

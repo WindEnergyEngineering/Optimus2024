@@ -11,3 +11,6 @@ plot(PS.v_0,PS.x_T,'.')
 xlabel('v_0 [m/s]')
 ylabel('x_T [m]')
 legend('Classic','Peak Shaving')
+
+%% AEP
+Delta_AEP = (classic.AEP_classic - PS.AEP_PS)/classic.AEP_classic * 100;    % [%]
