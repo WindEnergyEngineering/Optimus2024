@@ -8,9 +8,9 @@ Parameter.CPC.Ti                        = 10;                               % [s
 
 Parameter.CPC.Omega_g_rated             = rpm2radPs(428.5);                 % [rad/s]   % rated generator speed, from Shakti - Geno team 24/11/24 fle
 Parameter.CPC.theta_min                 = deg2rad(1.2);                     % [rad]     % pitch angle in region 1-2.5, brute-force optimized
-Parameter.CPC.theta_PS                  = deg2rad(7);                       % [rad]     % peak shifting, first guess, from fle 25/11/24
-Parameter.CPC.v_PS                      = 7.6;
-Parameter.CPC.PS                        = [0 Parameter.CPC.theta_min;Parameter.CPC.v_PS Parameter.CPC.theta_min; 10.5211 Parameter.CPC.theta_PS];
+Parameter.CPC.theta_PS                  = deg2rad(7);                       % [rad]     % min pitch angle at rated for peak shaving, first guess, from fle 25/11/24 !!! needs Brute-force optimization !!!
+Parameter.CPC.v_PS                      = 7.6;                              % [m/s]     % wind speed to start peak shaving, first guess, from fle 25/11/24 !!! needs Brute-force optimization !!!
+Parameter.CPC.PS                        = [0 Parameter.CPC.theta_min;Parameter.CPC.v_PS Parameter.CPC.theta_min; 10.5211 Parameter.CPC.theta_PS];   % peak shaving look-up table [v_i theta_i] 10.5211 => v_rated !!! has to be adjusted if changed
 %% Torque Controller
 Parameter.VSC.kp                        = 3000;                             % [Nm/(rad/s)]  % proportional gain, first guess
 Parameter.VSC.Ti                        = 2.5;                              % [s]           % integral gain, first guess
