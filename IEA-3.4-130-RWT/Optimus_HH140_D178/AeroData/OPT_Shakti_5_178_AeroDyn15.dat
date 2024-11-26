@@ -44,29 +44,18 @@ True                   FLookup     - Flag to indicate whether a lookup for f' wi
 3                      InCol_Cd    - The column in the airfoil tables that contains the drag coefficient (-)
 4                      InCol_Cm    - The column in the airfoil tables that contains the pitching-moment coefficient; use zero if there is no Cm column (-)
 0                      InCol_Cpmin - The column in the airfoil tables that contains the Cpmin coefficient; use zero if there is no Cpmin column (-)
-21                     NumAFfiles  - Number of airfoil files used (-)
-"Airfoils\OPT_Shakti_5_178_AeroDyn15_Polar_AF01.dat"    AFNames            - Airfoil file names (NumAFfiles lines) (quoted strings)
-"Airfoils\OPT_Shakti_5_178_AeroDyn15_Polar_AF02.dat"
-"Airfoils\OPT_Shakti_5_178_AeroDyn15_Polar_AF03.dat"
-"Airfoils\OPT_Shakti_5_178_AeroDyn15_Polar_AF04.dat"
-"Airfoils\OPT_Shakti_5_178_AeroDyn15_Polar_AF05.dat"
-"Airfoils\OPT_Shakti_5_178_AeroDyn15_Polar_AF06.dat"
-"Airfoils\OPT_Shakti_5_178_AeroDyn15_Polar_AF07.dat"
-"Airfoils\OPT_Shakti_5_178_AeroDyn15_Polar_AF08.dat"
-"Airfoils\OPT_Shakti_5_178_AeroDyn15_Polar_AF09.dat"
-"Airfoils\OPT_Shakti_5_178_AeroDyn15_Polar_AF10.dat"
-"Airfoils\OPT_Shakti_5_178_AeroDyn15_Polar_AF11.dat"
-"Airfoils\OPT_Shakti_5_178_AeroDyn15_Polar_AF12.dat"
-"Airfoils\OPT_Shakti_5_178_AeroDyn15_Polar_AF13.dat"
-"Airfoils\OPT_Shakti_5_178_AeroDyn15_Polar_AF14.dat"
-"Airfoils\OPT_Shakti_5_178_AeroDyn15_Polar_AF15.dat"
-"Airfoils\OPT_Shakti_5_178_AeroDyn15_Polar_AF16.dat"
-"Airfoils\OPT_Shakti_5_178_AeroDyn15_Polar_AF17.dat"
-"Airfoils\OPT_Shakti_5_178_AeroDyn15_Polar_AF18.dat"
-"Airfoils\OPT_Shakti_5_178_AeroDyn15_Polar_AF19.dat"
-"Airfoils\OPT_Shakti_5_178_AeroDyn15_Polar_AF20.dat"
-"Airfoils\OPT_Shakti_5_178_AeroDyn15_Polar_AF21.dat"
-
+11                     NumAFfiles  - Number of airfoil files used (-)
+"Airfoils\Optimus_Shakti_AeroDyn15_Polar_AF01.dat"    AFNames            - Airfoil file names (NumAFfiles lines) (quoted strings)
+"Airfoils\Optimus_Shakti_AeroDyn15_Polar_AF02.dat"
+"Airfoils\Optimus_Shakti_AeroDyn15_Polar_AF03.dat"
+"Airfoils\Optimus_Shakti_AeroDyn15_Polar_AF04.dat"
+"Airfoils\Optimus_Shakti_AeroDyn15_Polar_AF05.dat"
+"Airfoils\Optimus_Shakti_AeroDyn15_Polar_AF06.dat"
+"Airfoils\Optimus_Shakti_AeroDyn15_Polar_AF07.dat"
+"Airfoils\Optimus_Shakti_AeroDyn15_Polar_AF08.dat"
+"Airfoils\Optimus_Shakti_AeroDyn15_Polar_AF09.dat"
+"Airfoils\Optimus_Shakti_AeroDyn15_Polar_AF10.dat"
+"Airfoils\Optimus_Shakti_AeroDyn15_Polar_AF11.dat"
 ======  Rotor/Blade Properties  =====================================================================
 True                   UseBlCm     - Include aerodynamic pitching moment in calculations?  (flag)
 "OPT_Shakti_5_178_AeroDyn15_blade.dat" ADBlFile(1) - Name of file containing distributed aerodynamic properties for Blade #1 (-)
@@ -98,7 +87,7 @@ TwrElev        TwrDiam        TwrCd          TwrTI          TwrCb !TwrTI used on
 ======  Outputs  ====================================================================================
 False                  SumPrint    - Generate a summary file listing input options and interpolated properties to "<rootname>.AD.sum"?  (flag)
 9                      NBlOuts     - Number of blade node outputs [0 - 9] (-)
-4, 6, 8, 10, 12, 14, 16, 18, 20 BlOutNd     - Blade nodes whose values will be output  (-)
+1, 2, 4, 5, 6, 8, 9, 10, 11 	BlOutNd     - Blade nodes whose values will be output  (-)
 0                      NTwOuts     - Number of tower node outputs [0 - 9]  (-)
 0                      TwOutNd     - Tower nodes whose values will be output  (-)
                    OutList             - The next line(s) contains a list of output parameters.  See OutListParameters.xlsx for a listing of available output channels, (-)

@@ -2,10 +2,10 @@ import os
 import pandas as pd
  
 # Define the folder path (use raw string)
-folder_path = r"C:\Users\carlo\Documents\GitHub\Optimus2024\IEA-3.4-130-RWT\IEA_HH140_D178\Outputs\Data\DLC42"
+folder_path = r"C:\Users\carlo\Documents\GitHub\Optimus2024\IEA-3.4-130-RWT\IEA_HH140_D178\Outputs\Data\DLC14"
  
 # Specify the prefix to add before each file name (single backslash)
-prefix = ".\\Data\\DLC42\\"
+prefix = ".\\Data\\DLC14\\"
  
 # Get a list of all files in the folder and add the prefix
 file_names = [prefix + file_name for file_name in os.listdir(folder_path)]

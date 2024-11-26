@@ -1,0 +1,64 @@
+PLEASE ORDER THE REGARDING FILES ALPHABETICAL.
+
+AERODYN
+
+ELASTODYN
+
+"YawPzn"			- Yaw Position
+ "BldPitch1"                  - Blade 1 pitch angle
+ "BldPitch2"                  - Blade 2 pitch angle
+ "BldPitch3"                  - Blade 3 pitch angle
+   "Azimuth"                  - Blade 1 azimuth angle
+  "RotSpeed"                  - Low-speed shaft and high-speed shaft speeds
+   "RotTorq"                  - Rotor torque and low-speed shaft 0- and 90-bending moments at the main bearing	
+    "RotPwr"                  - Rotor power (this is equivalent to the LSShftPwr) (kW)
+   "HSSBrTq"                  - High-speed shaft brake torque	Always positive	(indicating dissipation of power) (kN m) 
+  "TipClrnc1"                 - Blade 1 tip-to-tower clearance estimate. This is computed as the perpendicular distance from the yaw axis to the tip of blade 1 when the blade tip is below the yaw bearing. When the tip of blade 1 is bove the yaw bearing, it is computed as the absolute distance from the yaw bearing to the blade tip. Please note that you should reduce this value by the tower radius to obtain the actual tower clearance (m)
+  "TipClrnc2"                 - Blade 2 tip-to-tower clearance estimate
+  "TipClrnc3"                 - Blade 2 tip-to-tower clearance estimate
+   "TTDspFA"                  - Tower fore-aft and side-to-side displacements and top twist
+   "TTDspSS"                  - Tower fore-aft and side-to-side displacements and top twist
+  "RootFxb1"                  - Blade 1 flapwise shear force at the blade root Directed along the xb1-axis (kN)
+  "RootFyb1"                  - Blade 1 edgewise shear force at the blade root Directed along the yb1-axis (kN)
+  "RootFzb1"                  - Blade 1 axial force at the blade root Directed along the zc,1- and zb,1-axes (kN)
+  "RootMxb1"                  - Blade 1 edgewise moment (i.e., the moment caused by edgewise forces) at the blade root About the xb1-axis (kN m)
+  "RootMyb1"                  - Blade 1 flapwise moment (i.e., the moment caused by flapwise forces) at the blade root About the yb1-axis (kN m)
+  "RootMzb1"                  - Blade 1 pitching moment at the blade root About the zc,1- and zb,1-axes (kN m)
+  "RootFxc1"                  - Out-of-plane shear, in-plane shear, and axial forces at the root of blade 1
+  "RootFyc1"                  - Out-of-plane shear, in-plane shear, and axial forces at the root of blade 1
+  "RootMxc1"                  - In-plane bending, out-of-plane bending, and pitching moments at the root of blade 1
+  "RootMyc1"                  - In-plane bending, out-of-plane bending, and pitching moments at the root of blade 1
+ "LSShftFxa"                  - LSS thrust force (this is constant along the shaftand is equivalent to the rotor thrust force)
+ "LSShftFya"                  - Rotating LSS shear force (this is constant along the shaft)
+ "LSShftFza"                  - Rotating LSS shear force (this is constant along the shaft)
+ "LSShftMxa"                  - LSS torque (this is constant along the shaft and is equivalent to the rotor torque)
+ "LSSTipMya"                  - Rotating LSS bending moment at the shaft tip (teeter pin for two-bladed turbines, apex of rotation for three-bladed turbines)
+ "LSSTipMza"                  - Rotating LSS bending moment at the shaft tip (teeter pin for two-bladed turbines, apex of rotation for three-bladed turbines) 
+ "LSShftFys"                  - Nonrotating low-speed shaft shear force (this is constant along the shaft) Directed along the ys-axis (kN)
+ "LSShftFzs"                  - Nonrotating low-speed shaft shear force (this is constant along the shaft) Directed along the zs-axis (kN)
+ "LSSTipMys"                  - Nonrotating low-speed shaft bending moment at the shaft tip About the ys-axis (kN m)
+ "LSSTipMzs"                  - Nonrotating low-speed shaft bending moment at the shaft tip About the zs-axis (kN m)
+  "YawBrFxp"                  - Fore-aft shear, side-to-side shear, and vertical forces at the top of the tower (not rotating with nacelle yaw)
+  "YawBrFyp"                  - Fore-aft shear, side-to-side shear, and vertical forces at the top of the tower (not rotating with nacelle yaw)
+  "YawBrFzp"                  - Fore-aft shear, side-to-side shear, and vertical forces at the top of the tower (not rotating with nacelle yaw)
+  "YawBrMxp"                  - Side-to-side bending, fore-aft bending, and yaw moments at the top of the tower (not rotating with nacelle yaw)
+  "YawBrMyp"                  - Side-to-side bending, fore-aft bending, and yaw moments at the top of the tower (not rotating with nacelle yaw)
+  "YawBrMzp"                  - Side-to-side bending, fore-aft bending, and yaw moments at the top of the tower (not rotating with nacelle yaw)
+  "TwrBsFxt"                  - Fore-aft shear, side-to-side shear, and vertical forces at the base of the tower (mudline)
+  "TwrBsFyt"                  - Fore-aft shear, side-to-side shear, and vertical forces at the base of the tower (mudline)
+  "TwrBsFzt"                  - Fore-aft shear, side-to-side shear, and vertical forces at the base of the tower (mudline)
+  "TwrBsMxt"                  - Side-to-side bending, fore-aft bending, and yaw moments at the base of the tower (mudline)
+  "TwrBsMyt"                  - Side-to-side bending, fore-aft bending, and yaw moments at the base of the tower (mudline)
+  "TwrBsMzt"                  - Side-to-side bending, fore-aft bending, and yaw moments at the base of the tower (mudline)
+
+INFLOW
+
+"Wind1VelX"
+"Wind1VelY"
+"Wind1VelZ"
+
+SERVODYN
+
+"GenPwr"
+"GenTq"
+

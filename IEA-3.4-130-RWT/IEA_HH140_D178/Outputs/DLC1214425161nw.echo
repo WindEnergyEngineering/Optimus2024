@@ -87,10 +87,10 @@ true                  WrEEvtsXLS       Write the extreme-event tables to an Exce
 0                     HeadTnS          Tint and shade of the header area (-1.0 to 1.0), with -1 being darkest and 1 lightest.
 0.5                   DiagTnS          Tint and shade of the diagonal (-1.0 to 1.0), with -1 being darkest and 1 lightest.
 TableName        #Chans     ChanList                                        #InfoChans     InfoChanList    (NumEETables rows of data follow)
-"bld_root"         10      19  20  21  22  23  24  25  26  27  28               3         1 2 5
-"Hub_rotor"          11      11  29  30  31  32  33  34  35  36  37  38         3         1 2 5
-"Tower_Top"           7      5  39  40  41  42  43  44                          3         1 2 5
-"Twr_Bttm"            6      45  46  47  48  49  50                             3         1 2 5
+"bld_root"         10      19  20  21  22  23  24  25  26  27  28               3         1 2 6
+"Hub_rotor"          11      11  29  30  31  32  33  34  35  36  37  38         3         1 2 6
+"Tower_Top"           7      5  39  40  41  42  43  44                          3         1 2 6
+"Twr_Bttm"            6      45  46  47  48  49  50                             3         1 2 6
 ChartName         YLabel                                  Type       #Chans        ChanList
 -----  Input Files  ------------------------------------------------------------
 1                     FileFormat       Flag determining input file format.  1 = ascii, 2 = binary
