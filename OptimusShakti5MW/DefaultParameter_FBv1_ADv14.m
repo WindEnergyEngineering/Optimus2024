@@ -35,7 +35,7 @@ Parameter.Filter.LowPass.f_cutoff       = 1;                                % [H
 Parameter.Filter.LowPass2.f_cutoff     	= 0.02;                             % [Hz]      % cut-off-frequency for low pass filter for setpoint-fading, first guess
 Parameter.Filter.LowPass3.f_cutoff      = 0.01;                             % [Hz]      % cut-off-frequency for low pass filter for dynamic notch filter, first guess
 Parameter.Filter.NotchFilter.Enable   	= 1;                                % [0/1]     % flag to enable dynamic notch filter for generator speed
-Parameter.Filter.NotchFilter.Gain       = 3*Parameter.Turbine.i;            % [-]       % gain on generator rotational frequency for dynamic notch filter, standard value
+Parameter.Filter.NotchFilter.Gain       = 3/Parameter.Turbine.r_GB;            % [-]       % gain on generator rotational frequency for dynamic notch filter, standard value
 Parameter.Filter.NotchFilter.BW      	= 0.10;                             % [Hz]      % bandwidth of dynamic notch filter, first guess
 Parameter.Filter.NotchFilter.D       	= 0.01;                             % [-]       % depth of dynamic notch filter, first guess
                              

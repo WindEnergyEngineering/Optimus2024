@@ -57,7 +57,7 @@ switch nargin
         
 end
 
-M_a         = AerodynamicTorque(Omega,theta,v_0,Parameter);
+M_a         = AerodynamicTorque(Omega,theta,v_0,Parameter)*Parameter.Turbine.eta_gb;
 
 Residual    = 1/Parameter.Turbine.J*...
     ( M_a - M_g*Parameter.Turbine.r_GB);  

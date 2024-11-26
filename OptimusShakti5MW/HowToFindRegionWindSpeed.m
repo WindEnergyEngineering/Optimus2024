@@ -23,7 +23,7 @@ for r = 1:1:length(regions)
 region = regions(r);
 switch region
     case 'rated'
-        theta                                   = deg2rad(7);               % first guess peak shaping, from fle 25/11/24
+        theta                                   = Parameter.CPC.theta_min;               % first guess peak shaping 7°, from fle 25/11/24
         Omega = Parameter.CPC.Omega_g_rated/Parameter.Turbine.r_GB;
         M_g   = Parameter.VSC.M_g_rated;
     case '1'

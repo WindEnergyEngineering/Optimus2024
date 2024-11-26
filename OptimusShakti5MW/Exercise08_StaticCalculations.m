@@ -150,10 +150,10 @@ Weights         = Distribution/sum(Distribution); % relative frequency
 
 if FlagPS == 1
     AEP_PS = sum(P.*Weights)*8760;
-    save("SteadyStatesShakti5MW_PS.mat","v_0","x_T","P","AEP_PS")
+    save("SteadyStatesShakti5MW_PS.mat","v_0","Omega","M_g","theta","x_T","P","AEP_PS")
 else
     AEP_classic = sum(P.*Weights)*8760;
-    save("SteadyStatesShakti5MW_classic.mat","v_0","x_T","P","AEP_classic")
+    save("SteadyStatesShakti5MW_classic.mat","v_0","Omega","M_g","theta","x_T","P","AEP_classic")
 end 
 %% 6. Plot
 figure('Name','Omega')
