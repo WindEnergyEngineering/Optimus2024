@@ -65,5 +65,7 @@ False                  LidRadialVel        - TRUE => return radial component, FA
 False                  SumPrint    - Print summary data to <RootName>.IfW.sum (flag)
 OutList      - The next line(s) contains a list of output parameters.  See OutListParameters.xlsx for a listing of available output channels, (-)
 "Wind1VelX"
+"Wind1VelY"
+"Wind1VelZ"
 END of input file (the word "END" must appear in the first 3 columns of this last OutList line)
 ---------------------------------------------------------------------------------------
