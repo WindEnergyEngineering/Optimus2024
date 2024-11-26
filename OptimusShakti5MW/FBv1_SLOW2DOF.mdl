@@ -18,6 +18,7 @@ __MWOPC_PART_BEGIN__ /[Content_Types].xml
   <Override ContentType="application/vnd.mathworks.simulink.configSetInfo+xml" PartName="/simulink/configSetInfo.xml"/>
   <Override ContentType="application/vnd.mathworks.simulink.graphicalInterface+xml" PartName="/simulink/graphicalInterface.xml"/>
   <Override ContentType="application/vnd.mathworks.simulink.mf0+xml" PartName="/simulink/modelDictionary.xml"/>
+  <Override ContentType="application/vnd.mathworks.simulink.pluginParameters+xml" PartName="/simulink/plugins/LogicAnalyzerPlugin.xml"/>
   <Override ContentType="application/vnd.mathworks.simulink.pluginParameters+xml" PartName="/simulink/plugins/SimscapeModelParametersPlugin.xml"/>
   <Override ContentType="application/vnd.mathworks.simulink.ScheduleCore+xml" PartName="/simulink/ScheduleCore.xml"/>
   <Override ContentType="application/vnd.mathworks.simulink.ScheduleEditor+xml" PartName="/simulink/ScheduleEditor.xml"/>
@@ -46,7 +47,7 @@ __MWOPC_PART_BEGIN__ /metadata/coreProperties.xml
   <dcterms:created xsi:type="dcterms:W3CDTF">2008-01-18T09:49:48Z</dcterms:created>
   <dc:creator>Phoenix_Shao</dc:creator>
   <cp:lastModifiedBy>felix</cp:lastModifiedBy>
-  <dcterms:modified xsi:type="dcterms:W3CDTF">2024-11-26T11:20:38Z</dcterms:modified>
+  <dcterms:modified xsi:type="dcterms:W3CDTF">2024-11-26T11:57:01Z</dcterms:modified>
   <cp:revision>15.0</cp:revision>
   <cp:version>R2022b</cp:version>
 </cp:coreProperties>
@@ -79,6 +80,7 @@ __MWOPC_PART_BEGIN__ /metadata/mwcorePropertiesReleaseInfo.xml
 __MWOPC_PART_BEGIN__ /simulink/_rels/blockdiagram.xml.rels
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">
+  <Relationship Id="LogicAnalyzerPlugin" Target="plugins/LogicAnalyzerPlugin.xml" Type="http://schemas.mathworks.com/simulinkModel/2014/relationships/pluginParameters"/>
   <Relationship Id="ScheduleCore" Target="ScheduleCore.xml" Type="http://schemas.mathworks.com/simulink/2013/relationships/ScheduleCore"/>
   <Relationship Id="ScheduleEditor" Target="ScheduleEditor.xml" Type="http://schemas.mathworks.com/simulink/2013/relationships/ScheduleEditor"/>
   <Relationship Id="SimscapeModelParametersPlugin" Target="plugins/SimscapeModelParametersPlugin.xml" Type="http://schemas.mathworks.com/simulinkModel/2014/relationships/pluginParameters"/>
@@ -1774,6 +1776,12 @@ __MWOPC_PART_BEGIN__ /simulink/modelDictionary.xml
     <Interface type="Interface" uuid="6852d4b9-65d0-4e67-8a89-d318423abc22"/>
   </System>
 </MF0>
+__MWOPC_PART_BEGIN__ /simulink/plugins/LogicAnalyzerPlugin.xml
+<?xml version="1.0" encoding="utf-8"?>
+<LogicAnalyzerPlugin>
+  <P Name="LogicAnalyzerSignalOrdering">137c04fe-69c9-4db1-a0e7-06ce154c2f20,fbcd491a-6fc6-4bd0-83e9-fce3eb7a317f,f2b654e4-9941-46d2-ac12-c14161fb02c1</P>
+</LogicAnalyzerPlugin>
+
 __MWOPC_PART_BEGIN__ /simulink/plugins/SimscapeModelParametersPlugin.xml
 <?xml version="1.0" encoding="utf-8"?>
 <SimscapeModelParametersPlugin>
@@ -1783,16 +1791,47 @@ __MWOPC_PART_BEGIN__ /simulink/plugins/SimscapeModelParametersPlugin.xml
 __MWOPC_PART_BEGIN__ /simulink/ScheduleCore.xml
 <?xml version="1.0" encoding="UTF-8"?>
 <sltp_graph version="1.1" packageUris="http://schema.mathworks.com/mf0/sltp_mm/R2022b_202203181029">
-  <sltp.mm.core.Context type="sltp.mm.core.Context" uuid="5acbe093-b7ab-4513-bae6-aec03c3ba54d">
+  <sltp.mm.core.Context type="sltp.mm.core.Context" uuid="1d0afa24-9408-4341-a4b0-6bd0945a93bd">
+    <priorityDirection>HighNumberLast</priorityDirection>
     <editorState type="sltp.mm.core.EditorState" uuid="7c730d68-2d74-4262-99e6-9b3aebead8b3">
+      <isSynchronized>true</isSynchronized>
       <panelState type="sltp.mm.core.EditorPanelState" uuid="5f4443a3-b792-4952-8733-043c2efb9697"/>
     </editorState>
-    <rootTask type="sltp.mm.core.Task" uuid="0efd8c31-7217-47af-b794-8bdd3737b1f8">
-      <context type="sltp.mm.core.Context" uuid="5acbe093-b7ab-4513-bae6-aec03c3ba54d"/>
+    <rootTask type="sltp.mm.core.Task" uuid="97da89dc-b062-426e-98fd-97681fae473b">
+      <context type="sltp.mm.core.Context" uuid="1d0afa24-9408-4341-a4b0-6bd0945a93bd"/>
       <explicit>false</explicit>
       <name>Default</name>
       <priority>-2147483648</priority>
-      <subgraph type="sltp.mm.core.Graph" uuid="c4644513-ee0f-449f-99ab-e5e986fa4100"/>
+      <subgraph type="sltp.mm.core.Graph" uuid="221fcb39-be81-4554-8051-86f9a48b1b3c">
+        <tasks type="sltp.mm.core.Task" uuid="992add35-6afd-4d77-ae49-b547ebf5e498">
+          <baseTask>true</baseTask>
+          <context type="sltp.mm.core.Context" uuid="1d0afa24-9408-4341-a4b0-6bd0945a93bd"/>
+          <explicit>false</explicit>
+          <id>1</id>
+          <isTimed>true</isTimed>
+          <name>Cont</name>
+          <priority>40</priority>
+          <rates type="sltp.mm.core.Rate" uuid="730468ed-b455-4d1f-b7f7-448c4a5cc82b">
+            <annotation>Cont</annotation>
+            <color>255</color>
+            <hasBlocks>true</hasBlocks>
+            <identifier>Continuous00</identifier>
+            <rateSpec type="sltp.mm.core.RateSpec">
+              <period>0.0</period>
+            </rateSpec>
+            <sti>0</sti>
+          </rates>
+          <rates type="sltp.mm.core.Rate" uuid="386be8c3-7e59-4ebc-85bb-3acddc4726b1">
+            <annotation>D1</annotation>
+            <color>-436207361</color>
+            <hasBlocks>true</hasBlocks>
+            <rateSpec type="sltp.mm.core.RateSpec">
+              <period>.0125</period>
+            </rateSpec>
+            <sti>1</sti>
+          </rates>
+        </tasks>
+      </subgraph>
     </rootTask>
   </sltp.mm.core.Context>
 </sltp_graph>
@@ -1800,13 +1839,47 @@ __MWOPC_PART_BEGIN__ /simulink/ScheduleEditor.xml
 <?xml version="1.0" encoding="UTF-8"?>
 <sltp_editor version="1.1" packageUris="http://schema.mathworks.com/mf0/DiagramEditor/R2019a_20181107 http://schema.mathworks.com/mf0/SltpSyntax/R2022b_202203181006">
   <diagram.editor.model.Diagram type="diagram.editor.model.Diagram" uuid="79c80ccf-868e-4ed6-9c31-6321a16fd178">
+    <entities type="diagram.editor.model.Entity" uuid="7c7bbfc5-d24f-4237-be05-b339239390c8">
+      <position>0,0</position>
+      <size>0,0,0,0</size>
+      <syntaxElement type="sltp.mm.syntax.Node" uuid="ba54d129-0cdf-4b26-ab22-64138e7576d9"/>
+      <title>Cont</title>
+      <type>base</type>
+      <subDiagram type="diagram.editor.model.Diagram" uuid="6abb148f-5c60-42b4-af64-29927d312c8c">
+        <position>0,0</position>
+        <syntaxElement type="sltp.mm.syntax.Graph" uuid="6f63c5d7-04f5-4e7b-b5be-50b8d7999e6b"/>
+        <title>Cont</title>
+        <type>graph.Graph</type>
+      </subDiagram>
+    </entities>
     <syntaxElement type="sltp.mm.syntax.Graph" uuid="f9b7441c-5efd-4fa0-b4fa-af97a088e419"/>
     <title>Default</title>
     <type>graph.Graph</type>
   </diagram.editor.model.Diagram>
   <sltp.mm.syntax.Context type="sltp.mm.syntax.Context" uuid="20afbe81-ef83-4342-a9c7-86e1a66310e9">
     <rootGraph type="sltp.mm.syntax.Graph" uuid="f9b7441c-5efd-4fa0-b4fa-af97a088e419">
-      <priorityDirection>HighNumberFirst</priorityDirection>
+      <children type="sltp.mm.syntax.Node" uuid="ba54d129-0cdf-4b26-ab22-64138e7576d9">
+        <priority>40</priority>
+        <rates type="sltp.mm.syntax.RateData">
+          <color>#000000</color>
+          <hasBlocks>true</hasBlocks>
+          <rate>0</rate>
+          <title>Cont</title>
+        </rates>
+        <rates type="sltp.mm.syntax.RateData">
+          <color>#e60000</color>
+          <hasBlocks>true</hasBlocks>
+          <rate>0.0125</rate>
+          <title>D1</title>
+        </rates>
+        <title>Cont</title>
+        <type>base</type>
+        <diagramElement type="diagram.editor.model.Entity" uuid="7c7bbfc5-d24f-4237-be05-b339239390c8"/>
+        <subgraph type="sltp.mm.syntax.Graph" uuid="6f63c5d7-04f5-4e7b-b5be-50b8d7999e6b">
+          <title>Cont</title>
+          <diagramElement type="diagram.editor.model.Diagram" uuid="6abb148f-5c60-42b4-af64-29927d312c8c"/>
+        </subgraph>
+      </children>
       <title>Default</title>
       <diagramElement type="diagram.editor.model.Diagram" uuid="79c80ccf-868e-4ed6-9c31-6321a16fd178"/>
     </rootGraph>
@@ -2225,12 +2298,22 @@ __MWOPC_PART_BEGIN__ /simulink/systems/system_6751.xml
     <P Name="Position">[370, 438, 400, 452]</P>
     <P Name="ZOrder">-1</P>
     <P Name="BackgroundColor">darkGreen</P>
+    <PortProperties>
+      <Port Type="out" Index="1">
+        <P Name="PropagatedSignals">d</P>
+      </Port>
+    </PortProperties>
   </Block>
   <Block BlockType="Inport" Name="u" SID="6753">
     <P Name="Position">[75, 183, 105, 197]</P>
     <P Name="ZOrder">-2</P>
     <P Name="BackgroundColor">darkGreen</P>
     <P Name="Port">2</P>
+    <PortProperties>
+      <Port Type="out" Index="1">
+        <P Name="PropagatedSignals">u</P>
+      </Port>
+    </PortProperties>
   </Block>
   <Block BlockType="BusCreator" Name="Bus&#xA;Creator2" SID="7611">
     <PortCounts in="12" out="1"/>
@@ -2285,8 +2368,6 @@ __MWOPC_PART_BEGIN__ /simulink/systems/system_6751.xml
     <PortProperties>
       <Port Type="out" Index="1">
         <P Name="Name">P_el</P>
-        <P Name="PropagatedSignals">
-</P>
       </Port>
       <Port Type="out" Index="2">
         <P Name="Name">M_g</P>
@@ -2728,6 +2809,11 @@ __MWOPC_PART_BEGIN__ /simulink/systems/system_6884.xml
     <P Name="Position">[205, 308, 235, 322]</P>
     <P Name="ZOrder">3</P>
     <P Name="BackgroundColor">darkGreen</P>
+    <PortProperties>
+      <Port Type="out" Index="1">
+        <P Name="PropagatedSignals">u_FF</P>
+      </Port>
+    </PortProperties>
   </Block>
   <Block BlockType="Inport" Name="y" SID="6886">
     <P Name="Position">[320, 98, 350, 112]</P>
@@ -2896,12 +2982,22 @@ __MWOPC_PART_BEGIN__ /simulink/systems/system_7125.xml
     <P Name="Position">[35, 83, 65, 97]</P>
     <P Name="ZOrder">-2</P>
     <P Name="BackgroundColor">darkGreen</P>
+    <PortProperties>
+      <Port Type="out" Index="1">
+        <P Name="PropagatedSignals">Omega_g</P>
+      </Port>
+    </PortProperties>
   </Block>
   <Block BlockType="Inport" Name="M_g_c [Nm]" SID="7127">
     <P Name="Position">[35, 48, 65, 62]</P>
     <P Name="ZOrder">-1</P>
     <P Name="BackgroundColor">darkGreen</P>
     <P Name="Port">2</P>
+    <PortProperties>
+      <Port Type="out" Index="1">
+        <P Name="PropagatedSignals">M_g_c</P>
+      </Port>
+    </PortProperties>
   </Block>
   <Block BlockType="Constant" Name="Constant3" SID="7128">
     <P Name="Position">[25, 113, 215, 137]</P>
@@ -2980,6 +3076,11 @@ __MWOPC_PART_BEGIN__ /simulink/systems/system_7362.xml
     <P Name="Position">[25, 278, 55, 292]</P>
     <P Name="ZOrder">-1</P>
     <P Name="BackgroundColor">darkGreen</P>
+    <PortProperties>
+      <Port Type="out" Index="1">
+        <P Name="PropagatedSignals">theta_c</P>
+      </Port>
+    </PortProperties>
   </Block>
   <Block BlockType="Constant" Name="Constant2" SID="7378">
     <P Name="Position">[45, 313, 235, 337]</P>
@@ -3025,6 +3126,11 @@ port_label(&apos;input&apos;,1,&apos;u&apos;)</Display>
         <Value>Parameter.PitchActuator.theta_min</Value>
       </MaskParameter>
     </Mask>
+    <PortProperties>
+      <Port Type="out" Index="2">
+        <P Name="PropagatedSignals">x1</P>
+      </Port>
+    </PortProperties>
     <System Ref="system_7365"/>
   </Block>
   <Block BlockType="Terminator" Name="Terminator" SID="7376">
@@ -3067,6 +3173,11 @@ __MWOPC_PART_BEGIN__ /simulink/systems/system_7365.xml
     <P Name="Position">[310, 98, 340, 112]</P>
     <P Name="ZOrder">-1</P>
     <P Name="BackgroundColor">darkGreen</P>
+    <PortProperties>
+      <Port Type="out" Index="1">
+        <P Name="PropagatedSignals">theta_c</P>
+      </Port>
+    </PortProperties>
   </Block>
   <Block BlockType="Inport" Name="y0" SID="7367">
     <P Name="Position">[695, 143, 725, 157]</P>
@@ -3231,18 +3342,33 @@ __MWOPC_PART_BEGIN__ /simulink/systems/system_7379.xml
     <P Name="Position">[-35, 93, -5, 107]</P>
     <P Name="ZOrder">1171</P>
     <P Name="BackgroundColor">darkGreen</P>
+    <PortProperties>
+      <Port Type="out" Index="1">
+        <P Name="PropagatedSignals">Omega_g</P>
+      </Port>
+    </PortProperties>
   </Block>
   <Block BlockType="Inport" Name="M_g [Nm]" SID="7381">
     <P Name="Position">[-35, 48, -5, 62]</P>
     <P Name="ZOrder">1172</P>
     <P Name="BackgroundColor">darkGreen</P>
     <P Name="Port">2</P>
+    <PortProperties>
+      <Port Type="out" Index="1">
+        <P Name="PropagatedSignals">M_g</P>
+      </Port>
+    </PortProperties>
   </Block>
   <Block BlockType="Inport" Name="theta [rad]" SID="7382">
     <P Name="Position">[-35, 348, -5, 362]</P>
     <P Name="ZOrder">1170</P>
     <P Name="BackgroundColor">darkGreen</P>
     <P Name="Port">3</P>
+    <PortProperties>
+      <Port Type="out" Index="1">
+        <P Name="PropagatedSignals">theta</P>
+      </Port>
+    </PortProperties>
   </Block>
   <Block BlockType="SubSystem" Name="Filter Generator Speed" SID="7383">
     <PortCounts in="1" out="1"/>
@@ -3420,6 +3546,11 @@ __MWOPC_PART_BEGIN__ /simulink/systems/system_7383.xml
     <P Name="Position">[50, 263, 80, 277]</P>
     <P Name="ZOrder">-1</P>
     <P Name="BackgroundColor">darkGreen</P>
+    <PortProperties>
+      <Port Type="out" Index="1">
+        <P Name="PropagatedSignals">Omega_g</P>
+      </Port>
+    </PortProperties>
   </Block>
   <Block BlockType="SubSystem" Name="2ndOrder Transfer function" SID="7385">
     <PortCounts in="8" out="1"/>
@@ -4172,12 +4303,22 @@ __MWOPC_PART_BEGIN__ /simulink/systems/system_7421.xml
     <P Name="Position">[255, 448, 285, 462]</P>
     <P Name="ZOrder">248</P>
     <P Name="BackgroundColor">darkGreen</P>
+    <PortProperties>
+      <Port Type="out" Index="1">
+        <P Name="PropagatedSignals">Omega_g</P>
+      </Port>
+    </PortProperties>
   </Block>
   <Block BlockType="Inport" Name="u" SID="7423">
     <P Name="Position">[55, 388, 85, 402]</P>
     <P Name="ZOrder">-1</P>
     <P Name="BackgroundColor">darkGreen</P>
     <P Name="Port">2</P>
+    <PortProperties>
+      <Port Type="out" Index="1">
+        <P Name="PropagatedSignals">Omega_g</P>
+      </Port>
+    </PortProperties>
   </Block>
   <Block BlockType="Inport" Name="f_cutoff" SID="7424">
     <P Name="Position">[215, 363, 245, 377]</P>
@@ -4274,12 +4415,22 @@ __MWOPC_PART_BEGIN__ /simulink/systems/system_7430.xml
     <P Name="Position">[255, 448, 285, 462]</P>
     <P Name="ZOrder">248</P>
     <P Name="BackgroundColor">darkGreen</P>
+    <PortProperties>
+      <Port Type="out" Index="1">
+        <P Name="PropagatedSignals">Omega_g</P>
+      </Port>
+    </PortProperties>
   </Block>
   <Block BlockType="Inport" Name="u" SID="7432">
     <P Name="Position">[55, 388, 85, 402]</P>
     <P Name="ZOrder">-1</P>
     <P Name="BackgroundColor">darkGreen</P>
     <P Name="Port">2</P>
+    <PortProperties>
+      <Port Type="out" Index="1">
+        <P Name="PropagatedSignals">Omega_g</P>
+      </Port>
+    </PortProperties>
   </Block>
   <Block BlockType="Inport" Name="f_cutoff" SID="7433">
     <P Name="Position">[215, 363, 245, 377]</P>
@@ -4411,6 +4562,11 @@ __MWOPC_PART_BEGIN__ /simulink/systems/system_7448.xml
     <P Name="Position">[275, 278, 305, 292]</P>
     <P Name="ZOrder">-1</P>
     <P Name="BackgroundColor">darkGreen</P>
+    <PortProperties>
+      <Port Type="out" Index="1">
+        <P Name="PropagatedSignals">Delta_Omega_g</P>
+      </Port>
+    </PortProperties>
   </Block>
   <Block BlockType="Constant" Name="Constant1" SID="7450">
     <P Name="Position">[80, 312, 280, 338]</P>
@@ -4472,6 +4628,11 @@ __MWOPC_PART_BEGIN__ /simulink/systems/system_7452.xml
     <P Name="ZOrder">-1</P>
     <P Name="BackgroundColor">darkGreen</P>
     <P Name="Port">2</P>
+    <PortProperties>
+      <Port Type="out" Index="1">
+        <P Name="PropagatedSignals">Delta_Omega_g</P>
+      </Port>
+    </PortProperties>
   </Block>
   <Block BlockType="Inport" Name="f_cutoff" SID="7455">
     <P Name="Position">[215, 363, 245, 377]</P>
@@ -4569,18 +4730,33 @@ __MWOPC_PART_BEGIN__ /simulink/systems/system_7462.xml
     <P Name="Position">[70, 148, 100, 162]</P>
     <P Name="ZOrder">367</P>
     <P Name="BackgroundColor">darkGreen</P>
+    <PortProperties>
+      <Port Type="out" Index="1">
+        <P Name="PropagatedSignals">Delta_Omega_g_f</P>
+      </Port>
+    </PortProperties>
   </Block>
   <Block BlockType="Inport" Name="Omega_g [rad/s]" SID="7464">
     <P Name="Position">[465, 153, 495, 167]</P>
     <P Name="ZOrder">-1</P>
     <P Name="BackgroundColor">darkGreen</P>
     <P Name="Port">2</P>
+    <PortProperties>
+      <Port Type="out" Index="1">
+        <P Name="PropagatedSignals">Omega_g_f</P>
+      </Port>
+    </PortProperties>
   </Block>
   <Block BlockType="Inport" Name="theta [rad]" SID="7465">
     <P Name="Position">[-90, 123, -60, 137]</P>
     <P Name="ZOrder">-2</P>
     <P Name="BackgroundColor">darkGreen</P>
     <P Name="Port">3</P>
+    <PortProperties>
+      <Port Type="out" Index="1">
+        <P Name="PropagatedSignals">theta</P>
+      </Port>
+    </PortProperties>
   </Block>
   <Block BlockType="Reference" Name="Compare&#xA;To Zero" SID="7466">
     <PortCounts in="1" out="1"/>
@@ -4845,6 +5021,11 @@ __MWOPC_PART_BEGIN__ /simulink/systems/system_7474.xml
     <P Name="Position">[390, 123, 420, 137]</P>
     <P Name="ZOrder">50</P>
     <P Name="BackgroundColor">darkGreen</P>
+    <PortProperties>
+      <Port Type="out" Index="1">
+        <P Name="PropagatedSignals">theta</P>
+      </Port>
+    </PortProperties>
   </Block>
   <Block BlockType="Inport" Name="e" SID="7476">
     <P Name="Position">[140, 98, 170, 112]</P>
@@ -5056,18 +5237,33 @@ __MWOPC_PART_BEGIN__ /simulink/systems/system_7497.xml
     <P Name="Position">[155, 363, 185, 377]</P>
     <P Name="ZOrder">1172</P>
     <P Name="BackgroundColor">darkGreen</P>
+    <PortProperties>
+      <Port Type="out" Index="1">
+        <P Name="PropagatedSignals">Omega_g</P>
+      </Port>
+    </PortProperties>
   </Block>
   <Block BlockType="Inport" Name="M_g [Nm]" SID="7499">
     <P Name="Position">[155, 438, 185, 452]</P>
     <P Name="ZOrder">208</P>
     <P Name="BackgroundColor">darkGreen</P>
     <P Name="Port">2</P>
+    <PortProperties>
+      <Port Type="out" Index="1">
+        <P Name="PropagatedSignals">M_g</P>
+      </Port>
+    </PortProperties>
   </Block>
   <Block BlockType="Inport" Name="theta [rad]" SID="7500">
     <P Name="Position">[155, 178, 185, 192]</P>
     <P Name="ZOrder">329</P>
     <P Name="BackgroundColor">darkGreen</P>
     <P Name="Port">3</P>
+    <PortProperties>
+      <Port Type="out" Index="1">
+        <P Name="PropagatedSignals">theta</P>
+      </Port>
+    </PortProperties>
   </Block>
   <Block BlockType="Constant" Name="Constant1" SID="7501">
     <P Name="Position">[475, 445, 610, 475]</P>
@@ -5329,18 +5525,33 @@ __MWOPC_PART_BEGIN__ /simulink/systems/system_7519.xml
     <P Name="Position">[710, 73, 740, 87]</P>
     <P Name="ZOrder">318</P>
     <P Name="BackgroundColor">darkGreen</P>
+    <PortProperties>
+      <Port Type="out" Index="1">
+        <P Name="PropagatedSignals">M_g</P>
+      </Port>
+    </PortProperties>
   </Block>
   <Block BlockType="Inport" Name="Omega_g [rad/s]" SID="7521">
     <P Name="Position">[245, 143, 275, 157]</P>
     <P Name="ZOrder">287</P>
     <P Name="BackgroundColor">darkGreen</P>
     <P Name="Port">2</P>
+    <PortProperties>
+      <Port Type="out" Index="1">
+        <P Name="PropagatedSignals">Omega_g_f</P>
+      </Port>
+    </PortProperties>
   </Block>
   <Block BlockType="Inport" Name="Delta_Omega_g [rad/s]" SID="7522">
     <P Name="Position">[335, 408, 365, 422]</P>
     <P Name="ZOrder">311</P>
     <P Name="BackgroundColor">darkGreen</P>
     <P Name="Port">3</P>
+    <PortProperties>
+      <Port Type="out" Index="1">
+        <P Name="PropagatedSignals">Delta_Omega_g_f</P>
+      </Port>
+    </PortProperties>
   </Block>
   <Block BlockType="Constant" Name="Constant" SID="7523">
     <P Name="Position">[675, 205, 795, 235]</P>
@@ -5362,6 +5573,9 @@ __MWOPC_PART_BEGIN__ /simulink/systems/system_7519.xml
     <P Name="ZOrder">305</P>
     <P Name="BackgroundColor">green</P>
     <PortProperties>
+      <Port Type="out" Index="1">
+        <P Name="PropagatedSignals">Omega_g_ref</P>
+      </Port>
       <Port Type="out" Index="2">
         <P Name="Name">M_g_ub</P>
       </Port>
@@ -5466,12 +5680,22 @@ __MWOPC_PART_BEGIN__ /simulink/systems/system_7525.xml
     <P Name="Position">[250, 108, 280, 122]</P>
     <P Name="ZOrder">-1</P>
     <P Name="BackgroundColor">darkGreen</P>
+    <PortProperties>
+      <Port Type="out" Index="1">
+        <P Name="PropagatedSignals">Omega_g_f</P>
+      </Port>
+    </PortProperties>
   </Block>
   <Block BlockType="Inport" Name="Delta_Omega_g [rad/s]" SID="7527">
     <P Name="Position">[250, 193, 280, 207]</P>
     <P Name="ZOrder">1181</P>
     <P Name="BackgroundColor">darkGreen</P>
     <P Name="Port">2</P>
+    <PortProperties>
+      <Port Type="out" Index="1">
+        <P Name="PropagatedSignals">Delta_Omega_g_f</P>
+      </Port>
+    </PortProperties>
   </Block>
   <Block BlockType="Constant" Name="Constant1" SID="7528">
     <P Name="Position">[170, 270, 365, 300]</P>
@@ -5616,11 +5840,21 @@ __MWOPC_PART_BEGIN__ /simulink/systems/system_7533.xml
   <Block BlockType="Inport" Name="Omega_g" SID="7533::4361">
     <P Name="Position">[20, 101, 40, 119]</P>
     <P Name="ZOrder">-1</P>
+    <PortProperties>
+      <Port Type="out" Index="1">
+        <P Name="PropagatedSignals">Omega_g_f</P>
+      </Port>
+    </PortProperties>
   </Block>
   <Block BlockType="Inport" Name="Delta_Omega_g" SID="7533::4539">
     <P Name="Position">[20, 136, 40, 154]</P>
     <P Name="ZOrder">108</P>
     <P Name="Port">2</P>
+    <PortProperties>
+      <Port Type="out" Index="1">
+        <P Name="PropagatedSignals">Delta_Omega_g_f</P>
+      </Port>
+    </PortProperties>
   </Block>
   <Block BlockType="Inport" Name="Omega_g_1d5" SID="7533::4422">
     <P Name="Position">[20, 171, 40, 189]</P>
@@ -5771,6 +6005,11 @@ __MWOPC_PART_BEGIN__ /simulink/systems/system_7537.xml
     <P Name="Position">[390, 123, 420, 137]</P>
     <P Name="ZOrder">50</P>
     <P Name="BackgroundColor">darkGreen</P>
+    <PortProperties>
+      <Port Type="out" Index="1">
+        <P Name="PropagatedSignals">M_g</P>
+      </Port>
+    </PortProperties>
   </Block>
   <Block BlockType="Inport" Name="e" SID="7539">
     <P Name="Position">[140, 98, 170, 112]</P>
@@ -5796,12 +6035,22 @@ __MWOPC_PART_BEGIN__ /simulink/systems/system_7537.xml
     <P Name="BackgroundColor">darkGreen</P>
     <P Name="NameLocation">top</P>
     <P Name="Port">5</P>
+    <PortProperties>
+      <Port Type="out" Index="1">
+        <P Name="PropagatedSignals">M_g_ub</P>
+      </Port>
+    </PortProperties>
   </Block>
   <Block BlockType="Inport" Name="u_min" SID="7543">
     <P Name="Position">[600, 133, 630, 147]</P>
     <P Name="ZOrder">66</P>
     <P Name="BackgroundColor">darkGreen</P>
     <P Name="Port">6</P>
+    <PortProperties>
+      <Port Type="out" Index="1">
+        <P Name="PropagatedSignals">M_g_lb</P>
+      </Port>
+    </PortProperties>
   </Block>
   <Block BlockType="Integrator" Name="Integrator" SID="7544">
     <PortCounts in="2" out="1"/>
@@ -5982,30 +6231,55 @@ __MWOPC_PART_BEGIN__ /simulink/systems/system_7558.xml
     <P Name="Position">[110, 108, 140, 122]</P>
     <P Name="ZOrder">-1</P>
     <P Name="BackgroundColor">darkGreen</P>
+    <PortProperties>
+      <Port Type="out" Index="1">
+        <P Name="PropagatedSignals">Omega</P>
+      </Port>
+    </PortProperties>
   </Block>
   <Block BlockType="Inport" Name="v_0 [m/s]" SID="7560">
     <P Name="Position">[110, 213, 140, 227]</P>
     <P Name="ZOrder">-2</P>
     <P Name="BackgroundColor">darkGreen</P>
     <P Name="Port">2</P>
+    <PortProperties>
+      <Port Type="out" Index="1">
+        <P Name="PropagatedSignals">v_0</P>
+      </Port>
+    </PortProperties>
   </Block>
   <Block BlockType="Inport" Name="theta [rad]" SID="7561">
     <P Name="Position">[110, 48, 140, 62]</P>
     <P Name="ZOrder">-3</P>
     <P Name="BackgroundColor">darkGreen</P>
     <P Name="Port">3</P>
+    <PortProperties>
+      <Port Type="out" Index="1">
+        <P Name="PropagatedSignals">theta</P>
+      </Port>
+    </PortProperties>
   </Block>
   <Block BlockType="Inport" Name="x_T_dot [m/s]" SID="7562">
     <P Name="Position">[110, 243, 140, 257]</P>
     <P Name="ZOrder">-4</P>
     <P Name="BackgroundColor">darkGreen</P>
     <P Name="Port">4</P>
+    <PortProperties>
+      <Port Type="out" Index="1">
+        <P Name="PropagatedSignals">x_T_dot</P>
+      </Port>
+    </PortProperties>
   </Block>
   <Block BlockType="SubSystem" Name="Aerodynamic Thrust" SID="7563">
     <PortCounts in="3" out="1"/>
     <P Name="Position">[750, 39, 935, 121]</P>
     <P Name="ZOrder">-5</P>
     <P Name="BackgroundColor">cyan</P>
+    <PortProperties>
+      <Port Type="out" Index="1">
+        <P Name="PropagatedSignals">F_a</P>
+      </Port>
+    </PortProperties>
     <System Ref="system_7563"/>
   </Block>
   <Block BlockType="SubSystem" Name="Aerodynamic Torque" SID="7571">
@@ -6013,6 +6287,11 @@ __MWOPC_PART_BEGIN__ /simulink/systems/system_7558.xml
     <P Name="Position">[750, 169, 935, 251]</P>
     <P Name="ZOrder">-6</P>
     <P Name="BackgroundColor">cyan</P>
+    <PortProperties>
+      <Port Type="out" Index="1">
+        <P Name="PropagatedSignals">M_a</P>
+      </Port>
+    </PortProperties>
     <System Ref="system_7571"/>
   </Block>
   <Block BlockType="SubSystem" Name="Tip Speed Ratio" SID="7580">
@@ -6020,6 +6299,11 @@ __MWOPC_PART_BEGIN__ /simulink/systems/system_7558.xml
     <P Name="Position">[335, 101, 470, 159]</P>
     <P Name="ZOrder">-7</P>
     <P Name="BackgroundColor">cyan</P>
+    <PortProperties>
+      <Port Type="out" Index="1">
+        <P Name="PropagatedSignals">lambda</P>
+      </Port>
+    </PortProperties>
     <System Ref="system_7580"/>
   </Block>
   <Block BlockType="SubSystem" Name="relative Wind Speed" SID="7587">
@@ -6027,6 +6311,11 @@ __MWOPC_PART_BEGIN__ /simulink/systems/system_7558.xml
     <P Name="Position">[175, 203, 300, 267]</P>
     <P Name="ZOrder">-9</P>
     <P Name="BackgroundColor">cyan</P>
+    <PortProperties>
+      <Port Type="out" Index="1">
+        <P Name="PropagatedSignals">v_rel</P>
+      </Port>
+    </PortProperties>
     <System Ref="system_7587"/>
   </Block>
   <Block BlockType="Outport" Name="M_a [Nm]" SID="7592">
@@ -6139,18 +6428,33 @@ __MWOPC_PART_BEGIN__ /simulink/systems/system_7563.xml
     <P Name="Position">[25, 93, 55, 107]</P>
     <P Name="ZOrder">-1</P>
     <P Name="BackgroundColor">darkGreen</P>
+    <PortProperties>
+      <Port Type="out" Index="1">
+        <P Name="PropagatedSignals">theta</P>
+      </Port>
+    </PortProperties>
   </Block>
   <Block BlockType="Inport" Name="lambda [-]" SID="7565">
     <P Name="Position">[20, 68, 50, 82]</P>
     <P Name="ZOrder">-2</P>
     <P Name="BackgroundColor">darkGreen</P>
     <P Name="Port">2</P>
+    <PortProperties>
+      <Port Type="out" Index="1">
+        <P Name="PropagatedSignals">lambda</P>
+      </Port>
+    </PortProperties>
   </Block>
   <Block BlockType="Inport" Name="v_rel [m/s]" SID="7566">
     <P Name="Position">[520, 33, 550, 47]</P>
     <P Name="ZOrder">-3</P>
     <P Name="BackgroundColor">darkGreen</P>
     <P Name="Port">3</P>
+    <PortProperties>
+      <Port Type="out" Index="1">
+        <P Name="PropagatedSignals">v_rel</P>
+      </Port>
+    </PortProperties>
   </Block>
   <Block BlockType="Fcn" Name="Fcn1" SID="7567">
     <P Name="Position">[340, 72, 630, 108]</P>
@@ -6245,18 +6549,33 @@ __MWOPC_PART_BEGIN__ /simulink/systems/system_7571.xml
     <P Name="Position">[25, 103, 55, 117]</P>
     <P Name="ZOrder">-1</P>
     <P Name="BackgroundColor">darkGreen</P>
+    <PortProperties>
+      <Port Type="out" Index="1">
+        <P Name="PropagatedSignals">theta</P>
+      </Port>
+    </PortProperties>
   </Block>
   <Block BlockType="Inport" Name="lambda [-]" SID="7573">
     <P Name="Position">[25, 73, 55, 87]</P>
     <P Name="ZOrder">-2</P>
     <P Name="BackgroundColor">darkGreen</P>
     <P Name="Port">2</P>
+    <PortProperties>
+      <Port Type="out" Index="1">
+        <P Name="PropagatedSignals">lambda</P>
+      </Port>
+    </PortProperties>
   </Block>
   <Block BlockType="Inport" Name="v_rel [m/s]" SID="7574">
     <P Name="Position">[650, 33, 680, 47]</P>
     <P Name="ZOrder">-3</P>
     <P Name="BackgroundColor">darkGreen</P>
     <P Name="Port">3</P>
+    <PortProperties>
+      <Port Type="out" Index="1">
+        <P Name="PropagatedSignals">v_rel</P>
+      </Port>
+    </PortProperties>
   </Block>
   <Block BlockType="Fcn" Name="Fcn1" SID="7575">
     <P Name="Position">[470, 72, 760, 108]</P>
@@ -6373,12 +6692,22 @@ __MWOPC_PART_BEGIN__ /simulink/systems/system_7580.xml
     <P Name="Position">[20, 28, 50, 42]</P>
     <P Name="ZOrder">-1</P>
     <P Name="BackgroundColor">darkGreen</P>
+    <PortProperties>
+      <Port Type="out" Index="1">
+        <P Name="PropagatedSignals">Omega</P>
+      </Port>
+    </PortProperties>
   </Block>
   <Block BlockType="Inport" Name="v_rel [m/s]" SID="7582">
     <P Name="Position">[20, 68, 50, 82]</P>
     <P Name="ZOrder">-2</P>
     <P Name="BackgroundColor">darkGreen</P>
     <P Name="Port">2</P>
+    <PortProperties>
+      <Port Type="out" Index="1">
+        <P Name="PropagatedSignals">v_rel</P>
+      </Port>
+    </PortProperties>
   </Block>
   <Block BlockType="Gain" Name="Gain6" SID="7583">
     <P Name="Position">[130, 34, 300, 76]</P>
@@ -6442,12 +6771,22 @@ __MWOPC_PART_BEGIN__ /simulink/systems/system_7587.xml
     <P Name="Position">[245, 58, 275, 72]</P>
     <P Name="ZOrder">-1</P>
     <P Name="BackgroundColor">darkGreen</P>
+    <PortProperties>
+      <Port Type="out" Index="1">
+        <P Name="PropagatedSignals">v_0</P>
+      </Port>
+    </PortProperties>
   </Block>
   <Block BlockType="Inport" Name="x_T_dot [m/s]" SID="7589">
     <P Name="Position">[20, 43, 50, 57]</P>
     <P Name="ZOrder">-2</P>
     <P Name="BackgroundColor">darkGreen</P>
     <P Name="Port">2</P>
+    <PortProperties>
+      <Port Type="out" Index="1">
+        <P Name="PropagatedSignals">x_T_dot</P>
+      </Port>
+    </PortProperties>
   </Block>
   <Block BlockType="Sum" Name="Add2" SID="7590">
     <PortCounts in="2" out="1"/>
@@ -6496,6 +6835,11 @@ __MWOPC_PART_BEGIN__ /simulink/systems/system_7595.xml
     <P Name="ZOrder">-1</P>
     <P Name="BlockMirror">on</P>
     <P Name="BackgroundColor">darkGreen</P>
+    <PortProperties>
+      <Port Type="out" Index="1">
+        <P Name="PropagatedSignals">F_a</P>
+      </Port>
+    </PortProperties>
   </Block>
   <Block BlockType="Sum" Name="Add1" SID="7597">
     <PortCounts in="2" out="1"/>
@@ -7159,7 +7503,7 @@ __MWOPC_PART_BEGIN__ /simulink/windowsInfo.xml
       </Array>
       <P Name="WindowState" Class="char">AAAA/wAAAAD9AAAAAwAAAAAAAAC9AAADLvwCAAAABPsAAAAWAEQAbwBjAGsAVwBpAGQAZwBlAHQAMwEAAAAxAAAB+AAAAAAAAAAA+wAAABYARABvAGMAawBXAGkAZABnAGUAdAA0AAAAAAD/////AAAAAAAAAAD7AAAAUgBHAEwAVQBFADIAIAB0AHIAZQBlACAAYwBvAG0AcABvAG4AZQBuAHQALwBHAEwAVQBFADIAIAB0AHIAZQBlACAAYwBvAG0AcABvAG4AZQBuAHQAAAAAlwAAAy4AAAB5AP////sAAABgAFMAaQBtAHUAbABpAG4AawA6AEUAZABpAHQAbwByADoAUgBlAGYAZQByAGUAbgBjAGUAZABGAGkAbABlAHMALwBSAGUAZgBlAHIAZQBuAGMAZQBkACAARgBpAGwAZQBzAAAAAAD/////AAAApwD///8AAAABAAAAAAAAAAD8AgAAAAH7AAAAVABHAEwAVQBFADIAOgBQAHIAbwBwAGUAcgB0AHkASQBuAHMAcABlAGMAdABvAHIALwBQAHIAbwBwAGUAcgB0AHkAIABJAG4AcwBwAGUAYwB0AG8AcgAAAAAA/////wAAAhYA////AAAAAwAAAAAAAAAA/AEAAAAB+/////8AAAAAAP////8AAAGuAP///wAAB4AAAAMuAAAAAQAAAAIAAAABAAAAAvwAAAAA</P>
       <Array PropName="PersistedApps" Type="Cell" Dimension="0*1"/>
-      <P Name="WindowUuid" Class="char">804ef1a0-0c6a-401c-9171-7f838bc21f72</P>
+      <P Name="WindowUuid" Class="char">fddd61cc-786a-41a2-a1d9-933a15a5b1a0</P>
     </Object>
     <P Name="BDUuid" Class="char">ec1c924a-3d9c-4885-af82-84574811bba7</P>
   </Object>

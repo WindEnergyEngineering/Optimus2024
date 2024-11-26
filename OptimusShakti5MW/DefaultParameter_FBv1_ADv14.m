@@ -27,7 +27,7 @@ Parameter.VSC.Omega_g_1d5               = rpm2radPs(300);                   % [r
 
 Parameter.VSC.Delta_Omega_g             = 0.10*Parameter.CPC.Omega_g_rated; % [rad/s]   % over-/under-speed limit for setpoint-fading, first guess
 Parameter.VSC.Delta_theta               = deg2rad(20);                      % [rad]     % change of pitch angle at which under-speed limit should be reached, brute-force-optimized
-Parameter.VSC.Delta_P                   = 3.35e6;                          	% [W]       % change of power at which over-speed limit should be reached, first guess
+Parameter.VSC.Delta_P                   = 4.95e6;                          	% [W]       % change of power at which over-speed limit should be reached, first guess
 
 %% Filter Generator Speed
 Parameter.Filter.LowPass.Enable         = 1;                                % [0/1]     % flag to enable low pass filter for generator speed
@@ -35,7 +35,7 @@ Parameter.Filter.LowPass.f_cutoff       = 1;                                % [H
 Parameter.Filter.LowPass2.f_cutoff     	= 0.02;                             % [Hz]      % cut-off-frequency for low pass filter for setpoint-fading, first guess
 Parameter.Filter.LowPass3.f_cutoff      = 0.01;                             % [Hz]      % cut-off-frequency for low pass filter for dynamic notch filter, first guess
 Parameter.Filter.NotchFilter.Enable   	= 1;                                % [0/1]     % flag to enable dynamic notch filter for generator speed
-Parameter.Filter.NotchFilter.Gain       = 3/Parameter.Turbine.r_GB;            % [-]       % gain on generator rotational frequency for dynamic notch filter, standard value
+Parameter.Filter.NotchFilter.Gain       = 3/Parameter.Turbine.r_GB;         % [-]       % gain on generator rotational frequency for dynamic notch filter, standard value
 Parameter.Filter.NotchFilter.BW      	= 0.10;                             % [Hz]      % bandwidth of dynamic notch filter, first guess
 Parameter.Filter.NotchFilter.D       	= 0.01;                             % [-]       % depth of dynamic notch filter, first guess
                              

@@ -6,8 +6,7 @@ Parameter.General.rho               = 1.12;         	% [kg/m^3]  air density, fr
 
 %% Turbine
 Parameter.Turbine.SS             	= load('PowerAndThrustCoefficients_SHAKTI_v5.mat','c_P','c_T','theta','lambda'); % from simulations
-
-%Parameter.Turbine.i               	= 1/53.25;           
+          
 Parameter.Turbine.r_GB              = 53.25;            % [-]       gearbox ratio, from ElastoDyn.dat:1/GBRatio, from Shakti(german) 20/11/24 fle 
 Parameter.Turbine.R              	= 178/2;            % [m]       Rotor radius, from ElastoDyn.dat: TipRad, from Shakti(Carlo table) 20/11/24 fle  
 

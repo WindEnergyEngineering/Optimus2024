@@ -3,7 +3,7 @@
 % Exercise 03 of "Controller Design for Wind Turbines and Wind Farms"
 % -----------------------------
 
-clearvars;%close all;clc;
+clearvars;close all;clc;
 
 %% PreProcessing SLOW for all simulations
 
@@ -19,7 +19,7 @@ Parameter.Time.TMax             = 60;   % [s] simulation length
 
 %% Loop over Operation Points
 
-OPs = [15];
+OPs = [9.3];
 nOP = length(OPs);
 
 for iOP=1:nOP
@@ -29,7 +29,7 @@ for iOP=1:nOP
 
     % wind for this OP
     Disturbance.v_0.time            = [0; 30; 30+dt;  60];       % [s]      time points to change wind speed
-    Disturbance.v_0.signals.values  = [0;  0;  0; 0]+OP;    % [m/s]    wind speeds
+    Disturbance.v_0.signals.values  = [0;  0;  0.1; 0.1]+OP;    % [m/s]    wind speeds
 
     % Initial Conditions from SteadyStates for this OP
     SteadyStates = load('SteadyStatesShakti5MW_classic.mat','v_0','Omega','theta','M_g','x_T');                       
@@ -43,6 +43,7 @@ for iOP=1:nOP
     
     % collect simulation Data
     Omega(:,iOP)    = logsout.get('y').Values.Omega.Data;
+    M_g(:,iOP)      = logsout.get('y').Values.M_g.Data;
     Power_el(:,iOP) = logsout.get('y').Values.P_el.Data;
     lambda(:,iOP)   = logsout.get('y').Values.lambda.Data;
     theta(:,iOP)    = logsout.get('y').Values.theta.Data;
@@ -62,20 +63,20 @@ legend(strcat(num2str(OPs'),' m/s'))
 
 subplot(512)
 hold on;box on;grid on;
-plot(tout,Power_el./1000)
-ylabel('Power [kW]')
+plot(tout,rad2deg(theta))
+ylabel('\theta [°]')
 legend(strcat(num2str(OPs'),' m/s'))
 
 subplot(513)
 hold on;box on;grid on;
-plot(tout,lambda)
-ylabel('\lambda [-]')
+plot(tout,M_g./1000)
+ylabel('M_g [kNm]')
 legend(strcat(num2str(OPs'),' m/s'))
 
 subplot(514)
 hold on;box on;grid on;
-plot(tout,rad2deg(theta))
-ylabel('\theta [°]')
+plot(tout,Power_el./1000)
+ylabel('Power [kW]')
 legend(strcat(num2str(OPs'),' m/s'))
 
 subplot(515)
