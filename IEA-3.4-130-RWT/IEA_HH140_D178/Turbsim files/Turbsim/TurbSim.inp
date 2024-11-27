@@ -15,14 +15,14 @@ True                Clockwise       - Clockwise rotation looking downwind? (used
  0                  ScaleIEC        - Scale IEC turbulence models to exact target standard deviation? [0=no additional scaling; 1=use hub scale uniformly; 2=use individual scales]
  
 --------Turbine/Model Specifications-----------------------
-53                  NumGrid_Z       - Vertical grid-point matrix dimension
-53                  NumGrid_Y       - Horizontal grid-point matrix dimension
+56                  NumGrid_Z       - Vertical grid-point matrix dimension
+56                  NumGrid_Y       - Horizontal grid-point matrix dimension
 0.05                TimeStep        - Time step [seconds]
 650                 AnalysisTime    - Length of analysis time series [seconds] (program will add time if necessary: AnalysisTime = MAX(AnalysisTime, UsableTime+GridWidth/MeanHHWS) )
 610                  UsableTime      - Usable length of output time series [seconds] (program will add GridWidth/MeanHHWS seconds)
 140                 HubHt           - Hub height [m] (should be > 0.5*GridHeight)
-260                 GridHeight      - Grid height [m] 
-260                 GridWidth       - Grid width [m] (should be >= 2*(RotorRadius+ShaftLength))
+220                 GridHeight      - Grid height [m] 
+220                 GridWidth       - Grid width [m] (should be >= 2*(RotorRadius+ShaftLength))
 0                   VFlowAng        - Vertical mean flow (uptilt) angle [degrees]
 0                   HFlowAng        - Horizontal mean flow (skew) angle [degrees]
   
@@ -30,7 +30,7 @@ True                Clockwise       - Clockwise rotation looking downwind? (used
 "IECKAI"            TurbModel       - Turbulence model ("IECKAI"=Kaimal, "IECVKM"=von Karman, "GP_LLJ", "NWTCUP", "SMOOTH", "WF_UPW", "WF_07D", "WF_14D", or "NONE")
 "1-ED3"             IECstandard     - Number of IEC 61400-x standard (x=1,2, or 3 with optional 61400-1 edition number (i.e. "1-Ed2") )
 "B"                 IECturbc        - IEC turbulence characteristic ("A", "B", "C" or the turbulence intensity in percent) ("KHTEST" option with NWTCUP model, not used for other models)
-"3ETM"               IEC_WindType    - IEC turbulence type ("NTM"=normal, "xETM"=extreme turbulence, "xEWM1"=extreme 1-year wind, "xEWM50"=extreme 50-year wind, where x=wind turbine class 1, 2, or 3)
+"3EWM1"               IEC_WindType    - IEC turbulence type ("NTM"=normal, "xETM"=extreme turbulence, "xEWM1"=extreme 1-year wind, "xEWM50"=extreme 50-year wind, where x=wind turbine class 1, 2, or 3)
 default             ETMc            - IEC Extreme Turbulence Model "c" parameter [m/s]
 "IEC"               WindProfileType - Wind profile type ("JET","LOG"=logarithmic,"PL"=power law,"IEC"=PL on rotor disk,LOG elsewhere, or "default")
 140                 RefHt           - Height of the reference wind speed [m]
