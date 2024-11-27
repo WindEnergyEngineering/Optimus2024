@@ -7,10 +7,10 @@ import time
 # from pyfiglet import Figlet
 
 # Define the directory where your wind files are located
-wind_directory = './Wind'  # Update this path to the actual location
+wind_directory = r'C:\Users\carlo\Documents\GitHub\Optimus2024\IEA-3.4-130-RWT\Wind\DLC61_EWM50_37'  # Update this path to the actual location
 #hydrodyn_directory = '../Wave'  # Update this path to the actual location
 main_directory = r'C:\Users\carlo\Documents\GitHub\Optimus2024\IEA-3.4-130-RWT\IEA_HH140_D178\DLC_6_1'  # Update this path
-
+second_directory = r'C:\Users\carlo\Documents\GitHub\Optimus2024\IEA-3.4-130-RWT\IEA_HH140_D178'
 # List all .bts files in the wind directory
 wind_files = [file for file in os.listdir(wind_directory) if file.endswith('.bts')]
 
@@ -102,10 +102,10 @@ for wind_file in wind_files:
         pyautogui.press('ctrl')
 
         # Define the output directory and DLC directory
-        output_directory = os.path.join(main_directory, 'Outputs')
+        output_directory = os.path.join(second_directory, 'Outputs')
 
         #Check if the Outputs directory exists; if not, create it
-        if not os.path.exists(main_directory):
+        if not os.path.exists(second_directory):
             os.makedirs(output_directory)
 
         dlc_directory = os.path.join(output_directory, 'DLC61')

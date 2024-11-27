@@ -44,10 +44,10 @@ True                   GenTiStp    - Method to stop the generator {T: timed usin
 99999.0                TEC_RLR     - Rotor leakage reactance (ohms) [used only when VSContrl=0 and GenModel=2]
 99999.0                TEC_MR      - Magnetizing reactance (ohms) [used only when VSContrl=0 and GenModel=2]
 ---------------------- HIGH-SPEED SHAFT BRAKE ----------------------------------
-0                      HSSBrMode   - HSS brake model {0: none, 1: simple, 3: user-defined from routine UserHSSBr, 4: user-defined from Simulink/Labview, 5: user-defined from Bladed-style DLL} (switch)
-110.0                THSSBrDp    - Time to initiate deployment of the HSS brake (s)
-110.5                HSSBrDT     - Time for HSS-brake to reach full deployment once initiated (sec) [used only when HSSBrMode=1]
-500000.0                HSSBrTqF    - Fully deployed HSS-brake torque (N-m)
+1                      HSSBrMode   - HSS brake model {0: none, 1: simple, 3: user-defined from routine UserHSSBr, 4: user-defined from Simulink/Labview, 5: user-defined from Bladed-style DLL} (switch)
+115.0                THSSBrDp    - Time to initiate deployment of the HSS brake (s)
+115.6                HSSBrDT     - Time for HSS-brake to reach full deployment once initiated (sec) [used only when HSSBrMode=1]
+28116.2                HSSBrTqF    - Fully deployed HSS-brake torque (N-m)
 ---------------------- NACELLE-YAW CONTROL -------------------------------------
 0                      YCMode      - Yaw control mode {0: none, 3: user-defined from routine UserYawCont, 4: user-defined from Simulink/Labview, 5: user-defined from Bladed-style DLL} (switch)
 99999.0                TYCOn       - Time to enable active yaw control (s) [unused when YCMode=0]
@@ -74,8 +74,8 @@ True                   GenTiStp    - Method to stop the generator {T: timed usin
 ---------------------- CABLE CONTROL ---------------------------------------- 
 0                      CCmode      - Cable control mode {0- none, 4- user-defined from Simulink/Labview, 5- user-defineAfC_phased from Bladed-style DLL}
 ---------------------- BLADED INTERFACE ---------------------------------------- [used only with Bladed Interface]
-"..\ServoData\libdiscon.dll" DLL_FileName - Name/location of the dynamic library {.dll [Windows] or .so [Linux]} in the Bladed-DLL format (-) [used only with Bladed Interface]
-"..\ServoData\IEA-3.4-130-RWT_DISCON.IN" DLL_InFile  - Name of input file sent to the DLL (-) [used only with Bladed Interface]
+"..\ServoData\FBv1_discon.dll" DLL_FileName - Name/location of the dynamic library {.dll [Windows] or .so [Linux]} in the Bladed-DLL format (-) [used only with Bladed Interface]
+"..\ServoData\FBv1_discon.IN" DLL_InFile  - Name of input file sent to the DLL (-) [used only with Bladed Interface]
 "DISCON"               DLL_ProcName - Name of procedure in DLL to be called (-) [case sensitive; used only with DLL Interface]
 default                DLL_DT      - Communication interval for dynamic library (s) (or "default") [used only with Bladed Interface]
 False                  DLL_Ramp    - Whether a linear ramp should be used between DLL_DT time steps [introduces time shift when true] (flag) [used only with Bladed Interface]
