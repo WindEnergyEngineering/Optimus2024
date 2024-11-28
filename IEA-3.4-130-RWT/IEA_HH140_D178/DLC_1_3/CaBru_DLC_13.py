@@ -7,7 +7,7 @@ import time
 # from pyfiglet import Figlet
 
 # Define the directory where your wind files are located
-wind_directory = './Wind'  # Update this path to the actual location
+wind_directory = r"C:\Users\carlo\Documents\GitHub\Optimus2024\IEA-3.4-130-RWT\Wind\DLC13_ETM_03-25"  # Update this path to the actual location
 #hydrodyn_directory = '../Wave'  # Update this path to the actual location
 main_directory = r'C:\Users\carlo\Documents\GitHub\Optimus2024\IEA-3.4-130-RWT\IEA_HH140_D178\DLC_1_3'  # Update this path
 second_directory = r'C:\Users\carlo\Documents\GitHub\Optimus2024\IEA-3.4-130-RWT\IEA_HH140_D178'
