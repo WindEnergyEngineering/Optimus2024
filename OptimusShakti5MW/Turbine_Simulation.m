@@ -3,7 +3,7 @@
 % Exercise 03 of "Controller Design for Wind Turbines and Wind Farms"
 % -----------------------------
 
-clearvars;close all;clc;
+clearvars;clc;
 
 %% PreProcessing SLOW for all simulations
 
@@ -29,7 +29,7 @@ for iOP=1:nOP
 
     % wind for this OP
     Disturbance.v_0.time            = [0; 30; 30+dt;  60];       % [s]      time points to change wind speed
-    Disturbance.v_0.signals.values  = [0;  0;  0.1; 0.1]+OP;    % [m/s]    wind speeds
+    Disturbance.v_0.signals.values  = [0;  0;  0.0; 0.0]+OP;    % [m/s]    wind speeds
 
     % Initial Conditions from SteadyStates for this OP
     SteadyStates = load('SteadyStatesShakti5MW_classic.mat','v_0','Omega','theta','M_g','x_T');                       
@@ -39,19 +39,19 @@ for iOP=1:nOP
     Parameter.IC.x_T          	    = interp1(SteadyStates.v_0,SteadyStates.x_T,  OP,'linear','extrap');
 
     % Processing SLOW for this OP
-    sim('FBv1_SLOW2DOF.mdl')
+    simout = sim('FBv1_SLOW2DOF.mdl');
     
     % collect simulation Data
-    Omega(:,iOP)    = logsout.get('y').Values.Omega.Data;
-    M_g(:,iOP)      = logsout.get('y').Values.M_g.Data;
-    Power_el(:,iOP) = logsout.get('y').Values.P_el.Data;
-    lambda(:,iOP)   = logsout.get('y').Values.lambda.Data;
-    theta(:,iOP)    = logsout.get('y').Values.theta.Data;
-    v_0(:,iOP)      = logsout.get('d').Values.v_0.Data;
+    Omega(:,iOP)    = simout.logsout.get('y').Values.Omega.Data;
+    M_g(:,iOP)      = simout.logsout.get('y').Values.M_g.Data;
+    Power_el(:,iOP) = simout.logsout.get('y').Values.P_el.Data;
+    lambda(:,iOP)   = simout.logsout.get('y').Values.lambda.Data;
+    theta(:,iOP)    = simout.logsout.get('y').Values.theta.Data;
+    v_0(:,iOP)      = simout.logsout.get('d').Values.v_0.Data;
  
 end
 
-
+tout = simout.tout;
 %% PostProcessing SLOW
 figure
 
