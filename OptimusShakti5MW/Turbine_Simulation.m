@@ -3,7 +3,7 @@
 % Exercise 03 of "Controller Design for Wind Turbines and Wind Farms"
 % -----------------------------
 
-clearvars;clc;
+clearvars;clc; bdclose;
 
 %% PreProcessing SLOW for all simulations
 
@@ -15,11 +15,11 @@ Parameter                       = DefaultParameter_FBv1_ADv14(Parameter);
 % Time
 dt                              = 1/80;
 Parameter.Time.dt               = dt;   % [s] simulation time step              
-Parameter.Time.TMax             = 60;   % [s] simulation length
+Parameter.Time.TMax             = 120;   % [s] simulation length
 
 %% Loop over Operation Points
 
-OPs = [9.3];
+OPs = [10];
 nOP = length(OPs);
 
 for iOP=1:nOP
@@ -29,7 +29,7 @@ for iOP=1:nOP
 
     % wind for this OP
     Disturbance.v_0.time            = [0; 30; 30+dt;  60];       % [s]      time points to change wind speed
-    Disturbance.v_0.signals.values  = [0;  0;  0.0; 0.0]+OP;    % [m/s]    wind speeds
+    Disturbance.v_0.signals.values  = [0;  0;  0.1; 0.1]+OP;    % [m/s]    wind speeds
 
     % Initial Conditions from SteadyStates for this OP
     SteadyStates = load('SteadyStatesShakti5MW_classic.mat','v_0','Omega','theta','M_g','x_T');                       

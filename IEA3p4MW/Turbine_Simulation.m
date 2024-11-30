@@ -3,7 +3,7 @@
 % Exercise 03 of "Controller Design for Wind Turbines and Wind Farms"
 % -----------------------------
 
-clearvars;close all;clc;
+clearvars;close all;clc;bdclose;
 
 %% PreProcessing SLOW for all simulations
 
@@ -15,11 +15,11 @@ Parameter                       = DefaultParameter_FBv1_ADv14(Parameter);
 % Time
 dt                              = 1/80;
 Parameter.Time.dt               = dt;   % [s] simulation time step              
-Parameter.Time.TMax             = 60;   % [s] simulation length
+Parameter.Time.TMax             = 60*2;   % [s] simulation length
 
 %% Loop over Operation Points
 
-OPs = [12 16 20 24];
+OPs = [7];
 nOP = length(OPs);
 
 for iOP=1:nOP
@@ -39,11 +39,15 @@ for iOP=1:nOP
     Parameter.IC.x_T          	    = interp1(SteadyStates.v_0,SteadyStates.x_T,  OP,'linear','extrap');
 
     % Processing SLOW for this OP
-    sim('FBv1_SLOW2DOF.mdl')
+    sim('FBv1_SLOW2DOF.mdl');
     
     % collect simulation Data
-    Omega(:,iOP) = logsout.get('y').Values.Omega.Data;
+    Omega(:,iOP)    = logsout.get('y').Values.Omega.Data;
+    M_g(:,iOP)      = logsout.get('y').Values.M_g.Data;
     Power_el(:,iOP) = logsout.get('y').Values.P_el.Data;
+    lambda(:,iOP)   = logsout.get('y').Values.lambda.Data;
+    theta(:,iOP)    = logsout.get('y').Values.theta.Data;
+    v_0(:,iOP)      = logsout.get('d').Values.v_0.Data;
  
 end
 
@@ -51,14 +55,32 @@ end
 %% PostProcessing SLOW
 figure
 
-subplot(211)
+subplot(511)
 hold on;box on;grid on;
 plot(tout,Omega*60/2/pi)
 ylabel('\Omega [rpm]')
 legend(strcat(num2str(OPs'),' m/s'))
 
-subplot(212)
+subplot(512)
+hold on;box on;grid on;
+plot(tout,rad2deg(theta))
+ylabel('\theta [°]')
+legend(strcat(num2str(OPs'),' m/s'))
+
+subplot(513)
+hold on;box on;grid on;
+plot(tout,M_g./1000)
+ylabel('M_g [kNm]')
+legend(strcat(num2str(OPs'),' m/s'))
+
+subplot(514)
 hold on;box on;grid on;
 plot(tout,Power_el./1000)
 ylabel('Power [kW]')
+legend(strcat(num2str(OPs'),' m/s'))
+
+subplot(515)
+hold on;box on;grid on;
+plot(tout,v_0)
+ylabel('v_0 [m/s]')
 legend(strcat(num2str(OPs'),' m/s')) 
