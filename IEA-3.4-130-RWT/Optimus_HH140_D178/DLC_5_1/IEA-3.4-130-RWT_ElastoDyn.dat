@@ -44,24 +44,24 @@ False                  PtfmYDOF    - Platform yaw rotation DOF (flag)
 3                      NumBl       - Number of blades (-)
 89		      TipRad      - The distance from the rotor apex to the blade tip (meters)
 2.0                    HubRad      - The distance from the rotor apex to the blade root (meters)
--3.0                   PreCone(1)  - Blade 1 cone angle (degrees)
--3.0                   PreCone(2)  - Blade 2 cone angle (degrees)
--3.0                   PreCone(3)  - Blade 3 cone angle (degrees) [unused for 2 blades]
+-5.0                   PreCone(1)  - Blade 1 cone angle (degrees)
+-5.0                   PreCone(2)  - Blade 2 cone angle (degrees)
+-5.0                   PreCone(3)  - Blade 3 cone angle (degrees) [unused for 2 blades]
 0.0                    HubCM       - Distance from rotor apex to hub mass [positive downwind] (meters)
 0.0                    UndSling    - Undersling length [distance from teeter pin to the rotor apex] (meters) [unused for 3 blades]
 0.0                    Delta3      - Delta-3 angle for teetering rotors (degrees) [unused for 3 blades]
 0.0                    AzimB1Up    - Azimuth value to use for I/O when blade 1 points up (degrees)
--5.019096350003331     OverHang    - Distance from yaw axis to rotor apex [3 blades] or teeter pin [2 blades] (meters)
+-6.5     OverHang    - Distance from yaw axis to rotor apex [3 blades] or teeter pin [2 blades] (meters)
 0.0                    ShftGagL    - Distance from rotor apex [3 blades] or teeter pin [2 blades] to shaft strain gages [positive for upwind rotors] (meters)
--4.999629720311564     ShftTilt    - Rotor shaft tilt angle (degrees)
+-6     ShftTilt    - Rotor shaft tilt angle (degrees)
 0.24342338341163358    NacCMxn     - Downwind distance from the tower-top to the nacelle CM (meters)
 -0.11800711194900922   NacCMyn     - Lateral  distance from the tower-top to the nacelle CM (meters)
 0.8829327249550237     NacCMzn     - Vertical distance from the tower-top to the nacelle CM (meters)
 0.0                    NcIMUxn     - Downwind distance from the tower-top to the nacelle IMU (meters)
 0.0                    NcIMUyn     - Lateral  distance from the tower-top to the nacelle IMU (meters)
 0.0                    NcIMUzn     - Vertical distance from the tower-top to the nacelle IMU (meters)
-1.5			Twr2Shft    - Vertical distance from the tower-top to the rotor shaft (meters)
-138.5                  TowerHt     - Height of tower above ground level [onshore] or MSL [offshore] (meters)
+3			Twr2Shft    - Vertical distance from the tower-top to the rotor shaft (meters)
+137                  TowerHt     - Height of tower above ground level [onshore] or MSL [offshore] (meters)
 0.0                    TowerBsHt   - Height of tower base above ground level [onshore] or MSL [offshore] (meters)
 0.0                    PtfmCMxt    - Downwind distance from the ground level [onshore] or MSL [offshore] to the platform CM (meters)
 0.0                    PtfmCMyt    - Lateral distance from the ground level [onshore] or MSL [offshore] to the platform CM (meters)
@@ -83,9 +83,9 @@ False                  PtfmYDOF    - Platform yaw rotation DOF (flag)
 0.0                    PtfmYIner   - Platform inertia for yaw rotation about the platform CM (kg m^2)
 ---------------------- BLADE ---------------------------------------------------
 50                     BldNodes    - Number of blade nodes (per blade) used for analysis (-)
-"..\StrucData\IEA-3.4-130-RWT_ElastoDyn_blade.dat" BldFile1    - Name of file containing properties for blade 1 (quoted string)
-"..\StrucData\IEA-3.4-130-RWT_ElastoDyn_blade.dat" BldFile2    - Name of file containing properties for blade 2 (quoted string)
-"..\StrucData\IEA-3.4-130-RWT_ElastoDyn_blade.dat" BldFile3    - Name of file containing properties for blade 3 (quoted string) [unused for 2 blades]
+"..\StrucData\OPT_Shakti_5_178_ElastoDyn_blade.dat" BldFile1    - Name of file containing properties for blade 1 (quoted string)
+"..\StrucData\OPT_Shakti_5_178_ElastoDyn_blade.dat" BldFile2    - Name of file containing properties for blade 2 (quoted string)
+"..\StrucData\OPT_Shakti_5_178_ElastoDyn_blade.dat" BldFile3    - Name of file containing properties for blade 3 (quoted string) [unused for 2 blades]
 ---------------------- ROTOR-TEETER --------------------------------------------
 0                      TeetMod     - Rotor-teeter spring/damper model {0: none, 1: standard, 2: user-defined from routine UserTeet} (switch) [unused for 3 blades]
 0.0                    TeetDmpP    - Rotor-teeter damper position (degrees) [used only for 2 blades and when TeetMod=1]
@@ -97,7 +97,7 @@ False                  PtfmYDOF    - Platform yaw rotation DOF (flag)
 0.0                    TeetHSSp    - Rotor-teeter hard-stop linear-spring constant (N-m/rad) [used only for 2 blades and when TeetMod=1]
 ---------------------- DRIVETRAIN ----------------------------------------------
 95.5                   GBoxEff     - Gearbox efficiency (%)
-97.0                   GBRatio     - Gearbox ratio (-)
+53.37                   GBRatio     - Gearbox ratio (-)
 368895787.92065376     DTTorSpr    - Drivetrain torsional spring (N-m/rad)
 1030522.6429562562     DTTorDmp    - Drivetrain torsional damper (N-m/(rad/s))
 ---------------------- FURLING -------------------------------------------------
@@ -105,7 +105,7 @@ False                  Furling     - Read in additional model properties for fur
 "none"                 FurlFile    - Name of file containing furling properties (quoted string) [unused when Furling=False]
 ---------------------- TOWER ---------------------------------------------------
 20                     TwrNodes    - Number of tower nodes used for analysis (-)
-"..\StrucData\IEA-3.4-130-RWT_ElastoDyn_tower.dat" TwrFile     - Name of file containing tower properties (quoted string)
+"..\StrucData\OPT_Shakti_5_178_ElastoDyn_tower.dat" TwrFile     - Name of file containing tower properties (quoted string)
 ---------------------- OUTPUT --------------------------------------------------
 False                  SumPrint    - Print summary data to "<RootName>.sum" (flag)
 1                      OutFile     - Switch to determine where output will be placed: {1: in module output file only; 2: in glue code output file only; 3: both} (currently unused)
@@ -126,7 +126,6 @@ True                   TabDelim    - Use tab delimiters in text tabular output f
   "RotSpeed"                  - Low-speed shaft and high-speed shaft speeds
    "RotTorq"                  - Rotor torque and low-speed shaft 0- and 90-bending moments at the main bearing	
     "RotPwr"                  - Rotor power (this is equivalent to the LSShftPwr) (kW)
-   "HSSBrTq"                  - High-speed shaft brake torque	Always positive	(indicating dissipation of power) (kN m) 
   "TipClrnc1"                 - Blade 1 tip-to-tower clearance estimate. This is computed as the perpendicular distance from the yaw axis to the tip of blade 1 when the blade tip is below the yaw bearing. When the tip of blade 1 is bove the yaw bearing, it is computed as the absolute distance from the yaw bearing to the blade tip. Please note that you should reduce this value by the tower radius to obtain the actual tower clearance (m)
   "TipClrnc2"                 - Blade 2 tip-to-tower clearance estimate
   "TipClrnc3"                 - Blade 2 tip-to-tower clearance estimate
@@ -152,6 +151,11 @@ True                   TabDelim    - Use tab delimiters in text tabular output f
  "LSShftFzs"                  - Nonrotating low-speed shaft shear force (this is constant along the shaft) Directed along the zs-axis (kN)
  "LSSTipMys"                  - Nonrotating low-speed shaft bending moment at the shaft tip About the ys-axis (kN m)
  "LSSTipMzs"                  - Nonrotating low-speed shaft bending moment at the shaft tip About the zs-axis (kN m)
+ "HSShftTq"		-High-speed shaft torque (this is constant along the shaft) (kN-m)
+ "HSSBrTq"		-High-speed shaft brake torque (i.e., the actual moment applied to the high-speed shaft by the brake)(kN-m)
+ "HSShftPwr"		-High-speed shaft power (KW)
+ "HSShftV"		-Angular speed of the high-speed shaft and generator(rpm)
+ "HSShftA"		-Angular acceleration of the high-speed shaft and generator(deg/s^2)
   "YawBrFxp"                  - Fore-aft shear, side-to-side shear, and vertical forces at the top of the tower (not rotating with nacelle yaw)
   "YawBrFyp"                  - Fore-aft shear, side-to-side shear, and vertical forces at the top of the tower (not rotating with nacelle yaw)
   "YawBrFzp"                  - Fore-aft shear, side-to-side shear, and vertical forces at the top of the tower (not rotating with nacelle yaw)
