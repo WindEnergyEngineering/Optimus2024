@@ -126,7 +126,6 @@ True                   TabDelim    - Use tab delimiters in text tabular output f
   "RotSpeed"                  - Low-speed shaft and high-speed shaft speeds
    "RotTorq"                  - Rotor torque and low-speed shaft 0- and 90-bending moments at the main bearing	
     "RotPwr"                  - Rotor power (this is equivalent to the LSShftPwr) (kW)
-   "HSSBrTq"                  - High-speed shaft brake torque	Always positive	(indicating dissipation of power) (kN m) 
   "TipClrnc1"                 - Blade 1 tip-to-tower clearance estimate. This is computed as the perpendicular distance from the yaw axis to the tip of blade 1 when the blade tip is below the yaw bearing. When the tip of blade 1 is bove the yaw bearing, it is computed as the absolute distance from the yaw bearing to the blade tip. Please note that you should reduce this value by the tower radius to obtain the actual tower clearance (m)
   "TipClrnc2"                 - Blade 2 tip-to-tower clearance estimate
   "TipClrnc3"                 - Blade 2 tip-to-tower clearance estimate
@@ -152,6 +151,11 @@ True                   TabDelim    - Use tab delimiters in text tabular output f
  "LSShftFzs"                  - Nonrotating low-speed shaft shear force (this is constant along the shaft) Directed along the zs-axis (kN)
  "LSSTipMys"                  - Nonrotating low-speed shaft bending moment at the shaft tip About the ys-axis (kN m)
  "LSSTipMzs"                  - Nonrotating low-speed shaft bending moment at the shaft tip About the zs-axis (kN m)
+ "HSShftTq"		-High-speed shaft torque (this is constant along the shaft) (kN-m)
+ "HSSBrTq"		-High-speed shaft brake torque (i.e., the actual moment applied to the high-speed shaft by the brake)(kN-m)
+ "HSShftPwr"		-High-speed shaft power (KW)
+ "HSShftV"		-Angular speed of the high-speed shaft and generator(rpm)
+ "HSShftA"		-Angular acceleration of the high-speed shaft and generator(deg/s^2)
   "YawBrFxp"                  - Fore-aft shear, side-to-side shear, and vertical forces at the top of the tower (not rotating with nacelle yaw)
   "YawBrFyp"                  - Fore-aft shear, side-to-side shear, and vertical forces at the top of the tower (not rotating with nacelle yaw)
   "YawBrFzp"                  - Fore-aft shear, side-to-side shear, and vertical forces at the top of the tower (not rotating with nacelle yaw)
