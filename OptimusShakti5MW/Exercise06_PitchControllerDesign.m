@@ -6,7 +6,7 @@
 clearvars;close all;clc;
 
 %% Design
-OPs         = [6 7 9.4];    % [m/s]
+OPs         = [7];    % [m/s]
 D_d         = 0.7;              % [-]
 omega_d     = 0.6;              % [rad/s]
 
