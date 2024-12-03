@@ -3,7 +3,7 @@ function [Parameter] = DefaultParameter_FBv1_ADv14(Parameter)
 
 %% Pitch Controller
 Parameter.CPC.theta_K                   = deg2rad(20);                      % [rad]     % gain scheduling parameter, brute-force-optimized
-Parameter.CPC.kp                        = 0.25;                          	% [s]       % proportional gain, brute-force-optimized (adjusted shakti 30.11 educated guess, JP)
+Parameter.CPC.kp                        = 0.025;                          	% [s]       % proportional gain, brute-force-optimized (adjusted shakti 30.11 educated guess, JP)
 Parameter.CPC.Ti                        = 10;                               % [s]       % integral gain, brute-force-optimized
 
 Parameter.CPC.Omega_g_rated             = rpm2radPs(428.5);                 % [rad/s]   % rated generator speed, from Shakti - Geno team 24/11/24 fle
@@ -12,8 +12,8 @@ Parameter.CPC.theta_PS                  = deg2rad(7);                       % [r
 Parameter.CPC.v_PS                      = 7.6;                              % [m/s]     % wind speed to start peak shaving, first guess, from fle 25/11/24 !!! needs Brute-force optimization !!!
 Parameter.CPC.PS                        = [0 Parameter.CPC.theta_min;Parameter.CPC.v_PS Parameter.CPC.theta_min; 10.5211 Parameter.CPC.theta_PS];   % peak shaving look-up table [v_i theta_i] 10.5211 => v_rated !!! has to be adjusted if changed
 %% Torque Controller
-Parameter.VSC.kp                        = 145907.694791;                             % [Nm/(rad/s)]  % proportional gain, first guess (adjusted shakti 30.11 task design script, JP)
-Parameter.VSC.Ti                        = 2.770817;                              % [s]           % integral gain, first guess (adjusted shakti 30.11 task design script, JP)
+Parameter.VSC.kp                        = 19929.189128;                             % [Nm/(rad/s)]  % proportional gain, first guess (adjusted shakti 03.12 task design script, JP)
+Parameter.VSC.Ti                        = 2.146985;                              % [s]           % integral gain, first guess (adjusted shakti 03.12 task design script, JP)
 % Parameter.VSC.k                         = 1.9;                              % [Nm/(rad/s)^2]% gain region 2, brute-force-optimized
 Parameter.VSC.k                         = .5 * Parameter.General.rho * pi ... % [Nm/(rad/s)^2]% gain region 2, first guess: cp 0.48, lambda 8.75
                                           * Parameter.Turbine.R^5 * .48 / ...

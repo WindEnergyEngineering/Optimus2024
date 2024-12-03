@@ -12,7 +12,7 @@ Parameter.Turbine.R              	= 178/2;            % [m]       Rotor radius, 
 
 % drive-train dynamics
 J_G                               	= 534.116;              % [kgm^2]	Generator Inertia About High-Speed Shaft, from ElastoDyn.dat: GenIner (shakti 29.11 DLC 1.2 FAST, JP)
-J_R                                	= 595753984;         % [kgm^2]	Rotor Inertia About High-Speed Shaft, from ED.sum file (shakti 29.11 DLC 1.2 FAST, JP)
+J_R                                	= 35799464*2;         % [kgm^2]	Rotor Inertia About High-Speed Shaft, from ED.sum file (shakti 03.12 from sum file way too high 17 times higher than 3.4, assmumed double of 3.4 model, JP)
 Parameter.Turbine.J                	= J_R+J_G*Parameter.Turbine.r_GB^2;
 Parameter.Turbine.eta_gb            = 0.955;            % [-]       Gearbox efficiency, from ElastoDyn.dat: GBoxEff
 

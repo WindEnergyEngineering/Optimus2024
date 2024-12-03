@@ -3,7 +3,7 @@
 % Exercise 03 of "Controller Design for Wind Turbines and Wind Farms"
 % -----------------------------
 
-clearvars;clc; bdclose;
+clearvars;clc;close;
 
 %% PreProcessing SLOW for all simulations
 
@@ -15,11 +15,11 @@ Parameter                       = DefaultParameter_FBv1_ADv14(Parameter);
 % Time
 dt                              = 1/80;
 Parameter.Time.dt               = dt;   % [s] simulation time step              
-Parameter.Time.TMax             = 120;   % [s] simulation length
+Parameter.Time.TMax             = 200;   % [s] simulation length
 
 %% Loop over Operation Points
 
-OPs = [10];
+OPs = [12];
 nOP = length(OPs);
 
 for iOP=1:nOP
