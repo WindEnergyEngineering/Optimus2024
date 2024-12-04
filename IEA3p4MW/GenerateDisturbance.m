@@ -9,13 +9,13 @@ clearvars;close all;clc;
 %% Configuration
 
 % Parameter 
-Parameter.Turbine.R                     = 65;       % [m] rotor radius
+Parameter.Turbine.R                     = 178/2;    % [m] rotor radius
 Parameter.Time.dt                       = 0.1;      % [s] simulation time step            
 Parameter.Time.TMax                     = 3600;     % [s] simulation lenght
 Parameter.TurbSim.IRef                  = 0.14;     % [-] ClassB
 
 % windfield
-[windfield.grid.Y,windfield.grid.Z]     = meshgrid(-68:8:68);
+[windfield.grid.Y,windfield.grid.Z]     = meshgrid(-96:8:96);
 
 %% Generate Disturbances
 figure
@@ -46,8 +46,10 @@ for iURef = 1:nURef
 end
 %% Post Processing Disturbance
 % Mean windspeed used can be manually adjusted
-v = [3 3 3 4 4 5 5 6 6 5 7 9 9 10 11 12 10 9 8 6 6 5 5 4 4];               % v [m/s}
-%v = [3 4];
+%v = [6.04 5.13 5.63 5.39 4.81 5.28 5.07 4.96 5.41 5.66 6.38 5.04 5.16 5.06 6.52 7.88 9.29 9.14 8.61 8.22 7.59 7.31 6.4 6.33];               % v [m/s} Vector 1 (10.01.2024)
+%v = [6.84 7.25 6.96 9.25 9.94 9.51 9.04 8.61 8.7 8.9 8.7 8.11 6.96 6.46 6.24 6.18 5.9 5.83 6.32 6.41 6.41 6.1 6.21 6.43];               % v [m/s} Vector 2 (20.06.2021)
+v = [8.23 7.71 7.82 8.77 9.53 9.93 9.46 10.21 10.64 10.16 9.72 9.50 9.17 7.84 8.77 7.79 7.30 7.85 8.57 8.56 8.75 8.72 9.08 8.82];       % v [m/s}Vector 3 (25.08.2024)
+v = round(v);
 
 % load only needed Disturbance time series 
 for i = min(v):max(v)
@@ -95,7 +97,7 @@ for j = 1:length(v)
 end
 % store results
 Disturbance.v_0.time = [0:0.1:25*3600-0.1];
-save('wind\shittyWind1_Disturbance','Disturbance','windfield','Parameter')
+save('wind\WindVector3_(25_08_2024)','Disturbance','windfield','Parameter')
 
 % plot results
 figure
