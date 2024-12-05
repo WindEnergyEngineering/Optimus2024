@@ -7,8 +7,8 @@ clearvars;close all;clc;
 %% PreProcessing SLOW
 
 % Default Parameter Turbine and Controller
-Parameter                           = NREL5MWDefaultParameter_SLOW2DOF;
-Parameter                           = NREL5MWDefaultParameter_FBNREL_TowerDamper(Parameter);
+Parameter                           = DefaultParameter_SLOW2DOF;
+Parameter                           = DefaultParameter_FBv1_ADv14(Parameter);
 
 % Time
 Parameter.Time.dt                   = 0.01;            % [s] simulation time step            
@@ -21,13 +21,13 @@ Disturbance.v_0.time                = [0;     0.01;      	30];            % [s] 
 Disturbance.v_0.signals.values      = [URef;  URef+DeltaU;  URef+DeltaU];   % [m/s]    wind speeds  
 
 % Initial Conditions from SteadyStates
-SteadyStates = load('SteadyStatesNREL5MW_FBNREL_SLOW','v_0','Omega','theta','x_T');                       
+SteadyStates = load('SteadyStatesShakti5MW_classic.mat','v_0','Omega','theta','x_T');                       
 Parameter.IC.Omega          	    = interp1(SteadyStates.v_0,SteadyStates.Omega   ,URef,'linear','extrap');
 Parameter.IC.theta          	    = interp1(SteadyStates.v_0,SteadyStates.theta   ,URef,'linear','extrap');
 Parameter.IC.x_T                    = interp1(SteadyStates.v_0,SteadyStates.x_T     ,URef,'linear','extrap');
 
 %% Processing SLOW
-sim('NREL5MW_FBNREL_SLOW2DOF_TowerDamper.mdl')
+simout = sim('FBv1_SLOW2DOF.mdl');
 
 %% PostProcessing SLOW
 figure
@@ -35,12 +35,12 @@ figure
 % plot rotor speed
 subplot(211)
 hold on;box on;grid on;
-plot(tout,logsout.get('y').Values.Omega.Data*60/2/pi)
+plot(simout.tout,simout.logsout.get('y').Values.Omega.Data*60/2/pi)
 ylabel('$\Omega$ [rpm]','Interpreter','latex')
 
 % plot tower top velocity
 subplot(212)
 hold on;box on;grid on;
-plot(tout,logsout.get('y').Values.x_T_dot.Data)
+plot(simout.tout,simout.logsout.get('y').Values.x_T_dot.Data)
 ylabel('$\dot x_T$ [m/s]','Interpreter','latex')
 xlabel('time [s]')

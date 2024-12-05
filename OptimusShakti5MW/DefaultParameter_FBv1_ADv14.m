@@ -38,6 +38,15 @@ Parameter.Filter.NotchFilter.Enable   	= 1;                                % [0/
 Parameter.Filter.NotchFilter.Gain       = 3/Parameter.Turbine.r_GB;         % [-]       % gain on generator rotational frequency for dynamic notch filter, standard value
 Parameter.Filter.NotchFilter.BW      	= 0.10;                             % [Hz]      % bandwidth of dynamic notch filter, first guess
 Parameter.Filter.NotchFilter.D       	= 0.01;                             % [-]       % depth of dynamic notch filter, first guess
+
+%% Tower Damper
+Parameter.TD.gain                       = 0.0;
+Parameter.TD.Power                      = [0 1 2 3];    % [W]
+Parameter.TD.Value                      = [0 0 0 0];
+
+%% Filter Tower Damper
+Parameter.Filter.LowPassTowerDamper.Enable       	    = 0;
+Parameter.Filter.LowPassTowerDamper.f_cutoff     	    = 1;                % [Hz]
                              
 %% helper functions
 function y = rpm2radPs(u)
