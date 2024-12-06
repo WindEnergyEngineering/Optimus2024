@@ -41,8 +41,8 @@ for iOP=1:nOP
     theta_OP = interp1(SteadyStates.v_0,SteadyStates.theta,OP,'linear','extrap');
     Omega_OP = interp1(SteadyStates.v_0,SteadyStates.Omega,OP,'linear','extrap');
 
-   % Linearize at each operation point
-   [A,B,C,D] = LinearizeSLOW2DOF(theta_OP,Omega_OP,OP,Parameter);
+    % Linearize at each operation point
+    [A,B,C,D] = LinearizeSLOW2DOF(theta_OP,Omega_OP,OP,Parameter);
 
     kp(iOP) = -(2*D_d*omega_d + A(1,1)) / (B(1,1)*C(1,1));
     ki = -(omega_d^2) / (B(1,1)*C(1,1));
@@ -65,7 +65,7 @@ for iOP=1:nOP
     fprintf('Ti                     = [%s];\n',sprintf('%f ',Ti));  
 
         
-
+end
 
 
 %% 3. Define Wind Turbine
@@ -75,7 +75,7 @@ WT_2DOF.OutputName 	= {'Omega_g','x_T_dot'};
 
 %% 4. Define Pitch Controller
 s                   = tf('s');    
-PC                  = 0*s; % Ex.5.1b: Please adjust!
+PC                  = (kp + kp/Ti*1/s);             %0*s; % Ex.5.1b: Please adjust!
 PC.InputName        = {'Omega_g'};    
 PC.OutputName       = {'theta'};  
 
@@ -95,7 +95,8 @@ damp(CL_1DOF)
 disp('---------------------------------------------------------------------')
 
 %% 7. Define Tower Damper 
-gain                = 0; % Ex.5.1c: Please adjust!
+% triples the damping of the coupled tower motion
+gain                = 0.0424; % Ex.5.1c: Please adjust! 
 TD                  = tf(gain); 
 TD.InputName        = {'x_T_dot'};    
 TD.OutputName       = {'theta'};    

@@ -10,8 +10,10 @@ rho             = Parameter.General.rho;
 m_Te          	= Parameter.Turbine.m_Te;
 k_Te           	= Parameter.Turbine.k_Te;
 c_Te         	= Parameter.Turbine.c_Te;
-M_g_rated       = Parameter.VSC.M_g_rated;
-Omega_g_rated   = Parameter.CPC.Omega_g_rated;
+Omega_g_rated   = rpm2radPs(428.5);                      % Parameter.CPC.Omega_g_rated;
+P_a_rated       = 5.42e6;
+M_g_rated       = P_a_rated/Omega_g_rated*0.955;        % 0.955 = Gearbox efficiency
+
 
 % gradients
 dtheta          = diff(Parameter.Turbine.SS.theta(1:2));

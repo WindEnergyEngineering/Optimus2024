@@ -40,13 +40,13 @@ Parameter.Filter.NotchFilter.BW      	= 0.10;                             % [Hz]
 Parameter.Filter.NotchFilter.D       	= 0.01;                             % [-]       % depth of dynamic notch filter, first guess
 
 %% Tower Damper
-Parameter.TD.gain                       = 0.0;
-Parameter.TD.Power                      = [0 1 2 3];    % [W]
-Parameter.TD.Value                      = [0 0 0 0];
+Parameter.TD.gain                       = 0.0424;
+Parameter.TD.Power                      = [0 0.8 1 1.1] * P_a_rated;    % [W]
+Parameter.TD.Value                      = [0 0 1 1];
 
 %% Filter Tower Damper
-Parameter.Filter.LowPassTowerDamper.Enable       	    = 0;
-Parameter.Filter.LowPassTowerDamper.f_cutoff     	    = 1;                % [Hz]
+Parameter.Filter.LowPassTowerDamper.Enable       	    = 1;
+Parameter.Filter.LowPassTowerDamper.f_cutoff     	    = 0.1;                % [Hz]
                              
 %% helper functions
 function y = rpm2radPs(u)

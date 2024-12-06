@@ -12,7 +12,7 @@ Parameter                           = DefaultParameter_FBv1_ADv14(Parameter);
 
 % Time
 Parameter.Time.dt                   = 0.01;            % [s] simulation time step            
-Parameter.Time.TMax                 = 30;              % [s] simulation length
+Parameter.Time.TMax                 = 60;              % [s] simulation length
 
 % Wind
 DeltaU                              = 1;
@@ -27,7 +27,7 @@ Parameter.IC.theta          	    = interp1(SteadyStates.v_0,SteadyStates.theta  
 Parameter.IC.x_T                    = interp1(SteadyStates.v_0,SteadyStates.x_T     ,URef,'linear','extrap');
 
 %% Processing SLOW
-simout = sim('FBv1_SLOW2DOF.mdl');
+simout = sim('FBv1_SLOW2DOF_With_TowerDamper.mdl');
 
 %% PostProcessing SLOW
 figure
