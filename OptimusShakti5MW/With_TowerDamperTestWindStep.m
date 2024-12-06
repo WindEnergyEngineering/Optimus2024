@@ -27,7 +27,13 @@ Parameter.IC.theta          	    = interp1(SteadyStates.v_0,SteadyStates.theta  
 Parameter.IC.x_T                    = interp1(SteadyStates.v_0,SteadyStates.x_T     ,URef,'linear','extrap');
 
 %% Processing SLOW
-simout = sim('FBv1_SLOW2DOF_With_TowerDamper.mdl');
+Parameter.Filter.LowPassTowerDamper.Enable = 0;
+simoutClassic = sim('FBv1_SLOW2DOF_with_TowerDamper.mdl');
+
+Parameter.Filter.LowPassTowerDamper.Enable = 1;
+Parameter.TD.gain = Parameter.TD.gain*8;
+simout = sim('FBv1_SLOW2DOF_with_TowerDamper.mdl');
+
 
 %% PostProcessing SLOW
 figure
@@ -36,11 +42,14 @@ figure
 subplot(211)
 hold on;box on;grid on;
 plot(simout.tout,simout.logsout.get('y').Values.Omega.Data*60/2/pi)
+plot(simoutClassic.tout,simoutClassic.logsout.get('y').Values.Omega.Data*60/2/pi)
 ylabel('$\Omega$ [rpm]','Interpreter','latex')
+legend('Tower Damper','Classic')
 
 % plot tower top velocity
 subplot(212)
 hold on;box on;grid on;
 plot(simout.tout,simout.logsout.get('y').Values.x_T_dot.Data)
+plot(simoutClassic.tout,simoutClassic.logsout.get('y').Values.x_T_dot.Data)
 ylabel('$\dot x_T$ [m/s]','Interpreter','latex')
 xlabel('time [s]')
