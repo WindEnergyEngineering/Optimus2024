@@ -21,17 +21,18 @@ Disturbance.v_0.time                = [0;     0.01;      	30];            % [s] 
 Disturbance.v_0.signals.values      = [URef;  URef+DeltaU;  URef+DeltaU];   % [m/s]    wind speeds  
 
 % Initial Conditions from SteadyStates
-SteadyStates = load('SteadyStatesShakti5MW_classic.mat','v_0','Omega','theta','x_T');                       
+SteadyStates = load('SteadyStatesShakti5MW_classic.mat','v_0','Omega','theta','x_T','M_g');                       
 Parameter.IC.Omega          	    = interp1(SteadyStates.v_0,SteadyStates.Omega   ,URef,'linear','extrap');
 Parameter.IC.theta          	    = interp1(SteadyStates.v_0,SteadyStates.theta   ,URef,'linear','extrap');
 Parameter.IC.x_T                    = interp1(SteadyStates.v_0,SteadyStates.x_T     ,URef,'linear','extrap');
+Parameter.IC.M_g          	        = interp1(SteadyStates.v_0,SteadyStates.M_g     ,URef,'linear','extrap');
 
 %% Processing SLOW
 Parameter.Filter.LowPassTowerDamper.Enable = 0;
 simoutClassic = sim('FBv1_SLOW2DOF_with_TowerDamper.mdl');
 
 Parameter.Filter.LowPassTowerDamper.Enable = 1;
-Parameter.TD.gain = Parameter.TD.gain*8;
+Parameter.TD.gain = Parameter.TD.gain*4;
 simout = sim('FBv1_SLOW2DOF_with_TowerDamper.mdl');
 
 
