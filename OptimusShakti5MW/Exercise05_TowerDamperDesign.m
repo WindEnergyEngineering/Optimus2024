@@ -19,18 +19,54 @@ clearvars;close all;clc;
 % y_1   = Omega_g
 % y_2   = x_T_dot
 
-A = [   -0.2478         0   -0.0300
-              0         0    1.0000
-        -1.6677   -4.1443   -0.2214];
-B = [   -1.3991    0.0300
-              0         0
-        -9.6875    0.1806];
-C = [        97         0         0
-              0         0         1];
-D = [         0         0
-              0         0];
-kp                  = 0.003332;
-Ti                  = 1.808628;
+%% Design
+OPs         = [20];    % [m/s]
+D_d         = 0.7;              % [-]
+omega_d     = 0.5;              % [rad/s]
+
+%% Default Parameter Turbine and Controller (only M_g_rated and Omega_g_rated needed for LinearizeSLOW1DOF_PC)
+Parameter                       = DefaultParameter_SLOW2DOF;
+SteadyStates                    = load('SteadyStatesShakti5MW_classic.mat','v_0','Omega','theta');                       
+
+%% loop over operation points
+nOP     = length(OPs);
+kp      = NaN(1,nOP);
+Ti      = NaN(1,nOP);
+theta   = NaN(1,nOP);
+
+for iOP=1:nOP  
+    
+    % Get operation point
+    OP = OPs(iOP);
+    theta_OP = interp1(SteadyStates.v_0,SteadyStates.theta,OP,'linear','extrap');
+    Omega_OP = interp1(SteadyStates.v_0,SteadyStates.Omega,OP,'linear','extrap');
+
+   % Linearize at each operation point
+   [A,B,C,D] = LinearizeSLOW2DOF(theta_OP,Omega_OP,OP,Parameter);
+
+    kp(iOP) = -(2*D_d*omega_d + A(1,1)) / (B(1,1)*C(1,1));
+    ki = -(omega_d^2) / (B(1,1)*C(1,1));
+    Ti(iOP) = kp(iOP)/ki;
+
+    % Display the matrices
+    disp('Matrix A:');
+    disp(A);
+    
+    disp('Matrix B:');
+    disp(B);
+    
+    disp('Matrix C:');
+    disp(C);
+    
+    disp('Matrix D:');
+    disp(D);
+    
+    fprintf('kp                     = [%s];\n',sprintf('%f ',kp));
+    fprintf('Ti                     = [%s];\n',sprintf('%f ',Ti));  
+
+        
+
+
 
 %% 3. Define Wind Turbine
 WT_2DOF             = ss(A,B,C,D);
