@@ -39,7 +39,7 @@ simout = sim('FBv1_SLOW2DOF_with_TowerDamper.mdl');
 figure
 
 % plot rotor speed
-subplot(211)
+subplot(311)
 hold on;box on;grid on;
 plot(simout.tout,simout.logsout.get('y').Values.Omega.Data*60/2/pi)
 plot(simoutClassic.tout,simoutClassic.logsout.get('y').Values.Omega.Data*60/2/pi)
@@ -47,9 +47,17 @@ ylabel('$\Omega$ [rpm]','Interpreter','latex')
 legend('Tower Damper','Classic')
 
 % plot tower top velocity
-subplot(212)
+subplot(312)
 hold on;box on;grid on;
 plot(simout.tout,simout.logsout.get('y').Values.x_T_dot.Data)
 plot(simoutClassic.tout,simoutClassic.logsout.get('y').Values.x_T_dot.Data)
 ylabel('$\dot x_T$ [m/s]','Interpreter','latex')
+xlabel('time [s]')
+
+% plot pitch rate
+subplot(313)
+hold on;box on;grid on;
+plot(simout.tout,simout.logsout.get('y').Values.theta_dot.Data.*(180/pi))
+plot(simoutClassic.tout,simoutClassic.logsout.get('y').Values.theta_dot.Data.*(180/pi))
+ylabel('$\dot \theta$ [deg/s]','Interpreter','latex')
 xlabel('time [s]')
