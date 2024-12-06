@@ -46,7 +46,7 @@ Parameter.TD.Value                      = [0 0 1 1];
 
 %% Filter Tower Damper
 Parameter.Filter.LowPassTowerDamper.Enable       	    = 1;
-Parameter.Filter.LowPassTowerDamper.f_cutoff     	    = 0.1;                % [Hz]
+Parameter.Filter.LowPassTowerDamper.f_cutoff     	    = 0.5/pi/2;                % [Hz]
                              
 %% helper functions
 function y = rpm2radPs(u)
