@@ -19,7 +19,7 @@ Parameter.Time.TMax             = 120;   % [s] simulation length
 
 %% Loop over Operation Points
     
-OPs = [9.5];
+OPs = [7];
 nOP = length(OPs);
 
 for iOP=1:nOP
@@ -71,14 +71,6 @@ wind = OPs;
     
     % rename output and move file to output directory
     OutputFile  = 'IEA-3.4-130-RWT.out';
-     
-%     new_filename = "OutputFiles\" + "IEA-3.4-130-RWT" + num2str(wind(i),'%02d') + ".out";
-%     out = fileread(OutputFile);
-%     fid = fopen(new_filename, 'w');
-%     fwrite(fid, out);
-%     fclose(fid);
-
-%     movefile(OutputFile,new_filename);
 %% PostProcessing FAST
 fid         = fopen(OutputFile);
 formatSpec  = repmat('%f',1,14);
