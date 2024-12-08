@@ -16,7 +16,7 @@ Parameter.Time.TMax                 = 60;              % [s] simulation length
 
 % Wind
 DeltaU                              = 1;
-URef                                = 20;                
+URef                                = 12;                
 Disturbance.v_0.time                = [0;     0.01;      	30];            % [s]      time points to change wind speed
 Disturbance.v_0.signals.values      = [URef;  URef+DeltaU;  URef+DeltaU];   % [m/s]    wind speeds  
 
@@ -39,8 +39,13 @@ simout = sim('FBv1_SLOW2DOF_with_TowerDamper.mdl');
 %% PostProcessing SLOW
 figure
 
-% plot rotor speed
 subplot(311)
+hold on;box on;grid on;
+plot(simout.tout,simout.logsout.get('d').Values.v_0.Data)
+ylabel('v_0 [m/s]')
+
+% plot rotor speed
+subplot(312)
 hold on;box on;grid on;
 plot(simout.tout,simout.logsout.get('y').Values.Omega.Data*60/2/pi)
 plot(simoutClassic.tout,simoutClassic.logsout.get('y').Values.Omega.Data*60/2/pi)
@@ -48,7 +53,7 @@ ylabel('$\Omega$ [rpm]','Interpreter','latex')
 legend('Tower Damper','Classic')
 
 % plot tower top velocity
-subplot(312)
+subplot(313)
 hold on;box on;grid on;
 plot(simout.tout,simout.logsout.get('y').Values.x_T_dot.Data)
 plot(simoutClassic.tout,simoutClassic.logsout.get('y').Values.x_T_dot.Data)
@@ -56,9 +61,9 @@ ylabel('$\dot x_T$ [m/s]','Interpreter','latex')
 xlabel('time [s]')
 
 % plot pitch rate
-subplot(313)
-hold on;box on;grid on;
-plot(simout.tout,simout.logsout.get('y').Values.theta_dot.Data.*(180/pi))
-plot(simoutClassic.tout,simoutClassic.logsout.get('y').Values.theta_dot.Data.*(180/pi))
-ylabel('$\dot \theta$ [deg/s]','Interpreter','latex')
-xlabel('time [s]')
+%subplot(313)
+%hold on;box on;grid on;
+%plot(simout.tout,simout.logsout.get('y').Values.theta_dot.Data.*(180/pi))
+%plot(simoutClassic.tout,simoutClassic.logsout.get('y').Values.theta_dot.Data.*(180/pi))
+%ylabel('$\dot \theta$ [deg/s]','Interpreter','latex')
+%xlabel('time [s]')
