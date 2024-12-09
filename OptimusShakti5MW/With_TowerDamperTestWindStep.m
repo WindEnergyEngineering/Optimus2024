@@ -16,7 +16,7 @@ Parameter.Time.TMax                 = 60;            % [s] simulation length
 
 % Wind
 DeltaU                              = 1;
-URef                                = 12;                
+URef                                = 20;                
 Disturbance.v_0.time                = [0;     0.01;      	30];            % [s]      time points to change wind speed
 Disturbance.v_0.signals.values      = [URef;  URef+DeltaU;  URef+DeltaU];   % [m/s]    wind speeds  
 
@@ -28,24 +28,20 @@ Parameter.IC.x_T                    = interp1(SteadyStates.v_0,SteadyStates.x_T 
 Parameter.IC.M_g          	        = interp1(SteadyStates.v_0,SteadyStates.M_g     ,URef,'linear','extrap');
 
 %% Processing SLOW
-Parameter.Filter.LowPassTowerDamper.Enable = 0;
-simoutClassic = sim('FBv1_SLOW2DOF_with_TowerDamper.mdl');
-
-Parameter.Filter.LowPassTowerDamper.Enable = 1;
-%Parameter.TD.gain = Parameter.TD.gain;
 simout = sim('FBv1_SLOW2DOF_with_TowerDamper.mdl');
-
+Parameter.TD.gain = 0;
+simoutClassic = sim('FBv1_SLOW2DOF_with_TowerDamper.mdl');
 
 %% PostProcessing SLOW
 figure
 
-subplot(311)
+subplot(411)
 hold on;box on;grid on;
 plot(simout.tout,simout.logsout.get('d').Values.v_0.Data)
 ylabel('v_0 [m/s]')
 
 % plot rotor speed
-subplot(312)
+subplot(412)
 hold on;box on;grid on;
 plot(simout.tout,simout.logsout.get('y').Values.Omega.Data*60/2/pi)
 plot(simoutClassic.tout,simoutClassic.logsout.get('y').Values.Omega.Data*60/2/pi)
@@ -53,7 +49,7 @@ ylabel('$\Omega$ [rpm]','Interpreter','latex')
 legend('Tower Damper','Classic')
 
 % plot tower top velocity
-subplot(313)
+subplot(413)
 hold on;box on;grid on;
 plot(simout.tout,simout.logsout.get('y').Values.x_T_dot.Data)
 plot(simoutClassic.tout,simoutClassic.logsout.get('y').Values.x_T_dot.Data)
@@ -61,9 +57,9 @@ ylabel('$\dot x_T$ [m/s]','Interpreter','latex')
 xlabel('time [s]')
 
 % plot pitch rate
-%subplot(313)
-%hold on;box on;grid on;
-%plot(simout.tout,simout.logsout.get('y').Values.theta_dot.Data.*(180/pi))
-%plot(simoutClassic.tout,simoutClassic.logsout.get('y').Values.theta_dot.Data.*(180/pi))
-%ylabel('$\dot \theta$ [deg/s]','Interpreter','latex')
-%xlabel('time [s]')
+subplot(414)
+hold on;box on;grid on;
+plot(simout.tout,simout.logsout.get('y').Values.theta_dot.Data.*(180/pi))
+plot(simoutClassic.tout,simoutClassic.logsout.get('y').Values.theta_dot.Data.*(180/pi))
+ylabel('$\dot \theta$ [deg/s]','Interpreter','latex')
+xlabel('time [s]')

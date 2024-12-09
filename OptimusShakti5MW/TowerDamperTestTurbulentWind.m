@@ -29,7 +29,7 @@ Parameter.IC.M_g                    = interp1(SteadyStates.v_0,SteadyStates.M_g 
 TD1 = sim('FBv1_SLOW2DOF_with_TowerDamper.mdl','ReturnWorkspaceOutputs','on');
 TD1_PA = sim('FBv1_SLOW2DOF_TD_PA.mdl','ReturnWorkspaceOutputs','on');
 Parameter.TD.gain  = 0;
-TD0 = sim('FBv1_SLOW2DOF_with_TowerDamper.mdl','ReturnWorkspaceOutputs','on');
+TD0 = sim('FBv1_SLOW2DOF_TD_PA.mdl','ReturnWorkspaceOutputs','on');
 %% PostProcessing SLOW
 
 % estimate spectra

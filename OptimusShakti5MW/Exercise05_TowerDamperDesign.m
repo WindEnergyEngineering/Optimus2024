@@ -71,7 +71,7 @@ end
 %% 3. Define Wind Turbine
 WT_2DOF             = ss(A,B,C,D);
 WT_2DOF.InputName  	= {'theta','v_0'};
-WT_2DOF.OutputName 	= {'Omega_g','x_T_dot'};   
+WT_2DOF.OutputName 	= {'Omega_g','x_T{dot}'};   
 
 %% 4. Define Pitch Controller
 s                   = tf('s');    
@@ -80,7 +80,7 @@ PC.InputName        = {'Omega_g'};
 PC.OutputName       = {'theta'};  
 
 %% 5. Closed Loop without Tower Damper
-CL_2DOF             = connect(WT_2DOF,PC,'v_0',{'Omega_g','x_T_dot'});
+CL_2DOF             = connect(WT_2DOF,PC,'v_0',{'Omega_g','x_T{dot}'});
 disp('--- Closed Loop without Tower Damper --------------------------------')
 damp(CL_2DOF)
 disp('---------------------------------------------------------------------')
@@ -98,11 +98,11 @@ disp('---------------------------------------------------------------------')
 % triples the damping of the coupled tower motion
 gain                = 0.0424; % Ex.5.1c: Please adjust! 
 TD                  = tf(gain); 
-TD.InputName        = {'x_T_dot'};    
+TD.InputName        = {'x_T{dot}'};    
 TD.OutputName       = {'theta'};    
     
 %% 8. Closed Loop with Tower damper
-CL_2DOF_TD       	= connect(WT_2DOF,[PC TD],'v_0',{'Omega_g','x_T_dot'});
+CL_2DOF_TD       	= connect(WT_2DOF,[PC TD],'v_0',{'Omega_g','x_T{dot}'});
 disp('--- Closed Loop with Tower damper -----------------------------------')
 damp(CL_2DOF_TD)
 disp('---------------------------------------------------------------------')
