@@ -3,19 +3,19 @@
 % Exercise 03 of "Controller Design for Wind Turbines and Wind Farms"
 % -----------------------------
 
-clearvars;clc;close;
+clearvars;clc;close all;
 
 %% PreProcessing SLOW for all simulations
 
 % Default Parameter Turbine and Controller
-Parameter                          = DefaultParameter_SLOW2DOF;
+Parameter                       = DefaultParameter_SLOW2DOF;
 Parameter                       = DefaultParameter_PitchActuator(Parameter);
 Parameter                       = DefaultParameter_FBv1_ADv14(Parameter);
 
 % Time
 dt                              = 1/80;
 Parameter.Time.dt               = dt;   % [s] simulation time step              
-Parameter.Time.TMax             = 120;   % [s] simulation length
+Parameter.Time.TMax             = 80;   % [s] simulation length
 
 %% Loop over Operation Points
     
@@ -73,16 +73,16 @@ wind = OPs;
     OutputFile  = 'IEA-3.4-130-RWT.out';
 %% PostProcessing FAST
 fid         = fopen(OutputFile);
-formatSpec  = repmat('%f',1,14);
+formatSpec  = repmat('%f',1,12);
 FASTResults = textscan(fid,formatSpec,'HeaderLines',8);
 Time        = FASTResults{:,1};
 Wind1VelX   = FASTResults{:,2};
 BldPitch1   = FASTResults{:,5};
 RotSpeed    = FASTResults{:,6};
-RtAeroCp    = FASTResults{:,11};
-RtTSR       = FASTResults{:,12};
-GenPwr      = FASTResults{:,13};
-GenTq       = FASTResults{:,14};
+% RtAeroCp    = FASTResults{:,11};
+% RtTSR       = FASTResults{:,12};
+GenPwr      = FASTResults{:,11};
+GenTq       = FASTResults{:,12};
 fclose(fid);
 %% PostProcessing SLOW
 figure
@@ -122,19 +122,19 @@ plot(Time,Wind1VelX)
 ylabel('v_0 [m/s]')
 legend('SLOW','FAST','Location','southeast')
 
-figure
-subplot(211)
-title('c_P')
-hold on;box on;grid on;
-plot(tout,c_P)
-plot(Time,RtAeroCp)    
-ylabel('')
-legend('SLOW','FAST','Location','southeast')
-
-subplot(212)
-title('lambda')
-hold on;box on;grid on;
-plot(tout,lambda)
-plot(Time,RtTSR)    
-ylabel('')
-legend('SLOW','FAST','Location','southeast')
+% figure
+% subplot(211)
+% title('c_P')
+% hold on;box on;grid on;
+% plot(tout,c_P)
+% plot(Time,RtAeroCp)    
+% ylabel('')
+% legend('SLOW','FAST','Location','southeast')
+% 
+% subplot(212)
+% title('lambda')
+% hold on;box on;grid on;
+% plot(tout,lambda)
+% plot(Time,RtTSR)    
+% ylabel('')
+% legend('SLOW','FAST','Location','southeast')
