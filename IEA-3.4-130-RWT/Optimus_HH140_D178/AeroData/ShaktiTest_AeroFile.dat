@@ -15,7 +15,7 @@ NREL 5.0 MW offshore baseline aerodynamic input properties.
 "default"     DTAero       - Time interval for aerodynamic calculations (sec)
           7   NumFoil      - Number of airfoil files (-)
 "Airfoils/Cylinder1.dat"    FoilNm      - Names of the airfoil files [NumFoil lines] (quoted strings)
-"Airfoils/NACA_0060_NACA_0060_Re6.000_M0.00_N9.0_360_M.dat"
+"Airfoils/NACA_0060_20_Re6.000_M0.00_N9.0_360_M.dat"
 "Airfoils/DU40_A17_coords20_Re6.000_M0.00_N9.0_360_M_copy.dat"
 "Airfoils/DU35_A17.dat"
 "Airfoils/DU30_A17.dat"
