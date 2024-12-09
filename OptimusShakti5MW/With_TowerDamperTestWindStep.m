@@ -11,8 +11,8 @@ Parameter                           = DefaultParameter_SLOW2DOF;
 Parameter                           = DefaultParameter_FBv1_ADv14(Parameter);
 
 % Time
-Parameter.Time.dt                   = 0.01;            % [s] simulation time step            
-Parameter.Time.TMax                 = 60;              % [s] simulation length
+Parameter.Time.dt                   = 1/10;            % [s] simulation time step            
+Parameter.Time.TMax                 = 60;            % [s] simulation length
 
 % Wind
 DeltaU                              = 1;
@@ -32,7 +32,7 @@ Parameter.Filter.LowPassTowerDamper.Enable = 0;
 simoutClassic = sim('FBv1_SLOW2DOF_with_TowerDamper.mdl');
 
 Parameter.Filter.LowPassTowerDamper.Enable = 1;
-Parameter.TD.gain = Parameter.TD.gain*4;
+%Parameter.TD.gain = Parameter.TD.gain;
 simout = sim('FBv1_SLOW2DOF_with_TowerDamper.mdl');
 
 

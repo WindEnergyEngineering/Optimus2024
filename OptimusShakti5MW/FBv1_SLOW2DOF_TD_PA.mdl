@@ -46,8 +46,8 @@ __MWOPC_PART_BEGIN__ /metadata/coreProperties.xml
   <cp:category>model</cp:category>
   <dcterms:created xsi:type="dcterms:W3CDTF">2024-12-09T12:30:03Z</dcterms:created>
   <cp:lastModifiedBy>felix</cp:lastModifiedBy>
-  <dcterms:modified xsi:type="dcterms:W3CDTF">2024-12-09T12:30:03Z</dcterms:modified>
-  <cp:revision>19.7</cp:revision>
+  <dcterms:modified xsi:type="dcterms:W3CDTF">2024-12-09T12:39:18Z</dcterms:modified>
+  <cp:revision>19.8</cp:revision>
   <cp:version>R2022b</cp:version>
 </cp:coreProperties>
 
@@ -121,7 +121,7 @@ __MWOPC_PART_BEGIN__ /simulink/blockdiagram.xml
     <ConfigManagerSettings>
       <P Name="ModifiedByFormat">%&lt;Auto&gt;</P>
       <P Name="ModifiedDateFormat">%&lt;Auto&gt;</P>
-      <P Name="ModelVersionFormat">%&lt;AutoIncrement:19.7&gt;</P>
+      <P Name="ModelVersionFormat">%&lt;AutoIncrement:19.8&gt;</P>
     </ConfigManagerSettings>
     <EditorSettings>
       <P Name="LibraryLinkDisplay">all</P>
@@ -1094,8 +1094,8 @@ Dynamic</P>
 __MWOPC_PART_BEGIN__ /simulink/modelDictionary.xml
 <?xml version="1.0" encoding="UTF-8"?>
 <MF0 version="1.1" defaultPackage="slid" packageUris="http://schema.mathworks.com/mf0/slid/R2022b_20220222">
-  <System type="System" uuid="9d89af7c-3084-4e46-ba7f-501661ee1c39">
-    <Interface type="Interface" uuid="d31ef7ed-69a5-48c5-bc7c-47ef5bfdb156"/>
+  <System type="System" uuid="a3795c49-87d4-4ef9-a713-500ad0b38253">
+    <Interface type="Interface" uuid="45051239-d11d-4dc9-bde9-3ea273cc9354"/>
   </System>
 </MF0>
 __MWOPC_PART_BEGIN__ /simulink/plugins/SimscapeModelParametersPlugin.xml
@@ -1115,16 +1115,16 @@ __MWOPC_PART_BEGIN__ /simulink/plugins/sl_paper_props.xml
 __MWOPC_PART_BEGIN__ /simulink/ScheduleCore.xml
 <?xml version="1.0" encoding="UTF-8"?>
 <sltp_graph version="1.1" packageUris="http://schema.mathworks.com/mf0/sltp_mm/R2022b_202203181029">
-  <sltp.mm.core.Context type="sltp.mm.core.Context" uuid="a597ee9b-a1bf-4ad5-ba48-ff43e1ead710">
+  <sltp.mm.core.Context type="sltp.mm.core.Context" uuid="0450b13c-fe52-41d8-af7e-33df67d95bc7">
     <editorState type="sltp.mm.core.EditorState" uuid="0647afc4-2d7e-4dc0-9f75-a9f8d73e74dc">
       <panelState type="sltp.mm.core.EditorPanelState" uuid="6acfc5e6-394e-4664-b786-550139e83162"/>
     </editorState>
-    <rootTask type="sltp.mm.core.Task" uuid="8fffccfa-264e-48bb-854f-b8d52b3d2eba">
-      <context type="sltp.mm.core.Context" uuid="a597ee9b-a1bf-4ad5-ba48-ff43e1ead710"/>
+    <rootTask type="sltp.mm.core.Task" uuid="d55d777d-567e-42ed-92ec-3960449b610f">
+      <context type="sltp.mm.core.Context" uuid="0450b13c-fe52-41d8-af7e-33df67d95bc7"/>
       <explicit>false</explicit>
       <name>Default</name>
       <priority>-2147483648</priority>
-      <subgraph type="sltp.mm.core.Graph" uuid="cc02f88e-9201-444e-8cfc-730f7f5e174d"/>
+      <subgraph type="sltp.mm.core.Graph" uuid="cdecb814-652a-4410-8f5d-a2452f5648eb"/>
     </rootTask>
   </sltp.mm.core.Context>
 </sltp_graph>
@@ -1472,6 +1472,7 @@ __MWOPC_PART_BEGIN__ /simulink/systems/_rels/system_6751.xml.rels
   <Relationship Id="system_7125" Target="system_7125.xml" Type="http://schemas.mathworks.com/simulink/2010/relationships/system"/>
   <Relationship Id="system_7558" Target="system_7558.xml" Type="http://schemas.mathworks.com/simulink/2010/relationships/system"/>
   <Relationship Id="system_7595" Target="system_7595.xml" Type="http://schemas.mathworks.com/simulink/2010/relationships/system"/>
+  <Relationship Id="system_7669" Target="system_7669.xml" Type="http://schemas.mathworks.com/simulink/2010/relationships/system"/>
 </Relationships>
 
 __MWOPC_PART_BEGIN__ /simulink/systems/_rels/system_6884.xml.rels
@@ -1539,6 +1540,12 @@ __MWOPC_PART_BEGIN__ /simulink/systems/_rels/system_7625.xml.rels
   <Relationship Id="system_7634" Target="system_7634.xml" Type="http://schemas.mathworks.com/simulink/2010/relationships/system"/>
 </Relationships>
 
+__MWOPC_PART_BEGIN__ /simulink/systems/_rels/system_7669.xml.rels
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">
+  <Relationship Id="system_7672" Target="system_7672.xml" Type="http://schemas.mathworks.com/simulink/2010/relationships/system"/>
+</Relationships>
+
 __MWOPC_PART_BEGIN__ /simulink/systems/_rels/system_root.xml.rels
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">
@@ -1551,7 +1558,7 @@ __MWOPC_PART_BEGIN__ /simulink/systems/system_6751.xml
 <System>
   <P Name="Location">[-1, -7, 1537, 817]</P>
   <P Name="Open">on</P>
-  <P Name="ZoomFactor">125</P>
+  <P Name="ZoomFactor">60</P>
   <Block BlockType="Inport" Name="d" SID="6752">
     <P Name="Position">[370, 438, 400, 452]</P>
     <P Name="ZOrder">-1</P>
@@ -1574,17 +1581,17 @@ __MWOPC_PART_BEGIN__ /simulink/systems/system_6751.xml
     </PortProperties>
   </Block>
   <Block BlockType="BusCreator" Name="Bus&#xA;Creator2" SID="7611">
-    <PortCounts in="13" out="1"/>
-    <P Name="Position">[1175, 77, 1180, 1003]</P>
+    <PortCounts in="12" out="1"/>
+    <P Name="Position">[1175, 79, 1180, 1006]</P>
     <P Name="ZOrder">1157</P>
     <P Name="ShowName">off</P>
-    <P Name="Inputs">13</P>
+    <P Name="Inputs">12</P>
     <P Name="DisplayOption">bar</P>
     <P Name="InheritFromInputs">on</P>
   </Block>
   <Block BlockType="BusSelector" Name="Bus&#xA;Selector" SID="6755">
     <PortCounts in="1" out="1"/>
-    <P Name="Position">[130, 886, 135, 924]</P>
+    <P Name="Position">[145, 476, 150, 514]</P>
     <P Name="ZOrder">-8</P>
     <P Name="ShowName">off</P>
     <P Name="OutputSignals">theta_c</P>
@@ -1618,15 +1625,6 @@ __MWOPC_PART_BEGIN__ /simulink/systems/system_6751.xml
       </Port>
     </PortProperties>
   </Block>
-  <Block BlockType="Derivative" Name="Derivative" SID="7668">
-    <P Name="Position">[515, 945, 545, 975]</P>
-    <P Name="ZOrder">1163</P>
-    <PortProperties>
-      <Port Type="out" Index="1">
-        <P Name="Name">theta_dot</P>
-      </Port>
-    </PortProperties>
-  </Block>
   <Block BlockType="SubSystem" Name="Generator" SID="7125">
     <PortCounts in="2" out="2"/>
     <P Name="Position">[180, 86, 300, 224]</P>
@@ -1642,16 +1640,17 @@ __MWOPC_PART_BEGIN__ /simulink/systems/system_6751.xml
     </PortProperties>
     <System Ref="system_7125"/>
   </Block>
-  <Block BlockType="Memory" Name="Simple Pitch Actuator" SID="7623">
-    <P Name="Position">[245, 890, 275, 920]</P>
-    <P Name="ZOrder">1159</P>
-    <P Name="BackgroundColor">red</P>
-    <P Name="InitialCondition">Parameter.IC.theta</P>
+  <Block BlockType="SubSystem" Name="Pitch Actuator" SID="7669">
+    <PortCounts in="1" out="1"/>
+    <P Name="Position">[225, 437, 335, 553]</P>
+    <P Name="ZOrder">1164</P>
+    <P Name="BackgroundColor">cyan</P>
     <PortProperties>
       <Port Type="out" Index="1">
         <P Name="Name">theta</P>
       </Port>
     </PortProperties>
+    <System Ref="system_7669"/>
   </Block>
   <Block BlockType="SubSystem" Name="aerodynamics " SID="7558">
     <PortCounts in="4" out="3"/>
@@ -1731,6 +1730,7 @@ __MWOPC_PART_BEGIN__ /simulink/systems/system_6751.xml
     <P Name="ZOrder">182</P>
     <P Name="Labels">[-1, 0]</P>
     <P Name="Src">7558#out:2</P>
+    <P Name="Points">[172, 0; 0, 35]</P>
     <P Name="Dst">7611#in:6</P>
   </Line>
   <Line>
@@ -1739,6 +1739,7 @@ __MWOPC_PART_BEGIN__ /simulink/systems/system_6751.xml
     <P Name="Points">[5, 0]</P>
     <Branch>
       <P Name="ZOrder">9</P>
+      <P Name="Points">[0, 305]</P>
       <P Name="Dst">6755#in:1</P>
     </Branch>
     <Branch>
@@ -1750,7 +1751,7 @@ __MWOPC_PART_BEGIN__ /simulink/systems/system_6751.xml
     <P Name="Name">M_a</P>
     <P Name="ZOrder">148</P>
     <P Name="Src">7558#out:1</P>
-    <P Name="Points">[48, 0]</P>
+    <P Name="Points">[48, 0; 0, 30]</P>
     <Branch>
       <P Name="ZOrder">179</P>
       <P Name="Labels">[-1, 0]</P>
@@ -1758,7 +1759,7 @@ __MWOPC_PART_BEGIN__ /simulink/systems/system_6751.xml
     </Branch>
     <Branch>
       <P Name="ZOrder">14</P>
-      <P Name="Points">[0, 187; -766, 0; 0, -257]</P>
+      <P Name="Points">[0, 157; -766, 0; 0, -257]</P>
       <P Name="Dst">6788#in:2</P>
     </Branch>
   </Line>
@@ -1766,7 +1767,7 @@ __MWOPC_PART_BEGIN__ /simulink/systems/system_6751.xml
     <P Name="Name">Omega</P>
     <P Name="ZOrder">15</P>
     <P Name="Src">6788#out:2</P>
-    <P Name="Points">[103, 0]</P>
+    <P Name="Points">[103, 0; 0, 25]</P>
     <Branch>
       <P Name="ZOrder">181</P>
       <P Name="Labels">[-1, 1]</P>
@@ -1774,7 +1775,7 @@ __MWOPC_PART_BEGIN__ /simulink/systems/system_6751.xml
     </Branch>
     <Branch>
       <P Name="ZOrder">145</P>
-      <P Name="Points">[0, 65]</P>
+      <P Name="Points">[0, 40]</P>
       <P Name="Dst">7558#in:1</P>
     </Branch>
   </Line>
@@ -1791,6 +1792,7 @@ __MWOPC_PART_BEGIN__ /simulink/systems/system_6751.xml
     <Branch>
       <P Name="ZOrder">176</P>
       <P Name="Labels">[-1, 0]</P>
+      <P Name="Points">[0, 20]</P>
       <P Name="Dst">7611#in:3</P>
     </Branch>
   </Line>
@@ -1806,13 +1808,14 @@ __MWOPC_PART_BEGIN__ /simulink/systems/system_6751.xml
     <P Name="ZOrder">177</P>
     <P Name="Labels">[-1, 0]</P>
     <P Name="Src">7125#out:1</P>
+    <P Name="Points">[581, 0; 0, 10]</P>
     <P Name="Dst">7611#in:1</P>
   </Line>
   <Line>
     <P Name="Name">F_a</P>
     <P Name="ZOrder">174</P>
     <P Name="Src">7558#out:3</P>
-    <P Name="Points">[5, 0]</P>
+    <P Name="Points">[5, 0; 0, 40]</P>
     <Branch>
       <P Name="ZOrder">190</P>
       <P Name="Labels">[-1, 0]</P>
@@ -1820,7 +1823,7 @@ __MWOPC_PART_BEGIN__ /simulink/systems/system_6751.xml
     </Branch>
     <Branch>
       <P Name="ZOrder">183</P>
-      <P Name="Points">[0, 245]</P>
+      <P Name="Points">[0, 205]</P>
       <P Name="Dst">7595#in:1</P>
     </Branch>
   </Line>
@@ -1829,6 +1832,7 @@ __MWOPC_PART_BEGIN__ /simulink/systems/system_6751.xml
     <P Name="ZOrder">192</P>
     <P Name="Labels">[1, 1]</P>
     <P Name="Src">7595#out:1</P>
+    <P Name="Points">[23, 0; 0, 50]</P>
     <P Name="Dst">7611#in:9</P>
   </Line>
   <Line>
@@ -1836,10 +1840,10 @@ __MWOPC_PART_BEGIN__ /simulink/systems/system_6751.xml
     <P Name="ZOrder">193</P>
     <P Name="Labels">[1, 1]</P>
     <P Name="Src">7595#out:2</P>
-    <P Name="Points">[23, 0]</P>
+    <P Name="Points">[23, 0; 0, 55]</P>
     <Branch>
       <P Name="ZOrder">198</P>
-      <P Name="Points">[0, 204; -533, 0; 0, -409]</P>
+      <P Name="Points">[0, 149; -533, 0; 0, -409]</P>
       <P Name="Dst">7558#in:4</P>
     </Branch>
     <Branch>
@@ -1850,8 +1854,9 @@ __MWOPC_PART_BEGIN__ /simulink/systems/system_6751.xml
   <Line>
     <P Name="Name">x_T_dotdot</P>
     <P Name="ZOrder">194</P>
-    <P Name="Labels">[1, 1]</P>
+    <P Name="Labels">[2, 1]</P>
     <P Name="Src">7595#out:3</P>
+    <P Name="Points">[9, 0; 0, 60]</P>
     <P Name="Dst">7611#in:11</P>
   </Line>
   <Line>
@@ -1859,66 +1864,52 @@ __MWOPC_PART_BEGIN__ /simulink/systems/system_6751.xml
     <P Name="ZOrder">195</P>
     <P Name="Labels">[1, 1]</P>
     <P Name="Src">7595#out:4</P>
+    <P Name="Points">[42, 0; 0, 65]</P>
     <P Name="Dst">7611#in:12</P>
   </Line>
   <Line>
     <P Name="ZOrder">196</P>
     <P Name="Src">7611#out:1</P>
+    <P Name="Points">[38, 0; 0, -5]</P>
     <P Name="Dst">6799#in:1</P>
   </Line>
   <Line>
     <P Name="Name">&lt;theta_c&gt;</P>
-    <P Name="ZOrder">217</P>
+    <P Name="ZOrder">275</P>
     <P Name="Labels">[0, 0]</P>
     <P Name="Src">6755#out:1</P>
-    <P Name="Dst">7623#in:1</P>
+    <P Name="Dst">7669#in:1</P>
   </Line>
   <Line>
     <P Name="Name">theta</P>
-    <P Name="ZOrder">218</P>
+    <P Name="ZOrder">276</P>
     <P Name="Labels">[0, 0]</P>
-    <P Name="Src">7623#out:1</P>
-    <P Name="Points">[160, 0]</P>
+    <P Name="Src">7669#out:1</P>
+    <P Name="Points">[100, 0]</P>
     <Branch>
-      <P Name="ZOrder">262</P>
-      <P Name="Points">[0, 55]</P>
-      <P Name="Dst">7668#in:1</P>
+      <P Name="ZOrder">277</P>
+      <P Name="Labels">[-1, 0]</P>
+      <P Name="Points">[0, 115; 684, 0; 0, 45]</P>
+      <P Name="Dst">7611#in:8</P>
     </Branch>
     <Branch>
-      <P Name="ZOrder">227</P>
-      <P Name="Points">[0, -295]</P>
-      <Branch>
-        <P Name="ZOrder">220</P>
-        <P Name="Labels">[-1, 0]</P>
-        <P Name="Dst">7611#in:8</P>
-      </Branch>
-      <Branch>
-        <P Name="ZOrder">219</P>
-        <P Name="Points">[0, -115]</P>
-        <P Name="Dst">7558#in:3</P>
-      </Branch>
+      <P Name="ZOrder">219</P>
+      <P Name="Dst">7558#in:3</P>
     </Branch>
-  </Line>
-  <Line>
-    <P Name="Name">theta_dot</P>
-    <P Name="ZOrder">263</P>
-    <P Name="Labels">[-1, 0]</P>
-    <P Name="Src">7668#out:1</P>
-    <P Name="Dst">7611#in:13</P>
   </Line>
   <Line>
     <P Name="Name">M_g</P>
     <P Name="ZOrder">249</P>
+    <P Name="Labels">[2, 1]</P>
     <P Name="Src">7125#out:2</P>
-    <P Name="Points">[9, 0]</P>
+    <P Name="Points">[9, 0; 0, 15]</P>
     <Branch>
       <P Name="ZOrder">258</P>
-      <P Name="Points">[0, 70]</P>
+      <P Name="Points">[0, 55]</P>
       <P Name="Dst">6788#in:1</P>
     </Branch>
     <Branch>
       <P Name="ZOrder">257</P>
-      <P Name="Labels">[1, 1]</P>
       <P Name="Dst">7611#in:2</P>
     </Branch>
   </Line>
@@ -5262,7 +5253,7 @@ __MWOPC_PART_BEGIN__ /simulink/systems/system_7537.xml
     <P Name="Position">[670, 65, 750, 155]</P>
     <P Name="ZOrder">68</P>
     <P Name="ShowName">off</P>
-    <P Name="LibraryVersion">7.6</P>
+    <P Name="LibraryVersion">3.4</P>
     <P Name="SourceBlock">simulink/Discontinuities/Saturation
 Dynamic</P>
     <P Name="SourceType">Saturation Dynamic</P>
@@ -6588,14 +6579,264 @@ __MWOPC_PART_BEGIN__ /simulink/systems/system_7634.xml
   </Line>
 </System>
 
+__MWOPC_PART_BEGIN__ /simulink/systems/system_7669.xml
+<?xml version="1.0" encoding="utf-8"?>
+<System>
+  <P Name="Location">[-8, 0, 1928, 1056]</P>
+  <Block BlockType="Inport" Name="theta_c [rad]" SID="7670">
+    <P Name="Position">[25, 278, 55, 292]</P>
+    <P Name="ZOrder">-1</P>
+    <P Name="BackgroundColor">darkGreen</P>
+  </Block>
+  <Block BlockType="Constant" Name="Constant2" SID="7671">
+    <P Name="Position">[45, 313, 235, 337]</P>
+    <P Name="ZOrder">821</P>
+    <P Name="BackgroundColor">red</P>
+    <P Name="ShowName">off</P>
+    <P Name="Value">Parameter.IC.theta</P>
+  </Block>
+  <Block BlockType="SubSystem" Name="PT2" SID="7672">
+    <PortCounts in="2" out="2"/>
+    <P Name="Position">[290, 266, 490, 344]</P>
+    <P Name="ZOrder">817</P>
+    <P Name="BackgroundColor">cyan</P>
+    <Mask>
+      <Display>disp([&apos;omega = &apos;,num2str(omega),&apos;\n&apos;...
+    ,&apos;xi = &apos;,num2str(xi)])
+port_label(&apos;output&apos;,1,&apos;y&apos;)
+port_label(&apos;output&apos;,2,&apos;x1&apos;)
+port_label(&apos;input&apos;,2,&apos;y0&apos;)
+port_label(&apos;input&apos;,1,&apos;u&apos;)</Display>
+      <MaskParameter Name="omega" Type="edit">
+        <Prompt>undamped natural frequency [rad/s]</Prompt>
+        <Value>Parameter.PitchActuator.omega</Value>
+      </MaskParameter>
+      <MaskParameter Name="xi" Type="edit">
+        <Prompt>damping factor [-]</Prompt>
+        <Value>Parameter.PitchActuator.xi</Value>
+      </MaskParameter>
+      <MaskParameter Name="x1_max" Type="edit">
+        <Prompt>Upper bound x1</Prompt>
+        <Value>Parameter.PitchActuator.theta_dot_max</Value>
+      </MaskParameter>
+      <MaskParameter Name="x1_min" Type="edit">
+        <Prompt>Lower bound x1</Prompt>
+        <Value>-Parameter.PitchActuator.theta_dot_max</Value>
+      </MaskParameter>
+      <MaskParameter Name="x2_max" Type="edit">
+        <Prompt>Upper bound x2</Prompt>
+        <Value>Parameter.PitchActuator.theta_max</Value>
+      </MaskParameter>
+      <MaskParameter Name="x2_min" Type="edit">
+        <Prompt>Lower bound x2</Prompt>
+        <Value>Parameter.PitchActuator.theta_min</Value>
+      </MaskParameter>
+    </Mask>
+    <System Ref="system_7672"/>
+  </Block>
+  <Block BlockType="Terminator" Name="Terminator" SID="7683">
+    <P Name="Position">[525, 315, 545, 335]</P>
+    <P Name="ZOrder">820</P>
+    <P Name="ShowName">off</P>
+  </Block>
+  <Block BlockType="Outport" Name="theta [rad]" SID="7684">
+    <P Name="Position">[565, 278, 595, 292]</P>
+    <P Name="ZOrder">-9</P>
+    <P Name="BackgroundColor">yellow</P>
+  </Block>
+  <Line>
+    <P Name="ZOrder">1</P>
+    <P Name="Src">7670#out:1</P>
+    <P Name="Dst">7672#in:1</P>
+  </Line>
+  <Line>
+    <P Name="ZOrder">2</P>
+    <P Name="Src">7671#out:1</P>
+    <P Name="Dst">7672#in:2</P>
+  </Line>
+  <Line>
+    <P Name="ZOrder">3</P>
+    <P Name="Src">7672#out:1</P>
+    <P Name="Dst">7684#in:1</P>
+  </Line>
+  <Line>
+    <P Name="ZOrder">4</P>
+    <P Name="Src">7672#out:2</P>
+    <P Name="Dst">7683#in:1</P>
+  </Line>
+</System>
+
+__MWOPC_PART_BEGIN__ /simulink/systems/system_7672.xml
+<?xml version="1.0" encoding="utf-8"?>
+<System>
+  <P Name="Location">[-8, 0, 1928, 1066]</P>
+  <Block BlockType="Inport" Name="u" SID="7673">
+    <P Name="Position">[310, 98, 340, 112]</P>
+    <P Name="ZOrder">-1</P>
+    <P Name="BackgroundColor">darkGreen</P>
+  </Block>
+  <Block BlockType="Inport" Name="y0" SID="7674">
+    <P Name="Position">[695, 143, 725, 157]</P>
+    <P Name="ZOrder">1</P>
+    <P Name="BackgroundColor">darkGreen</P>
+    <P Name="Port">2</P>
+  </Block>
+  <Block BlockType="Sum" Name="Add3" SID="7675">
+    <PortCounts in="3" out="1"/>
+    <P Name="Position">[495, 86, 525, 184]</P>
+    <P Name="ZOrder">-2</P>
+    <P Name="ShowName">off</P>
+    <P Name="IconShape">rectangular</P>
+    <P Name="Inputs">+--</P>
+  </Block>
+  <Block BlockType="Gain" Name="Gain1" SID="7676">
+    <P Name="Position">[360, 86, 475, 124]</P>
+    <P Name="ZOrder">-3</P>
+    <P Name="BackgroundColor">red</P>
+    <P Name="ShowName">off</P>
+    <P Name="Gain">omega*omega</P>
+    <P Name="ParamDataTypeStr">Inherit: Same as input</P>
+    <P Name="OutDataTypeStr">Inherit: Same as input</P>
+    <P Name="SaturateOnIntegerOverflow">on</P>
+  </Block>
+  <Block BlockType="Gain" Name="Gain2" SID="7677">
+    <P Name="Position">[415, 241, 530, 279]</P>
+    <P Name="ZOrder">5</P>
+    <P Name="BlockMirror">on</P>
+    <P Name="BackgroundColor">red</P>
+    <P Name="ShowName">off</P>
+    <P Name="Gain">omega*omega</P>
+    <P Name="ParamDataTypeStr">Inherit: Same as input</P>
+    <P Name="OutDataTypeStr">Inherit: Same as input</P>
+    <P Name="SaturateOnIntegerOverflow">on</P>
+  </Block>
+  <Block BlockType="Gain" Name="Gain3" SID="7678">
+    <P Name="Position">[500, 196, 615, 234]</P>
+    <P Name="ZOrder">-5</P>
+    <P Name="BlockMirror">on</P>
+    <P Name="BackgroundColor">red</P>
+    <P Name="NameLocation">top</P>
+    <P Name="ShowName">off</P>
+    <P Name="Gain">2*xi*omega</P>
+    <P Name="ParamDataTypeStr">Inherit: Same as input</P>
+    <P Name="OutDataTypeStr">Inherit: Same as input</P>
+    <P Name="SaturateOnIntegerOverflow">on</P>
+  </Block>
+  <Block BlockType="Integrator" Name="Integrator1" SID="7679">
+    <PortCounts in="1" out="1"/>
+    <P Name="Position">[585, 119, 615, 151]</P>
+    <P Name="ZOrder">2</P>
+    <P Name="BackgroundColor">red</P>
+    <P Name="ShowName">off</P>
+    <P Name="LimitOutput">on</P>
+    <P Name="UpperSaturationLimit">x1_max</P>
+    <P Name="LowerSaturationLimit">x1_min</P>
+    <PortProperties>
+      <Port Type="out" Index="1">
+        <P Name="Name">x1</P>
+      </Port>
+    </PortProperties>
+  </Block>
+  <Block BlockType="Integrator" Name="Integrator2" SID="7680">
+    <PortCounts in="2" out="1"/>
+    <P Name="Position">[750, 127, 810, 158]</P>
+    <P Name="ZOrder">-7</P>
+    <P Name="BackgroundColor">red</P>
+    <P Name="ShowName">off</P>
+    <P Name="InitialConditionSource">external</P>
+    <P Name="InitialCondition">x2_t0</P>
+    <P Name="LimitOutput">on</P>
+    <P Name="UpperSaturationLimit">x2_max</P>
+    <P Name="LowerSaturationLimit">x2_min</P>
+  </Block>
+  <Block BlockType="Outport" Name="y" SID="7681">
+    <P Name="Position">[885, 138, 915, 152]</P>
+    <P Name="ZOrder">-10</P>
+    <P Name="BackgroundColor">yellow</P>
+  </Block>
+  <Block BlockType="Outport" Name="x1" SID="7682">
+    <P Name="Position">[715, 73, 745, 87]</P>
+    <P Name="ZOrder">3</P>
+    <P Name="BackgroundColor">yellow</P>
+    <P Name="Port">2</P>
+  </Block>
+  <Line>
+    <P Name="ZOrder">1</P>
+    <P Name="Src">7678#out:1</P>
+    <P Name="Points">[-95, 0; 0, -50]</P>
+    <P Name="Dst">7675#in:3</P>
+  </Line>
+  <Line>
+    <P Name="ZOrder">2</P>
+    <P Name="Src">7673#out:1</P>
+    <P Name="Dst">7676#in:1</P>
+  </Line>
+  <Line>
+    <P Name="ZOrder">3</P>
+    <P Name="Src">7675#out:1</P>
+    <P Name="Dst">7679#in:1</P>
+  </Line>
+  <Line>
+    <P Name="ZOrder">4</P>
+    <P Name="Src">7676#out:1</P>
+    <P Name="Dst">7675#in:1</P>
+  </Line>
+  <Line>
+    <P Name="ZOrder">5</P>
+    <P Name="Src">7677#out:1</P>
+    <P Name="Points">[-60, 0; 0, -125]</P>
+    <P Name="Dst">7675#in:2</P>
+  </Line>
+  <Line>
+    <P Name="Name">x1</P>
+    <P Name="ZOrder">6</P>
+    <P Name="Labels">[1, 1]</P>
+    <P Name="Src">7679#out:1</P>
+    <P Name="Points">[60, 0]</P>
+    <Branch>
+      <P Name="ZOrder">7</P>
+      <P Name="Points">[0, -55]</P>
+      <P Name="Dst">7682#in:1</P>
+    </Branch>
+    <Branch>
+      <P Name="ZOrder">8</P>
+      <P Name="Points">[0, 80]</P>
+      <P Name="Dst">7678#in:1</P>
+    </Branch>
+    <Branch>
+      <P Name="ZOrder">9</P>
+      <P Name="Dst">7680#in:1</P>
+    </Branch>
+  </Line>
+  <Line>
+    <P Name="ZOrder">10</P>
+    <P Name="Src">7674#out:1</P>
+    <P Name="Dst">7680#in:2</P>
+  </Line>
+  <Line>
+    <P Name="ZOrder">11</P>
+    <P Name="Src">7680#out:1</P>
+    <P Name="Points">[29, 0]</P>
+    <Branch>
+      <P Name="ZOrder">12</P>
+      <P Name="Points">[0, 115]</P>
+      <P Name="Dst">7677#in:1</P>
+    </Branch>
+    <Branch>
+      <P Name="ZOrder">13</P>
+      <P Name="Dst">7681#in:1</P>
+    </Branch>
+  </Line>
+</System>
+
 __MWOPC_PART_BEGIN__ /simulink/systems/system_root.xml
 <?xml version="1.0" encoding="utf-8"?>
 <System>
   <P Name="Location">[-1, -7, 1537, 817]</P>
   <P Name="Open">on</P>
-  <P Name="ZoomFactor">127</P>
+  <P Name="ZoomFactor">227</P>
   <P Name="ReportName">simulink-default.rpt</P>
-  <P Name="SIDHighWatermark">7668</P>
+  <P Name="SIDHighWatermark">7684</P>
   <Block BlockType="BusCreator" Name="Bus&#xA;Creator1" SID="3984">
     <PortCounts in="1" out="1"/>
     <P Name="Position">[560, 399, 565, 471]</P>
@@ -6709,24 +6950,24 @@ __MWOPC_PART_BEGIN__ /simulink/windowsInfo.xml
       </Object>
       <Array PropName="EditorsInfo" Type="Simulink.EditorInfo" Dimension="1*26">
         <Object ObjectID="5">
-          <P Name="IsActive" Class="logical">1</P>
+          <P Name="IsActive" Class="logical">0</P>
           <P Name="IsTabbed" Class="logical">1</P>
           <P Name="ViewObjType" Class="char">SimulinkTopLevel</P>
           <P Name="LoadSaveID" Class="char">0</P>
           <P Name="Extents" Class="double">[1875.0, 743.0]</P>
-          <P Name="ZoomFactor" Class="double">1.2670998632010944</P>
-          <P Name="Offset" Class="double">[-269.05546987141321, 351.17773442542216]</P>
-          <P Name="SceneRectInView" Class="double">[-269.05546987141321, 351.17773442542216, 1183.8056680161944, 469.10272604588391]</P>
+          <P Name="ZoomFactor" Class="double">2.2668204584691107</P>
+          <P Name="Offset" Class="double">[271.18944576440771, 392.82394845269096]</P>
+          <P Name="SceneRectInView" Class="double">[271.18944576440771, 392.82394845269096, 661.71980864025716, 262.21750283717927]</P>
         </Object>
         <Object ObjectID="6">
-          <P Name="IsActive" Class="logical">0</P>
+          <P Name="IsActive" Class="logical">1</P>
           <P Name="IsTabbed" Class="logical">1</P>
           <P Name="ViewObjType" Class="char">SimulinkSubsys</P>
           <P Name="LoadSaveID" Class="char">6751</P>
           <P Name="Extents" Class="double">[1875.0, 743.0]</P>
-          <P Name="ZoomFactor" Class="double">1.25</P>
-          <P Name="Offset" Class="double">[129.64155307813871, 561.81651083344616]</P>
-          <P Name="SceneRectInView" Class="double">[129.64155307813871, 561.81651083344616, 1200.0, 475.52]</P>
+          <P Name="ZoomFactor" Class="double">0.599934230197595</P>
+          <P Name="Offset" Class="double">[-565.13703544300051, 38.56061950517676]</P>
+          <P Name="SceneRectInView" Class="double">[-565.13703544300051, 38.56061950517676, 2500.274070886001, 990.77527182309268]</P>
         </Object>
         <Object ObjectID="7">
           <P Name="IsActive" Class="logical">0</P>
