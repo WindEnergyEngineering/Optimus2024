@@ -116,7 +116,7 @@ True                   TabDelim    - Use tab delimiters in text tabular output f
 9                      NTwGages    - Number of tower nodes that have strain gages for output [0 to 9] (-)
 2, 4, 6, 8, 10, 12, 14, 16, 18 TwrGagNd    - List of tower nodes that have strain gages [1 to TwrNodes] (-) [unused if NTwGages=0]
 9                      NBlGages    - Number of blade nodes that have strain gages for output [0 to 9] (-)
-6, 11, 16, 21, 26, 31, 36, 41, 46 BldGagNd    - List of blade nodes that have strain gages [1 to BldNodes] (-) [unused if NBlGages=0]
+1, 2, 3, 4, 5, 6, 7, 8, 9 BldGagNd    - List of blade nodes that have strain gages [1 to BldNodes] (-) [unused if NBlGages=0]
                    OutList             - The next line(s) contains a list of output parameters.  See OutListParameters.xlsx for a listing of available output channels, (-)
 "YawPzn"			- Yaw Position
  "BldPitch1"                  - Blade 1 pitch angle
