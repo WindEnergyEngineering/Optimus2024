@@ -4,8 +4,8 @@ import time
 import shutil
 
 # Define main directory
-main_directory = r'D:\Masters\2024\3rd semester\WEC Development Project 202425 (WiSe 2024)\Local repos\Optimus2024\IEA-3.4-130-RWT\Optimus_HH140_D178\DLC_7_1'  # Update this path
-output_directory = r'D:\Masters\2024\3rd semester\WEC Development Project 202425 (WiSe 2024)\Local repos\Optimus2024\IEA-3.4-130-RWT\Optimus_HH140_D178\DLC_7_1\Outputs\DLC71\Steady'  # Specify the desired output directory
+main_directory = r'D:\Masters\2024\3rd semester\WEC Development Project 202425 (WiSe 2024)\Local repos\Optimus2024\IEA-3.4-130-RWT\IEA_HH140_D178\DLC_7_1'  # Update this path
+output_directory = r'D:\Masters\2024\3rd semester\WEC Development Project 202425 (WiSe 2024)\Local repos\Optimus2024\IEA-3.4-130-RWT\IEA_HH140_D178\DLC_7_1\Outputs\DLC71\Steady'  # Specify the desired output directory
 yaw_angles = [-15.0, 0.0, 15.0]  # Define yaw angles to iterate
 
 # Ensure output directory exists

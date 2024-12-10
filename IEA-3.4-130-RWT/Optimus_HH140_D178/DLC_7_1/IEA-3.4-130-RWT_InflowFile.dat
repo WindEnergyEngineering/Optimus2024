@@ -11,7 +11,7 @@ False                  VelInterpCubic - Use cubic interpolation for velocity in 
 0.0                    WindVyiList - List of coordinates in the inertial Y direction (m)
 140.0                  WindVziList - List of coordinates in the inertial Z direction (m)
 ================== Parameters for Steady Wind Conditions [used only for WindType = 1] =========================
-4.0                    HWindSpeed  - Horizontal windspeed                            (m/s)
+42.0                    HWindSpeed  - Horizontal windspeed                            (m/s)
 140.0                  RefHt       - Reference height for horizontal wind speed      (m)
 0.2                    PLexp       - Power law exponent                              (-)
 ================== Parameters for Uniform wind file   [used only for WindType = 2] ============================
@@ -19,7 +19,7 @@ False                  VelInterpCubic - Use cubic interpolation for velocity in 
 110.0                  RefHt_Uni   - Reference height for horizontal wind speed                (m)
 1.0                    RefLength   - Reference length for linear horizontal and vertical sheer (-)
 ================== Parameters for Binary TurbSim Full-Field files   [used only for WindType = 3] ==============
-"./Wind\V37_EWM50_IEC3BSeed6.bts" FileName_BTS - Name of the Full field wind file to use (.bts)
+"./Wind\V37.5_Seed1346529009.bts" FileName_BTS - Name of the Full field wind file to use (.bts)
 ================== Parameters for Binary Bladed-style Full-Field files   [used only for WindType = 4] =========
 "none"                 FilenameRoot - Rootname of the full-field wind file to use (.wnd, .sum)
 False                  TowerFile   - Have tower file (.twr) (flag)

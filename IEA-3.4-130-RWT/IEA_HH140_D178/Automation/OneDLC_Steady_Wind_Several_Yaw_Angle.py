@@ -4,9 +4,9 @@ import time
 import shutil
 
 # Define main directory
-main_directory = r'D:\Masters\2024\3rd semester\WEC Development Project 202425 (WiSe 2024)\Local repos\Optimus2024\IEA-3.4-130-RWT\Optimus_HH140_D178\DLC_7_1'  # Update this path
-output_directory = r'D:\Masters\2024\3rd semester\WEC Development Project 202425 (WiSe 2024)\Local repos\Optimus2024\IEA-3.4-130-RWT\Optimus_HH140_D178\DLC_7_1\Outputs\DLC71\Steady'  # Specify the desired output directory
-yaw_angles = [-15.0, 0.0, 15.0]  # Define yaw angles to iterate
+main_directory = r'C:\Users\carlo\Documents\GitHub\Optimus2024\IEA-3.4-130-RWT\IEA_HH140_D178\DLC_6_1'  # Update this path
+output_directory = os.path.join(main_directory, 'Outputs')
+yaw_angles = [-8.0, 0.0, 8.0]  # Define yaw angles to iterate
 
 # Ensure output directory exists
 if not os.path.exists(output_directory):
@@ -45,14 +45,19 @@ for yaw_angle in yaw_angles:
     start_openfast_batch = os.path.join(main_directory, 'run_OpenFAST.bat')
     run_openfast(start_openfast_batch)
 
+    # Define DLC directory for this yaw angle
+    yaw_output_directory = os.path.join(output_directory, f'Yaw_{yaw_angle}')
+    if not os.path.exists(yaw_output_directory):
+        os.makedirs(yaw_output_directory)
+
     # Move output files to the specified directory
     output_files = ['IEA-3.4-130-RWT.out', 'IEA-3.4-130-RWT.outb']
     for file in output_files:
         file_path = os.path.join(main_directory, file)
         if os.path.exists(file_path):
             new_file_name = f'Yaw_{yaw_angle}{os.path.splitext(file)[1]}'
-            new_file_path = os.path.join(output_directory, new_file_name)
+            new_file_path = os.path.join(yaw_output_directory, new_file_name)
             shutil.move(file_path, new_file_path)
-            print(f"Moved and renamed {file} to {new_file_name} in {output_directory}")
+            print(f"Moved and renamed {file} to {new_file_name} in {yaw_output_directory}")
 
 print("Simulation completed for all yaw angles.")
