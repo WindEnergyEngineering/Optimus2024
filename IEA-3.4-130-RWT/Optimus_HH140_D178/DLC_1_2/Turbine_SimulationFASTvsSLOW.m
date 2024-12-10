@@ -19,7 +19,8 @@ Parameter.Time.TMax             = 80;   % [s] simulation length
 
 %% Loop over Operation Points
     
-OPs = [9.5];
+OPs = [7];
+step = 1;
 nOP = length(OPs);
 
 for iOP=1:nOP
@@ -28,8 +29,8 @@ for iOP=1:nOP
     OP = OPs(iOP);
 
     % wind for this OP
-    Disturbance.v_0.time            = [0; 10; 10+dt;  60];       % [s]      time points to change wind speed
-    Disturbance.v_0.signals.values  = [0;  0;  0.0; 0.0]+OP;    % [m/s]    wind speeds
+    Disturbance.v_0.time            = [0; 30; 30+dt;  60];       % [s]      time points to change wind speed
+    Disturbance.v_0.signals.values  = [0;  0;  step; step]+OP;    % [m/s]    wind speeds
 
     % Initial Conditions from SteadyStates for this OP
     SteadyStates = load('SteadyStatesShakti5MW_classic.mat','v_0','Omega','theta','M_g','x_T');                       
@@ -55,6 +56,7 @@ end
 tout = simout.tout;
 
 %% Run FAST simualtion to compare
+if 0 == step
 wind = OPs;
 % find parameter placeholder in inflow file and replace with wind speed
     windstr = num2str(wind,'%2f');
@@ -65,12 +67,13 @@ wind = OPs;
     fid = fopen(new_filename, 'w');
     fwrite(fid, S);
     fclose(fid);
-    
+end    
     % run FAST
     dos('.\openfast_x64.exe IEA-3.4-130-RWT.fst');
     
     % rename output and move file to output directory
     OutputFile  = 'IEA-3.4-130-RWT.out';
+
 %% PostProcessing FAST
 fid         = fopen(OutputFile);
 formatSpec  = repmat('%f',1,12);

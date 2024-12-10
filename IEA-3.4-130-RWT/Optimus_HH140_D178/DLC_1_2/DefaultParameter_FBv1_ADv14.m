@@ -8,12 +8,9 @@ Parameter.CPC.Ti                        = 10;                               % [s
 
 Parameter.CPC.Omega_g_rated             = rpm2radPs(428.5);                 % [rad/s]   % rated generator speed, from Shakti - Geno team 24/11/24 fle
 Parameter.CPC.theta_min                 = deg2rad(1.2);                     % [rad]     % pitch angle in region 1-2.5, brute-force optimized
-Parameter.CPC.theta_PS                  = deg2rad(7);                       % [rad]     % min pitch angle at rated for peak shaving, first guess, from fle 25/11/24 !!! needs Brute-force optimization !!!
-Parameter.CPC.v_PS                      = 7.6;                              % [m/s]     % wind speed to start peak shaving, first guess, from fle 25/11/24 !!! needs Brute-force optimization !!!
-Parameter.CPC.PS                        = [0 Parameter.CPC.theta_min;Parameter.CPC.v_PS Parameter.CPC.theta_min; 10.5211 Parameter.CPC.theta_PS];   % peak shaving look-up table [v_i theta_i] 10.5211 => v_rated !!! has to be adjusted if changed
 %% Torque Controller
-Parameter.VSC.kp                        = 19929.189128;                             % [Nm/(rad/s)]  % proportional gain, first guess (adjusted shakti 03.12 task design script, JP)
-Parameter.VSC.Ti                        = 2.146985;                              % [s]           % integral gain, first guess (adjusted shakti 03.12 task design script, JP)
+Parameter.VSC.kp                        = 27631.587186;                             % [Nm/(rad/s)]  % proportional gain, first guess (adjusted shakti 10.12 task design script, JP)
+Parameter.VSC.Ti                        = 2.193072;                              % [s]           % integral gain, first guess (adjusted shakti 10.12 task design script, JP)
 % Parameter.VSC.k                         = 1.9;                              % [Nm/(rad/s)^2]% gain region 2, brute-force-optimized
 Parameter.VSC.k                         = .5 * Parameter.General.rho * pi ... % [Nm/(rad/s)^2]% gain region 2, first guess: cp 0.48, lambda 8.75
                                           * Parameter.Turbine.R^5 * .48 / ...
@@ -27,7 +24,7 @@ Parameter.VSC.Omega_g_1d5               = rpm2radPs(300);                   % [r
 
 Parameter.VSC.Delta_Omega_g             = 0.10*Parameter.CPC.Omega_g_rated; % [rad/s]   % over-/under-speed limit for setpoint-fading, first guess
 Parameter.VSC.Delta_theta               = deg2rad(20);                      % [rad]     % change of pitch angle at which under-speed limit should be reached, brute-force-optimized
-Parameter.VSC.Delta_P                   = 4.95e6;                          	% [W]       % change of power at which over-speed limit should be reached, first guess
+Parameter.VSC.Delta_P                   = 5e6;                          	% [W]       % change of power at which over-speed limit should be reached, first guess
 
 %% Filter Generator Speed
 Parameter.Filter.LowPass.Enable         = 1;                                % [0/1]     % flag to enable low pass filter for generator speed
