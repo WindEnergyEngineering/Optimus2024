@@ -3,6 +3,7 @@
 
 ### LaTeX ###
 ## Core latex/pdflatex auxiliary files:
+*.zip
 *.bts
 *.aux
 *.lof

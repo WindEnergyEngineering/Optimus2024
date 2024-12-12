@@ -7,12 +7,12 @@ import sys
 
 # List of dictionaries, each containing the script name and its directory
 scripts = [
-    #{"script": "CaBru_DLC_12.py", "directory": r"C:\Users\carlo\Documents\GitHub\Optimus2024\IEA-3.4-130-RWT\Optimus_HH140_D178\DLC_1_2"},
-    #{"script": "CaBru_DLC_13.py", "directory": r"C:\Users\carlo\Documents\GitHub\Optimus2024\IEA-3.4-130-RWT\Optimus_HH140_D178\DLC_1_3"},
+    {"script": "CaBru_DLC_12.py", "directory": r"C:\Users\carlo\Documents\GitHub\Optimus2024\IEA-3.4-130-RWT\Optimus_HH140_D178\DLC_1_2"},
+    {"script": "CaBru_DLC_13.py", "directory": r"C:\Users\carlo\Documents\GitHub\Optimus2024\IEA-3.4-130-RWT\Optimus_HH140_D178\DLC_1_3"},
     {"script": "CaBru_DLC_14.py", "directory": r"C:\Users\carlo\Documents\GitHub\Optimus2024\IEA-3.4-130-RWT\Optimus_HH140_D178\DLC_1_4_HighWindSpeed"},
     {"script": "CaBru_DLC_14.py", "directory": r"C:\Users\carlo\Documents\GitHub\Optimus2024\IEA-3.4-130-RWT\Optimus_HH140_D178\DLC_1_4_LowWindSpeed"},
-   # {"script": "CaBru_DLC_51.py", "directory": r"C:\Users\carlo\Documents\GitHub\Optimus2024\IEA-3.4-130-RWT\Optimus_HH140_D178\DLC_5_1"},
-    #{"script": "CaBru_DLC_61.py", "directory": r"C:\Users\carlo\Documents\GitHub\Optimus2024\IEA-3.4-130-RWT\Optimus_HH140_D178\DLC_6_1"},
+    {"script": "CaBru_DLC_51.py", "directory": r"C:\Users\carlo\Documents\GitHub\Optimus2024\IEA-3.4-130-RWT\Optimus_HH140_D178\DLC_5_1"},
+    {"script": "CaBru_DLC_61.py", "directory": r"C:\Users\carlo\Documents\GitHub\Optimus2024\IEA-3.4-130-RWT\Optimus_HH140_D178\DLC_6_1"},
 ]
 
 def run_python_script(script_path):
