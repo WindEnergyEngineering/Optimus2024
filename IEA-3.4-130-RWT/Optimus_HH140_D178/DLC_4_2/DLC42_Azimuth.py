@@ -15,10 +15,10 @@ main_directory = r'D:\Masters\2024\3rd semester\WEC Development Project 202425 (
 wind_files = [file for file in os.listdir(wind_directory) if file.endswith('.wnd')]
 
 # Sort wind files based on wind speed and seed number
-wind_files.sort(key=lambda x: (int(x.split('V')[1].split('.wnd')[0])))
+wind_files.sort(key=lambda x: (float(x.split('V')[1].split('.wnd')[0])))
 
 for wind_file in wind_files:
-    # Load the current OPT_Shakti_5_178_InflowFile.dat file
+    # Load the current IEA-3.4-130-RWT_InflowFile.dat file
     inflow_file_path = os.path.join(main_directory, 'OPT_Shakti_5_178_InflowFile.dat')
 
     with open(inflow_file_path, 'r') as inflow_file:
@@ -31,7 +31,7 @@ for wind_file in wind_files:
     
     # Extract the wind speed and seed
     #next_wind_speed = int(wind_file.split('_')[0][1:])
-    next_seed = int(wind_file.split("V")[1].split(".wnd")[0])
+    next_seed = float(wind_file.split("V")[1].split(".wnd")[0])
 
     # Find the appropriate hydrodyn file for the current wind speed
     #hydrodyn_filename = f'OPT-20-295-Monopile_HydroDyn{next_wind_speed}.dat'
@@ -56,8 +56,8 @@ for wind_file in wind_files:
     print(f'Updated inflow.dat with Wind Speed {next_seed}')
     print("########################################################################################")
     
-    # Modify the OPT_Shakti_5_178.fst file to dynamically update HydroDyn reference
-    #fst_file_path = os.path.join(main_directory, 'OPT_Shakti_5_178.fst')
+    # Modify the IEA-3.4-130-RWT.fst file to dynamically update HydroDyn reference
+    #fst_file_path = os.path.join(main_directory, 'IEA-3.4-130-RWT.fst')
 
     #with open(fst_file_path, 'r') as fst_file:
     #    fst_content = fst_file.read()

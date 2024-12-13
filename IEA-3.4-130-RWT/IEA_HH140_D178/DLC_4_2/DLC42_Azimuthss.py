@@ -9,7 +9,7 @@ import time
 # Define the directory where your wind files are located
 wind_directory = './Wind'  # Update this path to the actual location
 #hydrodyn_directory = '../Wave'  # Update this path to the actual location
-main_directory = r'D:\Masters\2024\3rd semester\WEC Development Project 202425 (WiSe 2024)\Local repos\Optimus2024\IEA-3.4-130-RWT\Optimus_HH140_D178\DLC_4_2'  # Update this path
+main_directory = r'D:\Masters\2024\3rd semester\WEC Development Project 202425 (WiSe 2024)\Local repos\Optimus2024\IEA-3.4-130-RWT\IEA_HH140_D178\DLC_4_2'  # Update this path
 
 # List all .bts files in the wind directory
 wind_files = [file for file in os.listdir(wind_directory) if file.endswith('.wnd')]
@@ -18,8 +18,8 @@ wind_files = [file for file in os.listdir(wind_directory) if file.endswith('.wnd
 wind_files.sort(key=lambda x: (int(x.split('V')[1].split('.wnd')[0])))
 
 for wind_file in wind_files:
-    # Load the current OPT_Shakti_5_178_InflowFile.dat file
-    inflow_file_path = os.path.join(main_directory, 'OPT_Shakti_5_178_InflowFile.dat')
+    # Load the current IEA-3.4-130-RWT_InflowFile.dat file
+    inflow_file_path = os.path.join(main_directory, 'IEA-3.4-130-RWT_InflowFile.dat')
 
     with open(inflow_file_path, 'r') as inflow_file:
         inflow_lines = inflow_file.readlines()
@@ -56,11 +56,11 @@ for wind_file in wind_files:
     print(f'Updated inflow.dat with Wind Speed {next_seed}')
     print("########################################################################################")
     
-    # Modify the OPT_Shakti_5_178.fst file to dynamically update HydroDyn reference
-    fst_file_path = os.path.join(main_directory, 'OPT_Shakti_5_178.fst')
+    # Modify the IEA-3.4-130-RWT.fst file to dynamically update HydroDyn reference
+    #fst_file_path = os.path.join(main_directory, 'IEA-3.4-130-RWT.fst')
 
-    with open(fst_file_path, 'r') as fst_file:
-        fst_content = fst_file.read()
+    #with open(fst_file_path, 'r') as fst_file:
+    #    fst_content = fst_file.read()
 
     # Extract the line that contains HydroDyn reference
     #lines = fst_content.split('\n')
@@ -73,42 +73,55 @@ for wind_file in wind_files:
     # Update the FST content
     #fst_content = '\n'.join(lines)
 
-    with open(fst_file_path, 'w') as fst_file:
-        fst_file.write(fst_content)
+    #with open(fst_file_path, 'w') as fst_file:
+    #   fst_file.write(fst_content)
 
     #print(f'Updated fst file with HydroDyn reference to {new_hydrodyn_reference}')
+    Azimuth = [0.0, 30.0, 60.0, 90.0]
+    for j in Azimuth:
+        elasto_file_path = os.path.join(main_directory, 'IEA-3.4-130-RWT_ElastoDyn.dat')
 
-    # Run start_OpenFAST_v3-41.bat with input redirection
-    start_openfast_batch = os.path.join(main_directory, 'run_OpenFAST.bat')
-    subprocess.call(f'cmd /c "{start_openfast_batch}" < nul', shell=True)
+        with open(elasto_file_path, 'r') as elasto_file:
+            elasto_lines = elasto_file.readlines()
 
-    # Automate "press any key to continue"
-    time.sleep(5)  # Adjust this delay as needed to give the Command Prompt time to appear
-    pyautogui.press('ctrl')
+            # Find the line containing FileName_BTS and update it
+        for i, line in enumerate(elasto_lines):
+            if 'Initial azimuth angle for blade 1' in line:
+                elasto_lines[i] = f'{j}                   Azimuth     - Initial azimuth angle for blade 1 (degrees)\n'
 
-    # Define the output directory and DLC directory
-    output_directory = os.path.join(main_directory, 'Outputs')
+        with open(elasto_file_path, 'w') as elasto_file:
+            elasto_file.writelines(elasto_lines)
+        # Run start_OpenFAST_v3-41.bat with input redirection
+        start_openfast_batch = os.path.join(main_directory, 'run_OpenFAST.bat')
+        subprocess.call(f'cmd /c "{start_openfast_batch}" < nul', shell=True)
 
-    #Check if the Outputs directory exists; if not, create it
-    if not os.path.exists(main_directory):
-        os.makedirs(output_directory)
+        # Automate "press any key to continue"
+        time.sleep(5)  # Adjust this delay as needed to give the Command Prompt time to appear
+        pyautogui.press('ctrl')
 
-    dlc_directory = os.path.join(output_directory, 'DLC42')
+        # Define the output directory and DLC directory
+        output_directory = os.path.join(main_directory, 'Outputs')
 
-    # Check if the DLC directory exists; if not, create it
-    if not os.path.exists(dlc_directory):
-        os.makedirs(dlc_directory)
+        #Check if the Outputs directory exists; if not, create it
+        if not os.path.exists(main_directory):
+            os.makedirs(output_directory)
 
-    # Move the output files to the DLC directory and rename them based on wind speed and seeds
-    output_files = ['OPT_Shakti_5_178.out', 'OPT_Shakti_5_178.outb']
-    new_output_name = f'OPT-Shakti_V{next_seed}'
+        dlc_directory = os.path.join(output_directory, 'DLC42')
 
-    for file in output_files:
-        file_path = os.path.join(main_directory, file)
-        if os.path.exists(file_path):
-            new_file_name = new_output_name + file[file.rfind('.'):]
-            new_file_path = os.path.join(dlc_directory, new_file_name)
-            shutil.move(file_path, new_file_path)
-            print(f'Moved and renamed {file} to {new_file_name}')
-            print("/////////////////////////////////////////////////////////////////////////")
+        # Check if the DLC directory exists; if not, create it
+        if not os.path.exists(dlc_directory):
+            os.makedirs(dlc_directory)
+
+        # Move the output files to the DLC directory and rename them based on wind speed and seeds
+        output_files = ['IEA-3.4-130-RWT.out', 'IEA-3.4-130-RWT.outb']
+        new_output_name = f'OPT-Shakti_V{next_seed}_{j}'
+
+        for file in output_files:
+            file_path = os.path.join(main_directory, file)
+            if os.path.exists(file_path):
+                new_file_name = new_output_name + file[file.rfind('.'):]
+                new_file_path = os.path.join(dlc_directory, new_file_name)
+                shutil.move(file_path, new_file_path)
+                print(f'Moved and renamed {file} to {new_file_name}')
+                print("/////////////////////////////////////////////////////////////////////////")
             
