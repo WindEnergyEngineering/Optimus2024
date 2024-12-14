@@ -23,15 +23,15 @@ NREL 5.0 MW offshore baseline aerodynamic input properties.
 "Airfoils/NACA64_A17.dat"
          10   BldNodes    - Number of blade nodes used for analysis (-)
 RNodes         AeroTwst       DRNodes        Chord          NFoil          PrnElm
-4.129		   15.00  		4.258  	 		3.72500          1      PRINT 
-8.283		   15.00  		4.05  	 		3.72500          2      PRINT 
-12.3325        12.00  		4.049  	 		4.80000          3      PRINT 
-19.931         9.00   		11.148   		5.74000          4      PRINT 
-32.0575        7.10   		13.105   		5.09182          4      PRINT 
-45.5           2.47   	    13.78    		4.32985          5      PRINT 
-58.9425  	   1.95         13.105   		3.52866          6      PRINT 
-71.069         1.53         11.148   		2.76668          7      PRINT 
-80.6925        0.69         8.099    		2.11851          7      PRINT 
-86.871         0.22         4.258    		1.64758          7      PRINT 
+4.129		   15.00  		4.258  	 		3.72500          1      NOPRINT 
+8.283		   15.00  		4.05  	 		3.72500          2      NOPRINT 
+12.3325        12.00  		4.049  	 		4.80000          3      NOPRINT 
+19.931         9.00   		11.148   		5.74000          4      NOPRINT 
+32.0575        7.10   		13.105   		5.09182          4      NOPRINT 
+45.5           2.47   	    13.78    		4.32985          5      NOPRINT 
+58.9425  	   1.95         13.105   		3.52866          6      NOPRINT 
+71.069         1.53         11.148   		2.76668          7      NOPRINT 
+80.6925        0.69         8.099    		2.11851          7      NOPRINT 
+86.871         0.22         4.258    		1.64758          7      NOPRINT 
 
 
