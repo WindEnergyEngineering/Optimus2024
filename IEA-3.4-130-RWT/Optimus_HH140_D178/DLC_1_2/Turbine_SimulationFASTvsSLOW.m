@@ -20,7 +20,7 @@ Parameter.Time.TMax             = 80;   % [s] simulation length
 %% Loop over Operation Points
     
 OPs = [10];
-step = 1;
+step = 0    ;
 nOP = length(OPs);
 
 for iOP=1:nOP
