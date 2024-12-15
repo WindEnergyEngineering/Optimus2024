@@ -13,7 +13,7 @@ f = Fs*(0:(L/2))/L;
 S = 0.7*sin(2*pi*50*t);
 
 % Corrupt the signal with zero-mean white noise with a variance of
-X = S + 2*randn(size(t));
+X = S + randn(size(t));
 Disturbance.signal.time = t';
 Disturbance.signal.signals.values = X';
 
@@ -72,14 +72,34 @@ bode(H_N)
 f_c_HP = 50;
 w_0_HP = f_c_HP*2*pi;
 
-H_HP = tf([w_0_HP 0],[w_0_HP 1])
+H_HP = tf([1 0],[1 w_0_HP])
 disp('--- LP-Filter ---------------------------------------------')
 damp(H_HP)
 disp('---------------------------------------------------------------------')
 figure
 grid on
 bode(H_HP)
+%% AllPass-Filter
+% Sampling frequency and parameters
+fs = 1000;             % Sampling frequency in Hz
+f_interest = 10;       % Frequency of interest in Hz
+theta = pi/2;          % Desired phase shift (+90 degrees)
 
+% All-pass filter design for +90° shift
+omega = 2 * pi * f_interest / fs; % Normalized angular frequency
+b = [1 cos(omega)];    % Numerator coefficients
+a = [1 -cos(omega)];   % Denominator coefficients
+
+% Create transfer function
+H_allpass = tf(b,a);
+
+% Display the transfer function
+disp('All-Pass Filter Transfer Function:');
+H_allpass
+% Plot frequency response
+figure;
+freqz(b, a, 1024, fs);
+title('Frequency Response of the All-Pass Filter');
 %% Filter effect - frequency domain
 % Compute the frequency response of the LP-filter
 [H, W] = freqresp(H_LP, 2*pi*f); % 2*pi*f converts frequency to rad/s
@@ -88,90 +108,107 @@ bode(H_HP)
 Filtered_P_f = squeeze(H) .* P1.';
 
 % Compute the frequency response of the Notch-filter
-[H_notch, W_notch] = freqresp(H_N, 2*pi*f); % 2*pi*f converts frequency to rad/s
+% [H_notch, W_notch] = freqresp(H_N, 2*pi*f); % 2*pi*f converts frequency to rad/s
+
+% Compute the frequency response of the HP-filter
+[H_HP, W] = freqresp(H_HP, 2*pi*f); % 2*pi*f converts frequency to rad/s
 
 % Apply the filter (element-wise multiplication)
-Filtered_P_f_notch = squeeze(H_notch) .* Filtered_P_f;
+Filtered_P_f_LHP = squeeze(H_HP) .* Filtered_P_f;
 
-% transform back to time domain
-P_t_filtered_notch = ifft(Filtered_P_f_notch, 'symmetric'); % Signal after both filters
+% Back into the time domain
+P_t_filtered = ifft(Filtered_P_f_LHP,'symmetric');
 
-
-% Plot the results
+% Apply the Hilbert transform
+analytic_signal = hilbert(P_t_filtered);          % Compute the analytic signal
+P_t_filtered_shifted = -imag(analytic_signal); % Extract the imaginary part (90° phase shift)
+%% Plot the results
 figure;
 subplot(3, 1, 1);
 plot(f, abs(P1));
 title('Original Signal in Frequency Domain');
 xlabel('Frequency (Hz)');
 ylabel('|P(f)|');
+ylim([0 .7])
 
 subplot(3, 1, 2);
 plot(f, abs(Filtered_P_f));
 title('LP-Filtered Signal in Frequency Domain');
 xlabel('Frequency (Hz)');
 ylabel('|LP-Filtered P(f)|');
+ylim([0 .7])
 
 subplot(3, 1, 3);
-plot(f, abs(Filtered_P_f_notch));
-title('Notch-Filtered Signal in Frequency Domain');
+plot(f, abs(Filtered_P_f_LHP));
+title('LP+HP-Filtered in Frequency Domain');
 xlabel('Frequency (Hz)');
-ylabel('|Notch-Filtered P(f)|');
+ylabel('|LP+HP-Filtered P(f)|');
+ylim([0 .7])
 
 figure
-subplot(2,1,1)
-plot(t(1:751)*1000, X(1:751));
-title('Original signal in Time Domain');
-xlabel('Time [ms]');
-ylabel('Amplitude');
-
-subplot(2,1,2)
-plot(t(1:751)*1000, P_t_filtered_notch*1000);
-title('Signal After Low Pass and Notch Filters in Time Domain');
-xlabel('Time [ms]');
-ylabel('Amplitude');
-%% Bode of final Signa
-% Compute the phase of the original signal
-Phase_P_f = angle(P1);
-
-% Compute the phase of the double-filtered signal
-Phase_Filtered_P_f_Notch = angle(Filtered_P_f_notch);
-
-% Compute the phase displacement
-Phase_Displacement = unwrap(Phase_Filtered_P_f_Notch - Phase_P_f);
-
-
-
-% Plot the phase displacement
-figure;
-plot(f, rad2deg(Phase_Displacement));
-title('Phase Displacement Between Original and Double-Filtered Signal');
-xlabel('Frequency (Hz)');
-ylabel('Phase Displacement (radians)');
-grid on;
+hold on;grid on;
+plot(t(1:751)*1000,X(1:751))
+plot(t(1:751)*1000,P_t_filtered*1000)
+plot(t(1:751)*1000,P_t_filtered_shifted*1000)
+xlabel('t [ms]')
+ylabel('Amplitude')
+legend('unfitered','filtered','filtered+shifted')
+%% Bode of final Signal
+% % Compute the phase of the original signal
+% Phase_P_f = angle(P1);
+% 
+% % Compute the phase of the double-filtered signal
+% Phase_Filtered_P_f = angle(Filtered_P_f_All);
+% 
+% % Compute the phase displacement
+% Phase_Displacement = unwrap(Phase_Filtered_P_f - Phase_P_f);
+% 
+% 
+% 
+% % Plot the phase displacement
+% figure;
+% plot(f, rad2deg(Phase_Displacement));
+% title('Phase Displacement Between Original and Double-Filtered Signal');
+% xlabel('Frequency (Hz)');
+% ylabel('Phase Displacement (radians)');
+% grid on;
 
 %% Filter signal - Simulink time domain
 
-% SimulationTmax = t(end);
-% dt             = SimulationTmax/length(t);
-% Enable_LP       = 1;
-% Enable_N        = 1;
-% Enable_HP       = 0;
-% 
-% simout = sim("TestFilter.slx");
-% 
-% tsim = simout.tout;
-% S_n = simout.logsout.get('d').Values.d.Data;
-% S_LP = simout.logsout.get('y_LP').Values.y_LP.Data;
-% S_N = simout.logsout.get('y_LP_N').Values.y_N.Data;
-% S_HP = simout.logsout.get('y_LP_N_HP').Values.y_HP.Data;
-% 
-% figure
-% hold on; grid on;
-% plot(tsim(1:100)*1000,S_n(1:100))
-% plot(tsim(1:100)*1000,S_LP(1:100))
-% plot(tsim(1:100)*1000,S_N(1:100))
-% plot(tsim(1:100)*1000,S_HP(1:100))
-% ylabel('X(t)')
-% xlabel('t[ms]')
-% legend('Unfilterd','LP-filtered','Notch-filtered','HP-filterd')
- 
+SimulationTmax = t(end);
+dt             = SimulationTmax/length(t);
+Enable_LP       = 1;
+Enable_HP       = 1;
+
+% FIR Hilbert Filter
+fs = 1000;             % Sampling frequency
+N = 64;                % Filter order (adjust based on precision requirements)
+h = -firpm(N, [0.1 0.9], [1 1], 'hilbert'); % FIR Hilbert transform filter
+
+% All-Pass Filter
+fs = 1000;               % Sampling frequency
+f_interest = 10;         % Frequency of interest
+omega = 2 * pi * f_interest / fs;
+
+% All-pass filter coefficients for +90° shift
+b = [1 cos(omega)]; % Numerator
+a = [1 -cos(omega)];% Denuminator
+
+simout = sim("TestFilter.slx");
+
+tsim = simout.tout;
+S_n = simout.logsout.get('d').Values.d.Data;
+S_LP = simout.logsout.get('y_LP').Values.y_LP.Data;
+S_HP = simout.logsout.get('y_all').Values.y_HP.Data;
+y = simout.logsout.get('y').Values.y.Data;
+
+figure
+hold on; grid on;
+plot(tsim(1:100)*1000,S_n(1:100))
+plot(tsim(1:100)*1000,S_LP(1:100))
+plot(tsim(1:100)*1000,S_HP(1:100))
+plot(tsim(1:100)*1000,y(1:100))
+ylabel('X(t)')
+xlabel('t[ms]')
+legend('Unfilterd','LP-filtered','LP+HP-filterd','Filtered+shifted')
+
