@@ -5,6 +5,9 @@ Fs = 1000;            % Sampling frequency  [Hz]
 T = 1/Fs;             % Sampling period     [s]       
 L = 1500;             % Length of signal    [-]
 t = (0:L-1)*T;        % Time vector         [s]
+% Define the frequency domain f and plot the single-sided amplitude spectrum P1
+f = Fs*(0:(L/2))/L;
+% t = (0:1/Fs:(length(f)-1)/Fs); % Time vector
 
 % Form a signal containing a 50 Hz sinusoid of amplitude 0.7
 S = 0.7*sin(2*pi*50*t);
@@ -30,8 +33,7 @@ P2 = abs(Y/L);
 P1 = P2(1:L/2+1);
 P1(2:end-1) = 2*P1(2:end-1);
 
-% Define the frequency domain f and plot the single-sided amplitude spectrum P1
-f = Fs*(0:(L/2))/L;
+
 
 figure
 hold on; grid on;
@@ -79,7 +81,6 @@ grid on
 bode(H_HP)
 
 %% Filter effect - frequency domain
-
 % Compute the frequency response of the LP-filter
 [H, W] = freqresp(H_LP, 2*pi*f); % 2*pi*f converts frequency to rad/s
 
@@ -91,6 +92,9 @@ Filtered_P_f = squeeze(H) .* P1.';
 
 % Apply the filter (element-wise multiplication)
 Filtered_P_f_notch = squeeze(H_notch) .* Filtered_P_f;
+
+% transform back to time domain
+P_t_filtered_notch = ifft(Filtered_P_f_notch, 'symmetric'); % Signal after both filters
 
 
 % Plot the results
@@ -112,6 +116,38 @@ plot(f, abs(Filtered_P_f_notch));
 title('Notch-Filtered Signal in Frequency Domain');
 xlabel('Frequency (Hz)');
 ylabel('|Notch-Filtered P(f)|');
+
+figure
+subplot(2,1,1)
+plot(t(1:751)*1000, X(1:751));
+title('Original signal in Time Domain');
+xlabel('Time [ms]');
+ylabel('Amplitude');
+
+subplot(2,1,2)
+plot(t(1:751)*1000, P_t_filtered_notch*1000);
+title('Signal After Low Pass and Notch Filters in Time Domain');
+xlabel('Time [ms]');
+ylabel('Amplitude');
+%% Bode of final Signa
+% Compute the phase of the original signal
+Phase_P_f = angle(P1);
+
+% Compute the phase of the double-filtered signal
+Phase_Filtered_P_f_Notch = angle(Filtered_P_f_notch);
+
+% Compute the phase displacement
+Phase_Displacement = unwrap(Phase_Filtered_P_f_Notch - Phase_P_f);
+
+
+
+% Plot the phase displacement
+figure;
+plot(f, rad2deg(Phase_Displacement));
+title('Phase Displacement Between Original and Double-Filtered Signal');
+xlabel('Frequency (Hz)');
+ylabel('Phase Displacement (radians)');
+grid on;
 
 %% Filter signal - Simulink time domain
 
