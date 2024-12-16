@@ -1,52 +1,38 @@
+
 clearvars;close all;clc;
+%% PreProcessing SLOW
 
-%% 50 Hz Signal
-Fs = 1000;            % Sampling frequency  [Hz]                    
-T = 1/Fs;             % Sampling period     [s]       
-L = 1500;             % Length of signal    [-]
-t = (0:L-1)*T;        % Time vector         [s]
-% Define the frequency domain f and plot the single-sided amplitude spectrum P1
-f = Fs*(0:(L/2))/L;
-% t = (0:1/Fs:(length(f)-1)/Fs); % Time vector
+% Default Parameter Turbine and Controller
+Parameter                           = DefaultParameter_SLOW2DOF;
+Parameter                           = DefaultParameter_FBv1_ADv14(Parameter);
 
-% Form a signal containing a 50 Hz sinusoid of amplitude 0.7
-S = 0.7*sin(2*pi*50*t);
+% Time
+Parameter.Time.dt                   = 1/10;            % [s] simulation time step            
+Parameter.Time.TMax                 = 60;            % [s] simulation length
 
-% Corrupt the signal with zero-mean white noise with a variance of
-X = S + randn(size(t));
-Disturbance.signal.time = t';
-Disturbance.signal.signals.values = X';
+% Wind
+DeltaU                              = 1;
+URef                                = 20;                
+Disturbance.v_0.time                = [0;     0.01;      	30];            % [s]      time points to change wind speed
+Disturbance.v_0.signals.values      = [URef;  URef+DeltaU;  URef+DeltaU];   % [m/s]    wind speeds  
 
+% Initial Conditions from SteadyStates
+SteadyStates = load('SteadyStatesShakti5MW_classic.mat','v_0','Omega','theta','x_T','M_g');                       
+Parameter.IC.Omega          	    = interp1(SteadyStates.v_0,SteadyStates.Omega   ,URef,'linear','extrap');
+Parameter.IC.theta          	    = interp1(SteadyStates.v_0,SteadyStates.theta   ,URef,'linear','extrap');
+Parameter.IC.x_T                    = interp1(SteadyStates.v_0,SteadyStates.x_T     ,URef,'linear','extrap');
+Parameter.IC.M_g          	        = interp1(SteadyStates.v_0,SteadyStates.M_g     ,URef,'linear','extrap');
+%% Real Tower damper design
 
-figure
-hold on; grid on;
-plot(1000*t(1:50),X(1:50))
-title("Signal Corrupted with Zero-Mean Random Noise")
-xlabel("t [ms]")
-ylabel("X(t)")
+f_3P            = Parameter.CPC.Omega_g_rated/2/pi; % [Hz]      3P under rated conditions. Here the TD is active
+f_Tower         = 0.28;                              % [Hz]      Eigenfrequency of the Tower
 
-% FFT
-Y = fft(X);
-
-% Compute the two-sided spectrum P2. Then compute the single-sided spectrum P1 based on P2 and the even-valued signal length L.
-P2 = abs(Y/L);
-P1 = P2(1:L/2+1);
-P1(2:end-1) = 2*P1(2:end-1);
-
-
-
-figure
-hold on; grid on;
-plot(f,P1) 
-title("Single-Sided Amplitude Spectrum of X(t)")
-xlabel("f (Hz)")
-ylabel("|P1(f)|")
-
-%% LP-Filter
-f_c_LP = 50;
+% LP Design
+f_c_LP = 1;
 w_0_LP = f_c_LP*2*pi;
-
-H_LP = tf([w_0_LP],[1 w_0_LP])
+num_LP = [w_0_LP];
+denum_LP = [1 w_0_LP];
+H_LP = tf(num_LP,denum_LP)
 disp('--- LP-Filter ---------------------------------------------')
 damp(H_LP)
 disp('---------------------------------------------------------------------')
@@ -54,13 +40,14 @@ figure
 hold on;grid on;
 bode(H_LP)
 
-%% 3P-Notch
-f_c_N = 50;
+% Notch Design 
+f_c_N = 1;%f_3P;
 w_0_N = f_c_N*2*pi;
 D = 0.01;
 BW = 0.1;
-
-H_N = tf([1 2*BW*D*w_0_N w_0_N^2],[1 2*BW*w_0_N w_0_N^2])
+num_Notch = [1 2*BW*D*w_0_N w_0_N^2];
+denum_Notch = [1 2*BW*w_0_N w_0_N^2];
+H_N = tf(num_Notch,denum_Notch)
 disp('--- LP-Filter ---------------------------------------------')
 damp(H_N)
 disp('---------------------------------------------------------------------')
@@ -68,147 +55,85 @@ figure
 grid on;
 bode(H_N)
 
-%% HP-Filter
-f_c_HP = 50;
+% HP Design
+f_c_HP = 0.1;
 w_0_HP = f_c_HP*2*pi;
-
-H_HP = tf([1 0],[1 w_0_HP])
+num_HP = [1 0];
+denum_HP = [1 w_0_HP];
+H_HP = tf(num_HP,denum_HP)
 disp('--- LP-Filter ---------------------------------------------')
 damp(H_HP)
 disp('---------------------------------------------------------------------')
 figure
 grid on
 bode(H_HP)
-%% AllPass-Filter
-% Sampling frequency and parameters
-fs = 1000;             % Sampling frequency in Hz
-f_interest = 10;       % Frequency of interest in Hz
-theta = pi/2;          % Desired phase shift (+90 degrees)
 
-% All-pass filter design for +90° shift
-omega = 2 * pi * f_interest / fs; % Normalized angular frequency
-b = [1 cos(omega)];    % Numerator coefficients
-a = [1 -cos(omega)];   % Denominator coefficients
-
-% Create transfer function
-H_allpass = tf(b,a);
-
-% Display the transfer function
-disp('All-Pass Filter Transfer Function:');
-H_allpass
-% Plot frequency response
-figure;
-freqz(b, a, 1024, fs);
-title('Frequency Response of the All-Pass Filter');
-%% Filter effect - frequency domain
-% Compute the frequency response of the LP-filter
-[H, W] = freqresp(H_LP, 2*pi*f); % 2*pi*f converts frequency to rad/s
-
-% Apply the filter (element-wise multiplication)
-Filtered_P_f = squeeze(H) .* P1.';
-
-% Compute the frequency response of the Notch-filter
-% [H_notch, W_notch] = freqresp(H_N, 2*pi*f); % 2*pi*f converts frequency to rad/s
-
-% Compute the frequency response of the HP-filter
-[H_HP, W] = freqresp(H_HP, 2*pi*f); % 2*pi*f converts frequency to rad/s
-
-% Apply the filter (element-wise multiplication)
-Filtered_P_f_LHP = squeeze(H_HP) .* Filtered_P_f;
-
-% Back into the time domain
-P_t_filtered = ifft(Filtered_P_f_LHP,'symmetric');
-
-% Apply the Hilbert transform
-analytic_signal = hilbert(P_t_filtered);          % Compute the analytic signal
-P_t_filtered_shifted = -imag(analytic_signal); % Extract the imaginary part (90° phase shift)
-%% Plot the results
-figure;
-subplot(3, 1, 1);
-plot(f, abs(P1));
-title('Original Signal in Frequency Domain');
-xlabel('Frequency (Hz)');
-ylabel('|P(f)|');
-ylim([0 .7])
-
-subplot(3, 1, 2);
-plot(f, abs(Filtered_P_f));
-title('LP-Filtered Signal in Frequency Domain');
-xlabel('Frequency (Hz)');
-ylabel('|LP-Filtered P(f)|');
-ylim([0 .7])
-
-subplot(3, 1, 3);
-plot(f, abs(Filtered_P_f_LHP));
-title('LP+HP-Filtered in Frequency Domain');
-xlabel('Frequency (Hz)');
-ylabel('|LP+HP-Filtered P(f)|');
-ylim([0 .7])
-
-figure
-hold on;grid on;
-plot(t(1:751)*1000,X(1:751))
-plot(t(1:751)*1000,P_t_filtered*1000)
-plot(t(1:751)*1000,P_t_filtered_shifted*1000)
-xlabel('t [ms]')
-ylabel('Amplitude')
-legend('unfitered','filtered','filtered+shifted')
-%% Bode of final Signal
-% % Compute the phase of the original signal
-% Phase_P_f = angle(P1);
+% % All Pass design
+% % Sampling frequency and parameters
+% fs = 1000;               % Sampling frequency in Hz
+% f_interest = f_Tower;  % Frequency of interest in Hz
+% theta = pi/2;          % Desired phase shift (+90 degrees)
+% f_c_all = f_interest/fs;
+% % All-pass filter design for +90° shift
+% omega = 2 * pi * f_interest / fs; % Normalized angular frequency
+% b = [1 cos(omega)];    % Numerator coefficients
+% a = [1 -cos(omega)];   % Denominator coefficients
 % 
-% % Compute the phase of the double-filtered signal
-% Phase_Filtered_P_f = angle(Filtered_P_f_All);
+% % Create transfer function
+% H_allpass = tf(b,a);
 % 
-% % Compute the phase displacement
-% Phase_Displacement = unwrap(Phase_Filtered_P_f - Phase_P_f);
-% 
-% 
-% 
-% % Plot the phase displacement
+% % Display the transfer function
+% disp('All-Pass Filter Transfer Function:');
+% H_allpass
+% % Plot frequency response
 % figure;
-% plot(f, rad2deg(Phase_Displacement));
-% title('Phase Displacement Between Original and Double-Filtered Signal');
-% xlabel('Frequency (Hz)');
-% ylabel('Phase Displacement (radians)');
-% grid on;
+% freqz(b, a, 1024, fs);
+% title('Frequency Response of the All-Pass Filter');
+%% Processing SLOW
+% simout = sim('FBv1_SLOW2DOF_with_TowerDamper.mdl');
+% Parameter.TD.gain = 0;%0.0424;
+TDFlag = 0;
+simoutClassic = sim('FBv1_SLOW2DOF_with_TowerDamper.mdl');
 
-%% Filter signal - Simulink time domain
+t = simoutClassic.tout;
+x_dotdot = simoutClassic.logsout.get('y').Values.x_T_dotdot.Data;
+x_dot = simoutClassic.logsout.get('y').Values.x_T_dot.Data;
 
-SimulationTmax = t(end);
-dt             = SimulationTmax/length(t);
-Enable_LP       = 1;
-Enable_HP       = 1;
+%% Test Filter Design
+% Parameter.TD.gain = 0.04;
+TDFlag = 1;
+simout = sim('FBv1_SLOW2DOF_with_TowerDamper.mdl');
+x_dot_est = simout.logsout.get('y').Values.x_T_dot.Data;
+figure
+hold on; grid on;
+plot(t,x_dot)
+plot(simout.tout,x_dot_est)
+ylabel('$\dot x_T$ [m/s]','Interpreter','latex')
+xlabel('$t$ [s]','Interpreter','latex')
+legend('reference','estimated')
 
-% FIR Hilbert Filter
-fs = 1000;             % Sampling frequency
-N = 64;                % Filter order (adjust based on precision requirements)
-h = -firpm(N, [0.1 0.9], [1 1], 'hilbert'); % FIR Hilbert transform filter
+%% Check frequencies
+Y_1 = fft(x_dotdot);
+Y_2 = fft(simout.logsout.get('y').Values.x_T_dotdot.Data);
+fs =  1/Parameter.Time.dt;      % Sampling frequency  [Hz]
+T = 1/fs;                       % Sampling period     [s]       
+L = Parameter.Time.TMax/T+1;    % Length of signal    [-]
 
-% All-Pass Filter
-fs = 1000;               % Sampling frequency
-f_interest = 10;         % Frequency of interest
-omega = 2 * pi * f_interest / fs;
-
-% All-pass filter coefficients for +90° shift
-b = [1 cos(omega)]; % Numerator
-a = [1 -cos(omega)];% Denuminator
-
-simout = sim("TestFilter.slx");
-
-tsim = simout.tout;
-S_n = simout.logsout.get('d').Values.d.Data;
-S_LP = simout.logsout.get('y_LP').Values.y_LP.Data;
-S_HP = simout.logsout.get('y_all').Values.y_HP.Data;
-y = simout.logsout.get('y').Values.y.Data;
+% Compute the two-sided spectrum P2. Then compute the single-sided spectrum P1 based on P2 and the even-valued signal length L.
+P2 = abs(Y_1/L);
+P2_2 = abs(Y_2/L);
+P1 = P2(1:L/2+1);
+P1_2 = P2_2(1:L/2+1);
+P1(2:end-1) = 2*P1(2:end-1);
+P1_2(2:end-1) = 2*P1_2(2:end-1);
+% Define the frequency domain f and plot the single-sided amplitude spectrum P1
+f = fs*(0:(L/2))/L;
 
 figure
 hold on; grid on;
-plot(tsim(1:100)*1000,S_n(1:100))
-plot(tsim(1:100)*1000,S_LP(1:100))
-plot(tsim(1:100)*1000,S_HP(1:100))
-plot(tsim(1:100)*1000,y(1:100))
-ylabel('X(t)')
-xlabel('t[ms]')
-legend('Unfilterd','LP-filtered','LP+HP-filterd','Filtered+shifted')
-
+plot(f,P1) 
+plot(f,P1_2)
+title("Single-Sided Amplitude Spectrum of X(t)")
+xlabel("f (Hz)")
+ylabel("|P1(f)|")
+legend('Integrator','Filtered')

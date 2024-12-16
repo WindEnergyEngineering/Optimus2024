@@ -14,6 +14,10 @@ Parameter                           = DefaultParameter_FBv1_ADv14(Parameter);
 % Time
 Parameter.Time.dt                   = 1/10;             % [s] simulation time step            
 Parameter.Time.TMax                 = 3600;             % [s] simulation length
+% Test stuff
+f_c_LP = 1;
+f_c_HP = 0.1;
+TDFlag = 1;
 
 % wind
 OP = 20;                            

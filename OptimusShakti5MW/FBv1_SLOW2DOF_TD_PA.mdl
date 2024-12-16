@@ -18,6 +18,7 @@ __MWOPC_PART_BEGIN__ /[Content_Types].xml
   <Override ContentType="application/vnd.mathworks.simulink.configSetInfo+xml" PartName="/simulink/configSetInfo.xml"/>
   <Override ContentType="application/vnd.mathworks.simulink.graphicalInterface+xml" PartName="/simulink/graphicalInterface.xml"/>
   <Override ContentType="application/vnd.mathworks.simulink.mf0+xml" PartName="/simulink/modelDictionary.xml"/>
+  <Override ContentType="application/vnd.mathworks.simulink.pluginParameters+xml" PartName="/simulink/plugins/LogicAnalyzerPlugin.xml"/>
   <Override ContentType="application/vnd.mathworks.simulink.pluginParameters+xml" PartName="/simulink/plugins/SimscapeModelParametersPlugin.xml"/>
   <Override ContentType="application/vnd.mathworks.simulink.pluginParameters+xml" PartName="/simulink/plugins/sl_paper_props.xml"/>
   <Override ContentType="application/vnd.mathworks.simulink.ScheduleCore+xml" PartName="/simulink/ScheduleCore.xml"/>
@@ -44,10 +45,10 @@ __MWOPC_PART_BEGIN__ /metadata/coreProperties.xml
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <cp:coreProperties xmlns:cp="http://schemas.openxmlformats.org/package/2006/metadata/core-properties" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcmitype="http://purl.org/dc/dcmitype/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <cp:category>model</cp:category>
-  <dcterms:created xsi:type="dcterms:W3CDTF">2024-12-09T16:33:51Z</dcterms:created>
+  <dcterms:created xsi:type="dcterms:W3CDTF">2024-12-16T11:24:48Z</dcterms:created>
   <cp:lastModifiedBy>felix</cp:lastModifiedBy>
-  <dcterms:modified xsi:type="dcterms:W3CDTF">2024-12-09T16:33:51Z</dcterms:modified>
-  <cp:revision>19.10</cp:revision>
+  <dcterms:modified xsi:type="dcterms:W3CDTF">2024-12-16T11:24:48Z</dcterms:modified>
+  <cp:revision>19.11</cp:revision>
   <cp:version>R2022b</cp:version>
 </cp:coreProperties>
 
@@ -62,7 +63,7 @@ __MWOPC_PART_BEGIN__ /metadata/mwcoreProperties.xml
 __MWOPC_PART_BEGIN__ /metadata/mwcorePropertiesExtension.xml
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <mwcoreProperties xmlns="http://schemas.mathworks.com/package/2014/corePropertiesExtension">
-  <uuid>101394a5-126c-4e42-87e5-e188d6bc58cb</uuid>
+  <uuid>bf2468c6-1970-4bb0-a823-631b9bbcdec0</uuid>
 </mwcoreProperties>
 
 __MWOPC_PART_BEGIN__ /metadata/mwcorePropertiesReleaseInfo.xml
@@ -79,6 +80,7 @@ __MWOPC_PART_BEGIN__ /metadata/mwcorePropertiesReleaseInfo.xml
 __MWOPC_PART_BEGIN__ /simulink/_rels/blockdiagram.xml.rels
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">
+  <Relationship Id="LogicAnalyzerPlugin" Target="plugins/LogicAnalyzerPlugin.xml" Type="http://schemas.mathworks.com/simulinkModel/2014/relationships/pluginParameters"/>
   <Relationship Id="ScheduleCore" Target="ScheduleCore.xml" Type="http://schemas.mathworks.com/simulink/2013/relationships/ScheduleCore"/>
   <Relationship Id="ScheduleEditor" Target="ScheduleEditor.xml" Type="http://schemas.mathworks.com/simulink/2013/relationships/ScheduleEditor"/>
   <Relationship Id="SimscapeModelParametersPlugin" Target="plugins/SimscapeModelParametersPlugin.xml" Type="http://schemas.mathworks.com/simulinkModel/2014/relationships/pluginParameters"/>
@@ -121,7 +123,7 @@ __MWOPC_PART_BEGIN__ /simulink/blockdiagram.xml
     <ConfigManagerSettings>
       <P Name="ModifiedByFormat">%&lt;Auto&gt;</P>
       <P Name="ModifiedDateFormat">%&lt;Auto&gt;</P>
-      <P Name="ModelVersionFormat">%&lt;AutoIncrement:19.10&gt;</P>
+      <P Name="ModelVersionFormat">%&lt;AutoIncrement:19.11&gt;</P>
     </ConfigManagerSettings>
     <EditorSettings>
       <P Name="LibraryLinkDisplay">all</P>
@@ -1094,10 +1096,16 @@ Dynamic</P>
 __MWOPC_PART_BEGIN__ /simulink/modelDictionary.xml
 <?xml version="1.0" encoding="UTF-8"?>
 <MF0 version="1.1" defaultPackage="slid" packageUris="http://schema.mathworks.com/mf0/slid/R2022b_20220222">
-  <System type="System" uuid="840b425f-61b8-498b-acce-41746d8b0c9f">
-    <Interface type="Interface" uuid="8d6783ca-ce88-46c1-ab45-62e5b9500088"/>
+  <System type="System" uuid="77a4d6ab-46e9-4265-bdf9-ce40460aa019">
+    <Interface type="Interface" uuid="87a54795-a41a-4fe2-a1c0-6d1fdff25b7a"/>
   </System>
 </MF0>
+__MWOPC_PART_BEGIN__ /simulink/plugins/LogicAnalyzerPlugin.xml
+<?xml version="1.0" encoding="utf-8"?>
+<LogicAnalyzerPlugin>
+  <P Name="LogicAnalyzerSignalOrdering">137c04fe-69c9-4db1-a0e7-06ce154c2f20,fbcd491a-6fc6-4bd0-83e9-fce3eb7a317f,f2b654e4-9941-46d2-ac12-c14161fb02c1</P>
+</LogicAnalyzerPlugin>
+
 __MWOPC_PART_BEGIN__ /simulink/plugins/SimscapeModelParametersPlugin.xml
 <?xml version="1.0" encoding="utf-8"?>
 <SimscapeModelParametersPlugin>
@@ -1115,27 +1123,27 @@ __MWOPC_PART_BEGIN__ /simulink/plugins/sl_paper_props.xml
 __MWOPC_PART_BEGIN__ /simulink/ScheduleCore.xml
 <?xml version="1.0" encoding="UTF-8"?>
 <sltp_graph version="1.1" packageUris="http://schema.mathworks.com/mf0/sltp_mm/R2022b_202203181029">
-  <sltp.mm.core.Context type="sltp.mm.core.Context" uuid="48b7d8da-71db-4d7d-8c6b-c0434a6d914b">
+  <sltp.mm.core.Context type="sltp.mm.core.Context" uuid="8013c8d9-829d-4045-81c2-1d9a936b64a9">
     <priorityDirection>HighNumberLast</priorityDirection>
     <editorState type="sltp.mm.core.EditorState" uuid="0647afc4-2d7e-4dc0-9f75-a9f8d73e74dc">
       <isSynchronized>true</isSynchronized>
       <panelState type="sltp.mm.core.EditorPanelState" uuid="6acfc5e6-394e-4664-b786-550139e83162"/>
     </editorState>
-    <rootTask type="sltp.mm.core.Task" uuid="b16114a1-a4f9-4456-83b1-5c0c8dbde5a1">
-      <context type="sltp.mm.core.Context" uuid="48b7d8da-71db-4d7d-8c6b-c0434a6d914b"/>
+    <rootTask type="sltp.mm.core.Task" uuid="3126a2d4-a57b-44be-aa5d-45f1b30aeadf">
+      <context type="sltp.mm.core.Context" uuid="8013c8d9-829d-4045-81c2-1d9a936b64a9"/>
       <explicit>false</explicit>
       <name>Default</name>
       <priority>-2147483648</priority>
-      <subgraph type="sltp.mm.core.Graph" uuid="dcda1760-d568-4c6d-b988-8b37b3daae9f">
-        <tasks type="sltp.mm.core.Task" uuid="6bab0e1b-7447-4ed5-9225-b9f2bb438144">
+      <subgraph type="sltp.mm.core.Graph" uuid="2eff72e8-99b6-4804-8f50-b1a4a25a0c9b">
+        <tasks type="sltp.mm.core.Task" uuid="fe1aae2e-9cea-4b40-bd60-f2a7d329cf6e">
           <baseTask>true</baseTask>
-          <context type="sltp.mm.core.Context" uuid="48b7d8da-71db-4d7d-8c6b-c0434a6d914b"/>
+          <context type="sltp.mm.core.Context" uuid="8013c8d9-829d-4045-81c2-1d9a936b64a9"/>
           <explicit>false</explicit>
           <id>1</id>
           <isTimed>true</isTimed>
           <name>Cont</name>
           <priority>40</priority>
-          <rates type="sltp.mm.core.Rate" uuid="1759b8b7-de49-434f-8726-46188b27da06">
+          <rates type="sltp.mm.core.Rate" uuid="bd00b460-026b-46d4-a078-331dcbaa291c">
             <annotation>Cont</annotation>
             <color>255</color>
             <hasBlocks>true</hasBlocks>
@@ -1145,12 +1153,13 @@ __MWOPC_PART_BEGIN__ /simulink/ScheduleCore.xml
             </rateSpec>
             <sti>0</sti>
           </rates>
-          <rates type="sltp.mm.core.Rate" uuid="9e8147ba-d6c1-4723-8ff2-b24e97e3b853">
-            <annotation>D1</annotation>
-            <color>-436207361</color>
+          <rates type="sltp.mm.core.Rate" uuid="5b658d0d-7313-4b66-9d61-526bbcb517b5">
+            <annotation>FiM</annotation>
+            <color>-2139062017</color>
             <hasBlocks>true</hasBlocks>
             <rateSpec type="sltp.mm.core.RateSpec">
-              <period>.1</period>
+              <offset>1.0</offset>
+              <period>0.0</period>
             </rateSpec>
             <sti>1</sti>
           </rates>
@@ -1191,10 +1200,10 @@ __MWOPC_PART_BEGIN__ /simulink/ScheduleEditor.xml
           <title>Cont</title>
         </rates>
         <rates type="sltp.mm.syntax.RateData">
-          <color>#e60000</color>
+          <color>#808080</color>
           <hasBlocks>true</hasBlocks>
-          <rate>0.1</rate>
-          <title>D1</title>
+          <rate>[0, 1]</rate>
+          <title>FiM</title>
         </rates>
         <title>Cont</title>
         <type>base</type>
@@ -7036,8 +7045,8 @@ __MWOPC_PART_BEGIN__ /simulink/windowsInfo.xml
           <P Name="LoadSaveID" Class="char">7379</P>
           <P Name="Extents" Class="double">[1875.0, 743.0]</P>
           <P Name="ZoomFactor" Class="double">1.2499999999999998</P>
-          <P Name="Offset" Class="double">[-109.43912995765447, 1.3367380875736217]</P>
-          <P Name="SceneRectInView" Class="double">[-109.43912995765447, 1.3367380875736217, 1200.0000000000002, 475.5200000000001]</P>
+          <P Name="Offset" Class="double">[-109.43912995765447, 1.33673808757365]</P>
+          <P Name="SceneRectInView" Class="double">[-109.43912995765447, 1.33673808757365, 1200.0000000000002, 475.5200000000001]</P>
         </Object>
         <Object ObjectID="6">
           <P Name="IsActive" Class="logical">0</P>
