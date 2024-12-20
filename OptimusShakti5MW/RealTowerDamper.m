@@ -6,55 +6,55 @@ clearvars;close all;clc;
 
 %% PreProcessing SLOW
 
-% % Default Parameter Turbine and Controller
-% Parameter                           = DefaultParameter_SLOW2DOF;
-% Parameter                           = DefaultParameter_PitchActuator(Parameter);
-% Parameter                           = DefaultParameter_FBv1_ADv14(Parameter);
-% 
-% % Time
-% Parameter.Time.dt                   = 1/10;             % [s] simulation time step            
-% Parameter.Time.TMax                 = 3600;             % [s] simulation length
-% 
-% 
-% % wind
-% OP = 20;                            
-% load(['wind/URef_',num2str(OP,'%02d'),'_Disturbance'],'Disturbance')              
-% 
-% % Initial Conditions from SteadyStates
-% SteadyStates = load('SteadyStatesShakti5MW_classic.mat','v_0','Omega','theta','x_T','M_g');                       
-% Parameter.IC.Omega          	    = interp1(SteadyStates.v_0,SteadyStates.Omega   ,OP,'linear','extrap');
-% Parameter.IC.theta          	    = interp1(SteadyStates.v_0,SteadyStates.theta   ,OP,'linear','extrap');
-% Parameter.IC.x_T                    = interp1(SteadyStates.v_0,SteadyStates.x_T     ,OP,'linear','extrap');
-% Parameter.IC.M_g                    = interp1(SteadyStates.v_0,SteadyStates.M_g     ,OP,'linear','extrap');
-
 % Default Parameter Turbine and Controller
 Parameter                           = DefaultParameter_SLOW2DOF;
 Parameter                           = DefaultParameter_PitchActuator(Parameter);
 Parameter                           = DefaultParameter_FBv1_ADv14(Parameter);
 
 % Time
-Parameter.Time.dt                   = 1/10;            % [s] simulation time step            
-Parameter.Time.TMax                 = 60;            % [s] simulation length
+Parameter.Time.dt                   = 1/10;             % [s] simulation time step            
+Parameter.Time.TMax                 = 3600;             % [s] simulation length
 
-% Wind
-DeltaU                              = 1;
-URef                                = 20;                
-Disturbance.v_0.time                = [0;     0.01;      	30];            % [s]      time points to change wind speed
-Disturbance.v_0.signals.values      = [URef;  URef+DeltaU;  URef+DeltaU];   % [m/s]    wind speeds  
+
+% wind
+OP = 20;                            
+load(['wind/URef_',num2str(OP,'%02d'),'_Disturbance'],'Disturbance')              
 
 % Initial Conditions from SteadyStates
 SteadyStates = load('SteadyStatesShakti5MW_classic.mat','v_0','Omega','theta','x_T','M_g');                       
-Parameter.IC.Omega          	    = interp1(SteadyStates.v_0,SteadyStates.Omega   ,URef,'linear','extrap');
-Parameter.IC.theta          	    = interp1(SteadyStates.v_0,SteadyStates.theta   ,URef,'linear','extrap');
-Parameter.IC.x_T                    = interp1(SteadyStates.v_0,SteadyStates.x_T     ,URef,'linear','extrap');
-Parameter.IC.M_g          	        = interp1(SteadyStates.v_0,SteadyStates.M_g     ,URef,'linear','extrap');
+Parameter.IC.Omega          	    = interp1(SteadyStates.v_0,SteadyStates.Omega   ,OP,'linear','extrap');
+Parameter.IC.theta          	    = interp1(SteadyStates.v_0,SteadyStates.theta   ,OP,'linear','extrap');
+Parameter.IC.x_T                    = interp1(SteadyStates.v_0,SteadyStates.x_T     ,OP,'linear','extrap');
+Parameter.IC.M_g                    = interp1(SteadyStates.v_0,SteadyStates.M_g     ,OP,'linear','extrap');
+
+% Default Parameter Turbine and Controller
+% Parameter                           = DefaultParameter_SLOW2DOF;
+% Parameter                           = DefaultParameter_PitchActuator(Parameter);
+% Parameter                           = DefaultParameter_FBv1_ADv14(Parameter);
+% 
+% % Time
+% Parameter.Time.dt                   = 1/10;            % [s] simulation time step            
+% Parameter.Time.TMax                 = 60;            % [s] simulation length
+% 
+% % Wind
+% DeltaU                              = 1;
+% URef                                = 20;                
+% Disturbance.v_0.time                = [0;     0.01;      	30];            % [s]      time points to change wind speed
+% Disturbance.v_0.signals.values      = [URef;  URef+DeltaU;  URef+DeltaU];   % [m/s]    wind speeds  
+% 
+% % Initial Conditions from SteadyStates
+% SteadyStates = load('SteadyStatesShakti5MW_classic.mat','v_0','Omega','theta','x_T','M_g');                       
+% Parameter.IC.Omega          	    = interp1(SteadyStates.v_0,SteadyStates.Omega   ,URef,'linear','extrap');
+% Parameter.IC.theta          	    = interp1(SteadyStates.v_0,SteadyStates.theta   ,URef,'linear','extrap');
+% Parameter.IC.x_T                    = interp1(SteadyStates.v_0,SteadyStates.x_T     ,URef,'linear','extrap');
+% Parameter.IC.M_g          	        = interp1(SteadyStates.v_0,SteadyStates.M_g     ,URef,'linear','extrap');
 %% Real Tower damper design
 
 f_3P            = Parameter.CPC.Omega_g_rated/2/pi; % [Hz]      3P under rated conditions. Here the TD is active
 f_Tower         = 0.28;                              % [Hz]      Eigenfrequency of the Tower
 fs              = Parameter.Time.TMax/Parameter.Time.dt;
 lag             = 0.8;
-% LP Design
+%% LP Design
 f_c_LP = 0.44;
 w_0_LP = f_c_LP*2*pi;
 num_LP = [w_0_LP];
@@ -67,7 +67,7 @@ figure
 hold on;grid on;
 bode(H_LP)
 
-% Notch Design 
+%% Notch Design 
 f_c_N = 1;%f_3P;
 w_0_N = f_c_N*2*pi;
 D = 0.01;
@@ -82,7 +82,7 @@ figure
 grid on;
 bode(H_N)
 
-% HP Design
+%% HP Design
 f_c_HP = 0.2;
 w_0_HP = f_c_HP*2*pi;
 num_HP = [1 0];
@@ -94,6 +94,29 @@ disp('---------------------------------------------------------------------')
 figure
 grid on
 bode(H_HP)
+
+
+%% Lead-Lag 
+tau_1 = 0.01;
+tau_2 = 28.2;
+tau_3 = 2;
+tau_4 = 0.563;
+H_LL = tf([tau_1*tau_3 tau_1+tau_3 1],[tau_2*tau_4 tau_2+tau_4 1])
+disp('--- LL-Filter ---------------------------------------------')
+damp(H_LL)
+disp('---------------------------------------------------------------------')
+figure
+grid on
+bode(H_LL)
+
+% PZ map
+figure
+hold on
+pzmap(H_LL)
+z1 = -100;
+z2 = -0.5;
+p1 = -1.7762;
+p2 = -0.0355;
 
 % % All Pass design
 % Sampling frequency and parameters
@@ -118,7 +141,8 @@ bode(H_HP)
 % title('Frequency Response of the All-Pass Filter');
 %% Processing SLOW
 % simout = sim('FBv1_SLOW2DOF_with_TowerDamper.mdl');
-Parameter.TD.gain = 0;%0.0424;
+Parameter.TD.gain = 0.0424;
+Gain_LL = 0.02;
 TDFlag = 0;
 EnableFilter = 0;
 simoutClassic = sim('FBv1_SLOW2DOF_with_TowerDamper.mdl');
@@ -129,6 +153,7 @@ x_dot = simoutClassic.logsout.get('y').Values.x_T_dot.Data;
 
 %% Test Filter Design
 %Parameter.TD.gain = 0.05;
+Gain_LL = 0.015;
 TDFlag = 1;
 EnableFilter = 1;
 simout = sim('FBv1_SLOW2DOF_with_TowerDamper.mdl');
@@ -143,14 +168,14 @@ xlabel('$t$ [s]','Interpreter','latex')
 xlim([0 60])
 legend('reference speed','estimated speed','reference acceleration')
 
-% figure
-% hold on; grid on;
-% plot(t,x_dot)
-% plot(simout.tout,simout.logsout.get('y').Values.x_T_dot.Data)
-% ylabel('$\dot x_T$ [m/s]','Interpreter','latex')
-% xlabel('$t$ [s]','Interpreter','latex')
-% xlim([0 60])
-% legend('reference','estimated')
+figure
+hold on; grid on;
+plot(t,x_dot)
+plot(simout.tout,simout.logsout.get('y').Values.x_T_dot.Data)
+ylabel('$\dot x_T$ [m/s]','Interpreter','latex')
+xlabel('$t$ [s]','Interpreter','latex')
+xlim([0 60])
+legend('reference','estimated')
 
 %% Check frequencies
 Y_1 = fft(x_dot);
