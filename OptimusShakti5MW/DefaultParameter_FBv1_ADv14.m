@@ -7,13 +7,10 @@ Parameter.CPC.kp                        = 0.025;                          	% [s]
 Parameter.CPC.Ti                        = 10;                               % [s]       % integral gain, brute-force-optimized
 
 Parameter.CPC.Omega_g_rated             = rpm2radPs(428.5);                 % [rad/s]   % rated generator speed, from Shakti - Geno team 24/11/24 fle
-Parameter.CPC.theta_min                 = deg2rad(1.2);                     % [rad]     % pitch angle in region 1-2.5, brute-force optimized
-Parameter.CPC.theta_PS                  = deg2rad(7);                       % [rad]     % min pitch angle at rated for peak shaving, first guess, from fle 25/11/24 !!! needs Brute-force optimization !!!
-Parameter.CPC.v_PS                      = 7.6;                              % [m/s]     % wind speed to start peak shaving, first guess, from fle 25/11/24 !!! needs Brute-force optimization !!!
-Parameter.CPC.PS                        = [0 Parameter.CPC.theta_min;Parameter.CPC.v_PS Parameter.CPC.theta_min; 10.5211 Parameter.CPC.theta_PS];   % peak shaving look-up table [v_i theta_i] 10.5211 => v_rated !!! has to be adjusted if changed
+Parameter.CPC.theta_min                 = deg2rad(0.5);                     % [rad]     % pitch angle in region 1-2.5, brute-force optimized
 %% Torque Controller
-Parameter.VSC.kp                        = 19929.189128;                             % [Nm/(rad/s)]  % proportional gain, first guess (adjusted shakti 03.12 task design script, JP)
-Parameter.VSC.Ti                        = 2.146985;                              % [s]           % integral gain, first guess (adjusted shakti 03.12 task design script, JP)
+Parameter.VSC.kp                        = 27928.661741;                             % [Nm/(rad/s)]  % proportional gain, first guess (adjusted shakti 03.12 task design script, JP)
+Parameter.VSC.Ti                        = 2.196201;                              % [s]           % integral gain, first guess (adjusted shakti 03.12 task design script, JP)
 % Parameter.VSC.k                         = 1.9;                              % [Nm/(rad/s)^2]% gain region 2, brute-force-optimized
 Parameter.VSC.k                         = .5 * Parameter.General.rho * pi ... % [Nm/(rad/s)^2]% gain region 2, first guess: cp 0.48, lambda 8.75
                                           * Parameter.Turbine.R^5 * .48 / ...
@@ -27,7 +24,7 @@ Parameter.VSC.Omega_g_1d5               = rpm2radPs(300);                   % [r
 
 Parameter.VSC.Delta_Omega_g             = 0.10*Parameter.CPC.Omega_g_rated; % [rad/s]   % over-/under-speed limit for setpoint-fading, first guess
 Parameter.VSC.Delta_theta               = deg2rad(20);                      % [rad]     % change of pitch angle at which under-speed limit should be reached, brute-force-optimized
-Parameter.VSC.Delta_P                   = 4.95e6;                          	% [W]       % change of power at which over-speed limit should be reached, first guess
+Parameter.VSC.Delta_P                   = 5e6;                          	% [W]       % change of power at which over-speed limit should be reached, first guess
 
 %% Filter Generator Speed
 Parameter.Filter.LowPass.Enable         = 1;                                % [0/1]     % flag to enable low pass filter for generator speed
@@ -45,8 +42,19 @@ Parameter.TD.Power                      = [0 0.8 1 1.1] * P_a_rated;    % [W]
 Parameter.TD.Value                      = [0 0 1 1];
 
 %% Filter Tower Damper
+% Omega Filter
 Parameter.Filter.LowPassTowerDamper.Enable       	    = 1;
 Parameter.Filter.LowPassTowerDamper.f_cutoff     	    = 0.5/pi/2;                % [Hz]
+
+% x_T_dotdot Filter
+Parameter.TD.RealTD.Enable              = 1;
+Parameter.TD.LowPass.f_cutoff           = 0.5;          % [Hz]
+Parameter.TD.HighPass.f_cutoff          = 0.2;          % [Hz]
+% Lead-Lag-Compensator
+Parameter.TD.LeadLagCompensator.Pole1   = -0.125;
+Parameter.TD.LeadLagCompensator.Pole2   = -2.86e-2;
+Parameter.TD.LeadLagCompensator.Zero1   = -100;
+Parameter.TD.LeadLagCompensator.Zero2   = -0.2;
                              
 %% helper functions
 function y = rpm2radPs(u)
