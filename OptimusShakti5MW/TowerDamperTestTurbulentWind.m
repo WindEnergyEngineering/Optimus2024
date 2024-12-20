@@ -14,10 +14,7 @@ Parameter                           = DefaultParameter_FBv1_ADv14(Parameter);
 % Time
 Parameter.Time.dt                   = 1/10;             % [s] simulation time step            
 Parameter.Time.TMax                 = 3600;             % [s] simulation length
-% Test stuff
-f_c_LP = 1;
-f_c_HP = 0.1;
-TDFlag = 1;
+
 
 % wind
 OP = 20;                            
@@ -35,6 +32,7 @@ TD1_PA = sim('FBv1_SLOW2DOF_TD_PA.mdl','ReturnWorkspaceOutputs','on');
 Parameter.TD.gain  = 0;
 TD0_PA = sim('FBv1_SLOW2DOF_TD_PA.mdl','ReturnWorkspaceOutputs','on');
 TD0 = sim('FBv1_SLOW2DOF_with_TowerDamper.mdl','ReturnWorkspaceOutputs','on');
+
 %% PostProcessing SLOW
 
 % estimate spectra
