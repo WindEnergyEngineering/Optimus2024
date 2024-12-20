@@ -1,14 +1,14 @@
 clearvars;close all;clc;bdclose;
-addpath(genpath('..\WetiMatlabFunctions'))
+% addpath(genpath('..\WetiMatlabFunctions'))
+addpath(genpath('C:\Users\Julius\Documents\GitHub\Optimus2024\WetiMatlabFunctions'));
 addpath(genpath('Simulink'))
 %% PreProcessing SLOW for all simulations
-
 % Parameter to optimize:
 % Region 2 -> k: OptFlag = 1;
 % Region 3 -> k_p:  OptFlag = 2; 
 % Region 2.5 -> delta P: OptFlag = 3;
 % Region 3 -> theta_k:  OptFlag = 4;
-OptFlag = 2; 
+OptFlag = 2;
 
 % Default Parameter Turbine and Controller
 Parameter                       = DefaultParameter_SLOW2DOF;
@@ -51,6 +51,11 @@ n               = length(Delta);
 Distribution    = k/C*(URef_v/C).^(k-1).*exp(-(URef_v/C).^k);
 Weights         = Distribution/sum(Distribution); % relative frequency
 
+% Variables
+Overspeed_all   = [];
+Wind_all        = [];
+k_all           = [];
+tic
 for i = 1:n
 
     if OptFlag == 1
@@ -69,13 +74,13 @@ for i = 1:n
         URef                	= URef_v(iURef);
 %         load(['wind\URef_',num2str(URef,'%02d'),'_Disturbance'],'Disturbance')
         for iSeed = 1:nSeeds
-            TurbSimResultFile = ['TurbulentWind/URef_',num2str(URef,'%02d'),'_Seed_',num2str(iSeed,'%02d'),'.wnd'];
+            TurbSimResultFile = ['Windfields_local/URef_',num2str(URef,'%02d'),'_Seed_',num2str(iSeed,'%02d'),'.wnd'];
             [v_0,t] = CalculateREWSfromWindField(TurbSimResultFile,Parameter.Turbine.R,1);
             u_RE(:,iSeed) = v_0;
         end
         U_RE = u_RE';
         U_RE = U_RE(:);
-                 
+        
         Disturbance.v_0.time = [0:Parameter.Time.dt:Parameter.Time.TMax]';
         Disturbance.v_0.signals.values = U_RE;
         
@@ -95,7 +100,13 @@ for i = 1:n
         c                       = rainflow(sim_out.logsout.get('y').Values.M_yT.Data);
         Count                   = c(:,1);
         Range                   = c(:,2);
-        DEL_MyT(iURef)          = (sum(Range.^WoehlerExponent.*Count)/N_REF).^(1/WoehlerExponent);       
+        DEL_MyT(iURef)          = (sum(Range.^WoehlerExponent.*Count)/N_REF).^(1/WoehlerExponent);
+        Wind_all                = [Wind_all sim_out.logsout.get('d').Values.v_0.Data'];
+        Overspeed_all           = [Overspeed_all sim_out.logsout.get('y').Values.Omega.Data'];
+        % ACHTUNG!
+        % ACHTUNG!
+        % ACHTUNG! so far only for Parameter.CPC.kp
+        k_all                   = [k_all Parameter.CPC.kp*ones(1,length(sim_out.logsout.get('d').Values.v_0.Data))]; 
     end
     
     % Calculate Annual energy production and lifetime-weighted DEL
@@ -104,7 +115,7 @@ for i = 1:n
     Overspeed(:,i) = Omega_max./(Parameter.CPC.Omega_g_rated/Parameter.Turbine.r_GB);
     DEL_MyT_LTW(:,i) = (Weights .*DEL_MyT .^WoehlerExponent).^(1/WoehlerExponent); 
 end
-
+toc
 %% Plot Brute Force Optimization Results
 figure
 subplot(211)
@@ -155,3 +166,65 @@ if OptFlag == 4 || OptFlag == 2
     legend(legendEntries, 'Location', 'best');
 end
 
+%% binning wind speed and overspeed data
+
+% plot histogram for plausibility check
+figure
+histogram(Wind_all)
+
+% bin data
+NumberOfBins = length(URef_v)*20;
+[N,edges,bin] = histcounts(Wind_all,NumberOfBins);
+% generate array from data set
+SpeedAndWind = [ 
+                Wind_all;
+                Overspeed_all;
+                bin;
+                k_all;
+                ]'; % [wind speed, rot speed, bin number, k-value]
+% self speaking variables for indexing
+WindSpeedi      = 1;
+RotSpeedi       = 2;
+BinNumberi      = 3;
+KValuei         = 4;
+
+% categorize by wind speed bin
+RotSpeedsByBin  = zeros(length(SpeedAndWind),max(bin));
+WindSpeedsByBin = zeros(length(SpeedAndWind),max(bin));
+kByBin          = zeros(length(SpeedAndWind),max(bin));
+for i=1:length(SpeedAndWind)
+    BinNumber                       = SpeedAndWind(i,BinNumberi);
+    RotSpeedsByBin(i,BinNumber)     = SpeedAndWind(i,RotSpeedi);
+    kByBin(i,BinNumber)             = SpeedAndWind(i,KValuei); % most important safe k value
+    WindSpeedsByBin(i,BinNumber)    = SpeedAndWind(i,WindSpeedi); % also safe the wind speed
+end
+
+[MaxOverspeedPerBin,index] = max(RotSpeedsByBin,[],1); % maximum for each bin (column)
+kValues = [];
+windValues = [];
+for i = 1:length(index)
+    kValues(i) = kByBin(index(i),i);
+    windValues(i) = WindSpeedsByBin(index(i),i);
+end
+
+figure
+subplot(121)
+hold on;
+plot(windValues,MaxOverspeedPerBin./(Parameter.CPC.Omega_g_rated/Parameter.Turbine.r_GB),'.-','Markersize',20)
+ylabel('Overspeed')
+xlabel('wind speed [m/s]');
+grid
+subplot(122)
+stem(windValues,kValues)
+ylabel('k values')
+xlabel('wind speed [m/s]');
+grid
+
+figure
+scatter(windValues,MaxOverspeedPerBin./(Parameter.CPC.Omega_g_rated/Parameter.Turbine.r_GB),[],kValues,'filled')
+colorbar
+grid
+ylabel('Overspeed')
+xlabel('wind speed [m/s]');
+% Outputs:
+fprintf('Number of bins: %02d \n',NumberOfBins)
