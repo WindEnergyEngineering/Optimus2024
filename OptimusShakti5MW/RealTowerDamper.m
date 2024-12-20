@@ -5,7 +5,7 @@
 % 3: Turbulent Test
 clearvars;close all;clc;
 
-TestFlag = 3;
+TestFlag = 1;
 
 % Default Parameter Turbine and Controller
 Parameter                           = DefaultParameter_SLOW2DOF;
@@ -44,6 +44,22 @@ if TestFlag == 1
     figure
     grid on
     bode(H_HP)
+
+    % Lag
+    T_1 = -0.125;
+    T_2 = -100;
+    H_Lag = tf([1 T_1],[1 T_2])
+    disp('--- Lag-Filter ---------------------------------------------')
+    damp(H_Lag)
+    disp('---------------------------------------------------------------------')
+    figure
+    grid on
+    bode(H_Lag)
+    
+    % PZ map
+    figure
+    hold on
+    pzmap(H_Lag)
 
     % Lead-Lag 
     tau_1 = 0.01;
