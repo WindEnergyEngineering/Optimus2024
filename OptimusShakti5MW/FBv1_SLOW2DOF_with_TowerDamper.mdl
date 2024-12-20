@@ -49,7 +49,7 @@ __MWOPC_PART_BEGIN__ /metadata/coreProperties.xml
   <cp:category>model</cp:category>
   <dcterms:created xsi:type="dcterms:W3CDTF">2024-12-20T16:39:49Z</dcterms:created>
   <cp:lastModifiedBy>felix</cp:lastModifiedBy>
-  <dcterms:modified xsi:type="dcterms:W3CDTF">2024-12-20T21:02:54Z</dcterms:modified>
+  <dcterms:modified xsi:type="dcterms:W3CDTF">2024-12-20T21:09:51Z</dcterms:modified>
   <cp:revision>19.180</cp:revision>
   <cp:version>R2022b</cp:version>
 </cp:coreProperties>
@@ -1318,27 +1318,27 @@ __MWOPC_PART_BEGIN__ /simulink/plugins/sl_paper_props.xml
 __MWOPC_PART_BEGIN__ /simulink/ScheduleCore.xml
 <?xml version="1.0" encoding="UTF-8"?>
 <sltp_graph version="1.1" packageUris="http://schema.mathworks.com/mf0/sltp_mm/R2022b_202203181029">
-  <sltp.mm.core.Context type="sltp.mm.core.Context" uuid="0f655f74-ac2f-4934-88bf-ad8bcab7e409">
+  <sltp.mm.core.Context type="sltp.mm.core.Context" uuid="ba23e209-7027-4eab-9dc6-4481dea89b4d">
     <priorityDirection>HighNumberLast</priorityDirection>
     <editorState type="sltp.mm.core.EditorState" uuid="0647afc4-2d7e-4dc0-9f75-a9f8d73e74dc">
       <isSynchronized>true</isSynchronized>
       <panelState type="sltp.mm.core.EditorPanelState" uuid="6acfc5e6-394e-4664-b786-550139e83162"/>
     </editorState>
-    <rootTask type="sltp.mm.core.Task" uuid="679c3cba-1a62-461c-932d-987f00b7460d">
-      <context type="sltp.mm.core.Context" uuid="0f655f74-ac2f-4934-88bf-ad8bcab7e409"/>
+    <rootTask type="sltp.mm.core.Task" uuid="2fe62ea5-bc88-4925-a72b-7b84ab8a3f2a">
+      <context type="sltp.mm.core.Context" uuid="ba23e209-7027-4eab-9dc6-4481dea89b4d"/>
       <explicit>false</explicit>
       <name>Default</name>
       <priority>-2147483648</priority>
-      <subgraph type="sltp.mm.core.Graph" uuid="244df4ef-0691-4930-a76a-e808ddfde240">
-        <tasks type="sltp.mm.core.Task" uuid="4467f6ef-d38f-4e31-bb62-9ede236b3d3c">
+      <subgraph type="sltp.mm.core.Graph" uuid="c66ad4f9-4723-491a-8cf4-7cbf7a1b9aa9">
+        <tasks type="sltp.mm.core.Task" uuid="4d0cd2b3-bba8-409c-903b-c95c13fe71f1">
           <baseTask>true</baseTask>
-          <context type="sltp.mm.core.Context" uuid="0f655f74-ac2f-4934-88bf-ad8bcab7e409"/>
+          <context type="sltp.mm.core.Context" uuid="ba23e209-7027-4eab-9dc6-4481dea89b4d"/>
           <explicit>false</explicit>
           <id>1</id>
           <isTimed>true</isTimed>
           <name>Cont</name>
           <priority>40</priority>
-          <rates type="sltp.mm.core.Rate" uuid="78fb4019-044e-41ae-91e1-0bdd29123db6">
+          <rates type="sltp.mm.core.Rate" uuid="43574099-092d-4c22-b4a2-4761d64631a5">
             <annotation>Cont</annotation>
             <color>255</color>
             <hasBlocks>true</hasBlocks>
@@ -1348,7 +1348,7 @@ __MWOPC_PART_BEGIN__ /simulink/ScheduleCore.xml
             </rateSpec>
             <sti>0</sti>
           </rates>
-          <rates type="sltp.mm.core.Rate" uuid="e9163ecb-00ab-4999-adf3-45541d66bf55">
+          <rates type="sltp.mm.core.Rate" uuid="614dc894-3d24-41fb-92b0-5c0943ca08c1">
             <annotation>D1</annotation>
             <color>-436207361</color>
             <hasBlocks>true</hasBlocks>
