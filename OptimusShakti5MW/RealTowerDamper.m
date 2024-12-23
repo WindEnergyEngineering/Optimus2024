@@ -46,9 +46,9 @@ if TestFlag == 1
     bode(H_HP)
 
     % Lag
-    T_1 = -0.125;
-    T_2 = -100;
-    H_Lag = tf([1 T_1],[1 T_2])
+    T_1 = 0.125;
+    T_2 = 100;
+    H_Lag = tf([1 T_2],[1 T_1])
     disp('--- Lag-Filter ---------------------------------------------')
     damp(H_Lag)
     disp('---------------------------------------------------------------------')
@@ -106,6 +106,7 @@ if TestFlag ==2
     Parameter.IC.M_g          	        = interp1(SteadyStates.v_0,SteadyStates.M_g     ,URef,'linear','extrap');
 
     % Processing SLOW
+    FlagFiltertype = 1; 
     Parameter.TD.gain = 0;
     TDFlag = 0;
     simout_pure = sim('FBv1_SLOW2DOF_with_TowerDamper.mdl');
@@ -118,8 +119,13 @@ if TestFlag ==2
 
     Parameter.TD.gain = 0.00085;
     TDFlag = 1;
+    FlagFiltertype = 1;             % Lead-Lag:= 1; Lag:= 0
     simout = sim('FBv1_SLOW2DOF_with_TowerDamper.mdl');
     x_dot_est = simout.logsout.get('logTD').Values.x_dot_est.Data;
+    
+    FlagFiltertype = 0;             % Lead-Lag:= 1; Lag:= 0
+    simout_lag = sim('FBv1_SLOW2DOF_with_TowerDamper.mdl');
+    x_dot_est_lag = simout.logsout.get('logTD').Values.x_dot_est.Data;
 
     % Plot Results
     figure
@@ -127,21 +133,23 @@ if TestFlag ==2
     hold on; grid on;
     plot(t,simoutClassic.logsout.get('logTD').Values.x_dot_est.Data)
     plot(simout.tout,x_dot_est.*0.01)
+    plot(simout_lag.tout,x_dot_est_lag.*0.01)
     plot(t,x_dotdot)
     ylabel('$\dot x_T$ [m/s]','Interpreter','latex')
     xlabel('$t$ [s]','Interpreter','latex')
     xlim([0 60])
-    legend('integrated speed estimation','filtered speed estimation','acceleration reference',Location='best')
+    legend('integrated speed estimation','filtered speed estimation','filtered speed estimation (pure lag)','acceleration reference',Location='best')
     
     figure
     title('Tower-Top-Speed')
     hold on; grid on;
     plot(t,x_dot)
     plot(simout.tout,simout.logsout.get('y').Values.x_T_dot.Data)
+    plot(simout_lag.tout,simout_lag.logsout.get('y').Values.x_T_dot.Data)
     ylabel('$\dot x_T$ [m/s]','Interpreter','latex')
     xlabel('$t$ [s]','Interpreter','latex')
     xlim([0 60])
-    legend('TD: Integrator','TD: Filter')
+    legend('TD: Integrator','TD: Filter','TD: Filter (pure lag)',Location='best')
 end
 
 %% Test TD: Turbulent Wind
@@ -165,6 +173,7 @@ if TestFlag ==3
     Parameter.IC.M_g                    = interp1(SteadyStates.v_0,SteadyStates.M_g     ,OP,'linear','extrap');
     
     % Processing SLOW
+    FlagFiltertype = 1;             % Lead-Lag:= 1; Lag:= 0
     Parameter.TD.gain = 0;
     TDFlag = 0;
     simout_pure = sim('FBv1_SLOW2DOF_with_TowerDamper.mdl');
@@ -174,6 +183,8 @@ if TestFlag ==3
     TDFlag = 1;
     simout = sim('FBv1_SLOW2DOF_with_TowerDamper.mdl');
     t = simoutClassic.tout;
+    FlagFiltertype = 0;             % Lead-Lag:= 1; Lag:= 0
+    simout_lag = sim('FBv1_SLOW2DOF_with_TowerDamper.mdl');
 
     % Spectrum analysis
     % estimate spectra
@@ -184,6 +195,8 @@ if TestFlag ==3
     [S_M_yT_pure,~]         = pwelch(detrend(M_yT_pure,  'constant'),nDataPerBlock,[],[],SamplingFrequency);
     M_yT_ref                = simoutClassic.logsout.get('y').Values.M_yT.Data;
     [S_M_yT_ref,~]          = pwelch(detrend(M_yT_ref,  'constant'),nDataPerBlock,[],[],SamplingFrequency);
+    M_yT_est_lag            = simout_lag.logsout.get('y').Values.M_yT.Data;
+    [S_M_yT_est_lag,~]      = pwelch(detrend(M_yT_est_lag,  'constant'),nDataPerBlock,[],[],SamplingFrequency);
     M_yT_est                = simout.logsout.get('y').Values.M_yT.Data;
     [S_M_yT_est,f_est]      = pwelch(detrend(M_yT_est,  'constant'),nDataPerBlock,[],[],SamplingFrequency);
     
@@ -193,10 +206,11 @@ if TestFlag ==3
     plot(f_est,S_M_yT_pure)
     plot(f_est,S_M_yT_ref)
     plot(f_est,S_M_yT_est)
+    plot(f_est,S_M_yT_est_lag)
     set(gca,'xScale','log')
     set(gca,'yScale','log')
     ylabel('[(Nm)^2/Hz]')
-    legend('No TD','TD: Integrator','TD: Filter','Location','best')
+    legend('No TD','TD: Integrator','TD: Filter','TD: Filter (pure lag)','Location','best')
     xlabel('frequency [Hz]')
 end
 
