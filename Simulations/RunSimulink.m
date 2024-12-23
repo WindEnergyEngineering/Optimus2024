@@ -67,11 +67,11 @@ for i = 1:n
     elseif OptFlag == 4
         Parameter.CPC.theta_K = deg2rad(Delta(i)); 
     end
-         
+    Overspeed_k   = [];
+    Wind_k        = [];
+    k_k           = [];   
     for iURef = 1:nURef
-        Overspeed_k   = [];
-        Wind_k        = [];
-        k_k           = [];
+
         % Load wind speed
         URef                	= URef_v(iURef);
 %         load(['wind\URef_',num2str(URef,'%02d'),'_Disturbance'],'Disturbance')
@@ -178,7 +178,7 @@ kmatrix = cell(n,1);
 
 for j = 1:n    
     % bin data
-    NumberOfBins = length(URef_v)*4;
+    NumberOfBins = length(URef_v)*3;
     [N,edges,bin] = histcounts(cell2mat(Wind_all(j)),NumberOfBins);
     % generate array from data set
     SpeedAndWind = [ 
@@ -224,9 +224,10 @@ hold on;box on;
 for h = 1:length(kmatrix)
     plot(kmatrix{h}(:, 3), kmatrix{h}(:, 1)./(Parameter.CPC.Omega_g_rated/Parameter.Turbine.r_GB),'.-','Markersize',20)
 end
-legend(legendEntries, 'Location', 'best');
+xlim([8 24])
 ylabel('Overspeed')
 xlabel('wind speeds [m/s]');
+legend(legendEntries, 'Location', 'best');
 
 
 %     figure
