@@ -1,6 +1,13 @@
 clearvars;close all;clc;bdclose;
-% addpath(genpath('..\WetiMatlabFunctions'))
-addpath(genpath('C:\Users\Julius\Documents\GitHub\Optimus2024\WetiMatlabFunctions'));
+% Generate Windfolder 
+if ~exist('TurbulentWind','dir')
+    mkdir TurbulentWind
+    % Copy lokal wind folder
+    copyfile(['C:\Users\felix\Documents\Optimus\Simulations\TurbulentWind'],['TurbulentWind'])
+end
+% Load function files
+addpath(genpath('TurbulentWind'))
+addpath(genpath('..\WetiMatlabFunctions'))
 addpath(genpath('Simulink'))
 %% PreProcessing SLOW for all simulations
 % Parameter to optimize:
@@ -31,9 +38,9 @@ SteadyStates = load('SteadyStatesShakti5MW_classic.mat','v_0','Omega','theta','x
 %% DLC 1.2
 
 if OptFlag == 1
-    Delta           = [44:2:48]; % Values for k [Nm/(rad/s)^2]
+    Delta           = [42:0.1:44]; % Values for k [Nm/(rad/s)^2]
 elseif OptFlag == 2
-    Delta           = [0.01:0.005:0.05]; % Values for k_p pitch [s]
+    Delta           = [0.01:0.005:0.035]; % Values for k_p pitch [s]
 elseif OptFlag == 3
     Delta           = [4.8e6:1e5:5.2e6]; % Values for delta P [W]
 elseif OptFlag == 4
@@ -76,7 +83,7 @@ for i = 1:n
         URef                	= URef_v(iURef);
 %         load(['wind\URef_',num2str(URef,'%02d'),'_Disturbance'],'Disturbance')
         for iSeed = 1:nSeeds
-            TurbSimResultFile = ['Windfields_local/URef_',num2str(URef,'%02d'),'_Seed_',num2str(iSeed,'%02d'),'.wnd'];
+            TurbSimResultFile = ['TurbulentWind/URef_',num2str(URef,'%02d'),'_Seed_',num2str(iSeed,'%02d'),'.wnd'];
             [v_0,t] = CalculateREWSfromWindField(TurbSimResultFile,Parameter.Turbine.R,1);
             u_RE(:,iSeed) = v_0;
         end
@@ -251,3 +258,6 @@ legend(legendEntries, 'Location', 'best');
 %     xlabel('wind speed [m/s]');
     % Outputs:
     fprintf('Number of bins: %02d \n',NumberOfBins)
+
+%% Clean up
+rmdir 'TurbulentWind' s
