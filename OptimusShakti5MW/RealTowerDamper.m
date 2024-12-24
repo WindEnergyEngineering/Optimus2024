@@ -5,7 +5,7 @@
 % 3: Turbulent Test
 clearvars;close all;clc;
 
-TestFlag = 1;
+TestFlag = 3;
 
 % Default Parameter Turbine and Controller
 Parameter                           = DefaultParameter_SLOW2DOF;
