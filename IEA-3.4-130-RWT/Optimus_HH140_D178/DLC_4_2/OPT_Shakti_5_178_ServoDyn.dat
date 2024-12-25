@@ -9,9 +9,9 @@ default                DT          - Communication interval for controllers (s) 
 150.0                TPitManS(1) - Time to start override pitch maneuver for blade 1 and end standard pitch control (s)
 150.0                TPitManS(2) - Time to start override pitch maneuver for blade 2 and end standard pitch control (s)
 150.0                TPitManS(3) - Time to start override pitch maneuver for blade 3 and end standard pitch control (s) [unused for 2 blades]
-5.0                    PitManRat(1) - Pitch rate at which override pitch maneuver heads toward final pitch angle for blade 1 (deg/s)
-5.0                    PitManRat(2) - Pitch rate at which override pitch maneuver heads toward final pitch angle for blade 2 (deg/s)
-5.0                    PitManRat(3) - Pitch rate at which override pitch maneuver heads toward final pitch angle for blade 3 (deg/s) [unused for 2 blades]
+2.0                    PitManRat(1) - Pitch rate at which override pitch maneuver heads toward final pitch angle for blade 1 (deg/s)
+2.0                    PitManRat(2) - Pitch rate at which override pitch maneuver heads toward final pitch angle for blade 2 (deg/s)
+2.0                    PitManRat(3) - Pitch rate at which override pitch maneuver heads toward final pitch angle for blade 3 (deg/s) [unused for 2 blades]
 90.0                   BlPitchF(1) - Blade 1 final pitch for pitch maneuvers (degrees)
 90.0                   BlPitchF(2) - Blade 2 final pitch for pitch maneuvers (degrees)
 90.0                   BlPitchF(3) - Blade 3 final pitch for pitch maneuvers (degrees) [unused for 2 blades]
