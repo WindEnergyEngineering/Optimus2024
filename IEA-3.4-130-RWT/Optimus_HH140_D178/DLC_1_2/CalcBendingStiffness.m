@@ -130,5 +130,5 @@ legend('TTDspFA','TwrTpTDxi','YawBrTDxp')
 format compact;
 % inital tower top deflection from basic fit of F_a over x_t for zero force
 x_T0 = -0.021 % [m]
-k_Te = F_a_elastodyn./(x_t-x_T0);
-k_Te = mean(k_Te)
+k_Te = F_a_elastodyn./(x_t-x_T0); % [N/m]
+k_Te = mean(k_Te) % [N/m]
