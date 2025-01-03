@@ -132,24 +132,25 @@ if TestFlag ==2
     title('Tower Damper Estimated Tower-Top-Speed')
     hold on; grid on;
     plot(t,simoutClassic.logsout.get('logTD').Values.x_dot_est.Data)
-    plot(simout.tout,x_dot_est.*0.01)
+    %plot(simout.tout,x_dot_est.*0.01)
     plot(simout_lag.tout,x_dot_est_lag.*0.01)
     plot(t,x_dotdot)
     ylabel('$\dot x_T$ [m/s]','Interpreter','latex')
     xlabel('$t$ [s]','Interpreter','latex')
     xlim([0 60])
-    legend('integrated speed estimation','filtered speed estimation','filtered speed estimation (pure lag)','acceleration reference',Location='best')
+    legend('Integrator speed estimation','Lag-Compensator speed estimation','acceleration reference',Location='best')
     
     figure
     title('Tower-Top-Speed')
     hold on; grid on;
+    plot(simout_pure.tout,simout_pure.logsout.get('y').Values.x_T_dot.Data)
     plot(t,x_dot)
-    plot(simout.tout,simout.logsout.get('y').Values.x_T_dot.Data)
+    %plot(simout.tout,simout.logsout.get('y').Values.x_T_dot.Data)
     plot(simout_lag.tout,simout_lag.logsout.get('y').Values.x_T_dot.Data)
     ylabel('$\dot x_T$ [m/s]','Interpreter','latex')
     xlabel('$t$ [s]','Interpreter','latex')
     xlim([0 60])
-    legend('TD: Integrator','TD: Filter','TD: Filter (pure lag)',Location='best')
+    legend('No TD','TD: Integrator','TD: Lag-Compensator',Location='best')
 end
 
 %% Test TD: Turbulent Wind
@@ -202,15 +203,15 @@ if TestFlag ==3
     
     figure
     hold on;grid on;box on
-    title('tower base bending moment spectrum')
+    title('Spectrum of the tower base bending moment')
     plot(f_est,S_M_yT_pure)
     plot(f_est,S_M_yT_ref)
-    plot(f_est,S_M_yT_est)
+%     plot(f_est,S_M_yT_est)
     plot(f_est,S_M_yT_est_lag)
     set(gca,'xScale','log')
     set(gca,'yScale','log')
     ylabel('[(Nm)^2/Hz]')
-    legend('No TD','TD: Integrator','TD: Filter','TD: Filter (pure lag)','Location','best')
+    legend('No TD','TD: Integrator','TD: Lag-Compensator','Location','best')
     xlabel('frequency [Hz]')
 end
 
