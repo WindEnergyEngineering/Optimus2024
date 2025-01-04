@@ -96,18 +96,18 @@ for j = 1:length(v)
 
 end
 % store results
-Disturbance.v_0.time = [0:0.1:25*3600-0.1];
+Disturbance.v_0.time = [0:0.1:24*3600-0.1];
 save('wind\WindVector3_(25_08_2024)','Disturbance','windfield','Parameter')
-
+t = Disturbance.v_0.time./3600;
 % plot results
 figure
 
-p = plot(Disturbance.v_0.signals.values,'x-','MarkerIndices',[36000:36000:length(Disturbance.v_0.signals.values)]);
+p = plot(t,Disturbance.v_0.signals.values,'x-','MarkerIndices',[36000:36000:length(Disturbance.v_0.signals.values)]);
 p.MarkerFaceColor = [1 0.5 0];
 p.MarkerSize = 8;
 p.MarkerEdgeColor = [1 0.5 0];
-title('Combined timeseries of Scenario X')
+% title('Combined timeseries of Scenario X')
 ylabel('v_0 [m/s]')
-xlabel('time [ds]')
+xlabel('time [h]')
 
 
