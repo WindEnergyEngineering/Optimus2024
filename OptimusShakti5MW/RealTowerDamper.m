@@ -141,7 +141,7 @@ if TestFlag ==2
     legend('Integrator speed estimation','Lag-Compensator speed estimation','acceleration reference',Location='best')
     
     figure
-    title('Tower-Top-Speed')
+    %title('Tower-Top-Speed')
     hold on; grid on;
     plot(simout_pure.tout,simout_pure.logsout.get('y').Values.x_T_dot.Data)
     plot(t,x_dot)
@@ -203,7 +203,7 @@ if TestFlag ==3
     
     figure
     hold on;grid on;box on
-    title('Spectrum of the tower base bending moment')
+%     title('Spectrum of the tower base bending moment')
     plot(f_est,S_M_yT_pure)
     plot(f_est,S_M_yT_ref)
 %     plot(f_est,S_M_yT_est)
