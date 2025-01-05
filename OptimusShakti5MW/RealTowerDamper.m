@@ -5,7 +5,7 @@
 % 3: Turbulent Test
 clearvars;close all;clc;
 
-TestFlag = 3;
+TestFlag = 2;
 
 % Default Parameter Turbine and Controller
 Parameter                           = DefaultParameter_SLOW2DOF;
@@ -141,7 +141,7 @@ if TestFlag ==2
     legend('Integrator speed estimation','Lag-Compensator speed estimation','acceleration reference',Location='best')
     
     figure
-    %title('Tower-Top-Speed')
+    title('Tower Top Speed (1 m/s Wind Step Response)')
     hold on; grid on;
     plot(simout_pure.tout,simout_pure.logsout.get('y').Values.x_T_dot.Data)
     plot(t,x_dot)
@@ -149,7 +149,7 @@ if TestFlag ==2
     plot(simout_lag.tout,simout_lag.logsout.get('y').Values.x_T_dot.Data)
     ylabel('$\dot x_T$ [m/s]','Interpreter','latex')
     xlabel('$t$ [s]','Interpreter','latex')
-    xlim([0 60])
+    xlim([0 40])
     legend('No TD','TD: Integrator','TD: Lag-Compensator',Location='best')
 end
 
@@ -203,7 +203,7 @@ if TestFlag ==3
     
     figure
     hold on;grid on;box on
-%     title('Spectrum of the tower base bending moment')
+    title('Spectrum of the Tower Base Bending Moment')
     plot(f_est,S_M_yT_pure)
     plot(f_est,S_M_yT_ref)
 %     plot(f_est,S_M_yT_est)
