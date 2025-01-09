@@ -5,7 +5,7 @@
 % 3: Turbulent Test
 clearvars;close all;clc;
 
-TestFlag = 1;
+TestFlag = 3;
 
 % Default Parameter Turbine and Controller
 Parameter                           = DefaultParameter_SLOW2DOF;
@@ -31,6 +31,7 @@ if TestFlag == 1
     figure
     hold on;grid on;
     bode(H_LP)
+    xline(f_Tower*2*pi)
 
     % HP Design
     f_c_HP = 0.2;
@@ -42,19 +43,24 @@ if TestFlag == 1
     damp(H_HP)
     disp('---------------------------------------------------------------------')
     figure
-    grid on
+    grid on; hold on;
     bode(H_HP)
+    xline(f_Tower*2*pi)
 
     % Lag
-    T_1 = 0.125;
-    T_2 = 100;
-    H_Lag = tf([1 T_2],[1 T_1])
+    phase_target_deg = -90;             %[deg]
+    [z,p] = calculate_lag_compensator(f_Tower,phase_target_deg);
+    T_1 = -0.125;
+    T_2 = -100;
+    H_Lag = tf([1 z],[1 p])
     disp('--- Lag-Filter ---------------------------------------------')
     damp(H_Lag)
     disp('---------------------------------------------------------------------')
     figure
-    grid on
+    grid on; hold on;
     bode(H_Lag)
+    xline(f_Tower*2*pi)
+    
     
     % PZ map
     figure
@@ -83,42 +89,44 @@ if TestFlag == 1
 %     p1 = -0.125;%-2;%-1.7762;
 %     p2 = -2.86e-2;%-0.0355;
 
-% Pitch Actuator (PT-2)
-omega = Parameter.PitchActuator.omega;
-D = Parameter.PitchActuator.xi;
-H_PA = tf([omega^2],[1 2*D*omega omega^2])
-disp('--- Pitch Actuator ---------------------------------------------')
-damp(H_PA)
-disp('---------------------------------------------------------------------')
-figure
-grid on;
-bode(H_PA)
-
-% Connect the model
-% Name inputs and outputs for each block
-H_LP.InputName = 'x_dotdot';
-H_LP.OutputName = 'x1_dotdot';
-
-H_HP.InputName = 'x1_dotdot';
-H_HP.OutputName = 'x2_dotdot';
-
-H_Lag.InputName = 'x2_dotdot';
-H_Lag.OutputName = 'Theta';
-
-H_PA.InputName = 'Theta_sum';  % Input to Pitch Actuator is the sum of Theta (TD-Filter) and Theta_c (Out of CPC)
-H_PA.OutputName = 'y';
-
-% Define the summing junction
-SumBlock = sumblk('Theta_sum = Theta + Theta_c');
-
-% Connect all systems
-% Specify overall system inputs as {'x', 'Theta_c'} and outputs as {'y'}
-Sys = connect(H_LP, H_HP, H_Lag, H_PA, SumBlock, {'x_dotdot', 'Theta_c'}, {'y'});
-
-% Bode plot
-bodeplot(Sys);
-grid on;
-xline(f_Tower)
+    % Pitch Actuator (PT-2)
+    omega = Parameter.PitchActuator.omega;
+    D = Parameter.PitchActuator.xi;
+    H_PA = tf([omega^2],[1 2*D*omega omega^2])
+    disp('--- Pitch Actuator ---------------------------------------------')
+    damp(H_PA)
+    disp('---------------------------------------------------------------------')
+    figure
+    grid on; hold on;
+    bode(H_PA)
+    xline(f_Tower*2*pi)
+    
+    % Connect the model
+    % Name inputs and outputs for each block
+    H_LP.InputName = 'x_dotdot';
+    H_LP.OutputName = 'x1_dotdot';
+    
+    H_HP.InputName = 'x1_dotdot';
+    H_HP.OutputName = 'x2_dotdot';
+    
+    H_Lag.InputName = 'x2_dotdot';
+    H_Lag.OutputName = 'Theta';
+    
+    H_PA.InputName = 'Theta_sum';  % Input to Pitch Actuator is the sum of Theta (TD-Filter) and Theta_c (Out of CPC)
+    H_PA.OutputName = 'y';
+    
+    % Define the summing junction
+    SumBlock = sumblk('Theta_sum = Theta + Theta_c');
+    
+    % Connect all systems
+    % Specify overall system inputs as {'x_dotdot', 'Theta_c'} and outputs as {'y'}
+    Sys = connect(H_LP, H_HP, H_Lag, H_PA, SumBlock, {'x_dotdot'}, {'y'});
+    
+    % Bode plot
+    figure
+    bodeplot(Sys);
+    grid on; hold on;
+    xline(f_Tower*2*pi)
 end
 
 %% Test TD: Windstep
@@ -170,7 +178,7 @@ if TestFlag ==2
     hold on; grid on;
     plot(t,simoutClassic.logsout.get('logTD').Values.x_dot_est.Data)
     %plot(simout.tout,x_dot_est.*0.01)
-    plot(simout_lag.tout,x_dot_est_lag.*0.01)
+    plot(simout_lag.tout,x_dot_est_lag) %.*0.01
     plot(t,x_dotdot)
     ylabel('$\dot x_T$ [m/s]','Interpreter','latex')
     xlabel('$t$ [s]','Interpreter','latex')
