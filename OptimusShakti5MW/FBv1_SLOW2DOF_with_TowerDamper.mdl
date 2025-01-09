@@ -46,10 +46,10 @@ __MWOPC_PART_BEGIN__ /metadata/coreProperties.xml
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <cp:coreProperties xmlns:cp="http://schemas.openxmlformats.org/package/2006/metadata/core-properties" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcmitype="http://purl.org/dc/dcmitype/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <cp:category>model</cp:category>
-  <dcterms:created xsi:type="dcterms:W3CDTF">2025-01-05T11:20:45Z</dcterms:created>
+  <dcterms:created xsi:type="dcterms:W3CDTF">2025-01-09T14:33:58Z</dcterms:created>
   <cp:lastModifiedBy>felix</cp:lastModifiedBy>
-  <dcterms:modified xsi:type="dcterms:W3CDTF">2025-01-05T11:20:45Z</dcterms:modified>
-  <cp:revision>19.188</cp:revision>
+  <dcterms:modified xsi:type="dcterms:W3CDTF">2025-01-09T14:33:58Z</dcterms:modified>
+  <cp:revision>19.189</cp:revision>
   <cp:version>R2022b</cp:version>
 </cp:coreProperties>
 
@@ -64,7 +64,7 @@ __MWOPC_PART_BEGIN__ /metadata/mwcoreProperties.xml
 __MWOPC_PART_BEGIN__ /metadata/mwcorePropertiesExtension.xml
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <mwcoreProperties xmlns="http://schemas.mathworks.com/package/2014/corePropertiesExtension">
-  <uuid>0730e5cc-0508-4335-9f7b-57afe211f176</uuid>
+  <uuid>9cdae57e-6515-4bf6-a575-c9b56330d503</uuid>
 </mwcoreProperties>
 
 __MWOPC_PART_BEGIN__ /metadata/mwcorePropertiesReleaseInfo.xml
@@ -123,7 +123,7 @@ __MWOPC_PART_BEGIN__ /simulink/blockdiagram.xml
     <ConfigManagerSettings>
       <P Name="ModifiedByFormat">%&lt;Auto&gt;</P>
       <P Name="ModifiedDateFormat">%&lt;Auto&gt;</P>
-      <P Name="ModelVersionFormat">%&lt;AutoIncrement:19.188&gt;</P>
+      <P Name="ModelVersionFormat">%&lt;AutoIncrement:19.189&gt;</P>
     </ConfigManagerSettings>
     <EditorSettings>
       <P Name="LibraryLinkDisplay">all</P>
@@ -1289,8 +1289,8 @@ Dynamic</P>
 __MWOPC_PART_BEGIN__ /simulink/modelDictionary.xml
 <?xml version="1.0" encoding="UTF-8"?>
 <MF0 version="1.1" defaultPackage="slid" packageUris="http://schema.mathworks.com/mf0/slid/R2022b_20220222">
-  <System type="System" uuid="33b34c55-d4ca-4e0c-9eef-1f1ce0f0e2af">
-    <Interface type="Interface" uuid="bd49c9dd-e614-4e96-a002-439af09ea077"/>
+  <System type="System" uuid="e86a8a55-13ab-4d1e-b682-a71f2712daba">
+    <Interface type="Interface" uuid="e5b85981-2084-40b8-a837-878b483b5012"/>
   </System>
 </MF0>
 __MWOPC_PART_BEGIN__ /simulink/plugins/SimscapeModelParametersPlugin.xml
@@ -1310,27 +1310,27 @@ __MWOPC_PART_BEGIN__ /simulink/plugins/sl_paper_props.xml
 __MWOPC_PART_BEGIN__ /simulink/ScheduleCore.xml
 <?xml version="1.0" encoding="UTF-8"?>
 <sltp_graph version="1.1" packageUris="http://schema.mathworks.com/mf0/sltp_mm/R2022b_202203181029">
-  <sltp.mm.core.Context type="sltp.mm.core.Context" uuid="2d5ef15c-c84e-4942-b202-3eed2a41c132">
+  <sltp.mm.core.Context type="sltp.mm.core.Context" uuid="388473e3-15ea-489e-bdf1-99d9fcffbd10">
     <priorityDirection>HighNumberLast</priorityDirection>
     <editorState type="sltp.mm.core.EditorState" uuid="0647afc4-2d7e-4dc0-9f75-a9f8d73e74dc">
       <isSynchronized>true</isSynchronized>
       <panelState type="sltp.mm.core.EditorPanelState" uuid="6acfc5e6-394e-4664-b786-550139e83162"/>
     </editorState>
-    <rootTask type="sltp.mm.core.Task" uuid="e2caf212-c0b1-418f-824b-614f0b783ee7">
-      <context type="sltp.mm.core.Context" uuid="2d5ef15c-c84e-4942-b202-3eed2a41c132"/>
+    <rootTask type="sltp.mm.core.Task" uuid="55d90525-adfd-4040-862a-8c2dc73d6172">
+      <context type="sltp.mm.core.Context" uuid="388473e3-15ea-489e-bdf1-99d9fcffbd10"/>
       <explicit>false</explicit>
       <name>Default</name>
       <priority>-2147483648</priority>
-      <subgraph type="sltp.mm.core.Graph" uuid="58f8858b-a183-46ff-be7d-aba4af4ea544">
-        <tasks type="sltp.mm.core.Task" uuid="0a8dc71a-8025-4296-945a-aa6af979fd0e">
+      <subgraph type="sltp.mm.core.Graph" uuid="9528b26a-9b90-4918-be2b-19d6836b87d4">
+        <tasks type="sltp.mm.core.Task" uuid="4f93639c-541a-462b-83d4-971c99163fd2">
           <baseTask>true</baseTask>
-          <context type="sltp.mm.core.Context" uuid="2d5ef15c-c84e-4942-b202-3eed2a41c132"/>
+          <context type="sltp.mm.core.Context" uuid="388473e3-15ea-489e-bdf1-99d9fcffbd10"/>
           <explicit>false</explicit>
           <id>1</id>
           <isTimed>true</isTimed>
           <name>Cont</name>
           <priority>40</priority>
-          <rates type="sltp.mm.core.Rate" uuid="1784fa4f-1840-4410-a2d5-b4b030c7229c">
+          <rates type="sltp.mm.core.Rate" uuid="d3a99785-6b56-4a7c-b2e0-2d29cbee17a2">
             <annotation>Cont</annotation>
             <color>255</color>
             <hasBlocks>true</hasBlocks>
@@ -1340,7 +1340,7 @@ __MWOPC_PART_BEGIN__ /simulink/ScheduleCore.xml
             </rateSpec>
             <sti>0</sti>
           </rates>
-          <rates type="sltp.mm.core.Rate" uuid="f09f77eb-e3fd-4385-9144-941591b8e4f5">
+          <rates type="sltp.mm.core.Rate" uuid="54b3ee5a-c44d-48a2-98b1-db1e60c5cdb3">
             <annotation>D1</annotation>
             <color>-436207361</color>
             <hasBlocks>true</hasBlocks>
@@ -6529,6 +6529,7 @@ __MWOPC_PART_BEGIN__ /simulink/systems/system_7625.xml
 <?xml version="1.0" encoding="utf-8"?>
 <System>
   <P Name="Location">[-1, -7, 1537, 817]</P>
+  <P Name="Open">on</P>
   <Block BlockType="Inport" Name="Omega_g [rad/s]" SID="7626">
     <P Name="Position">[375, 78, 405, 92]</P>
     <P Name="ZOrder">364</P>
@@ -8079,7 +8080,6 @@ __MWOPC_PART_BEGIN__ /simulink/systems/system_8102.xml
 <?xml version="1.0" encoding="utf-8"?>
 <System>
   <P Name="Location">[-1, -7, 1537, 817]</P>
-  <P Name="Open">on</P>
   <Block BlockType="Inport" Name="X" SID="8106">
     <P Name="Position">[385, 168, 415, 182]</P>
     <P Name="ZOrder">177</P>
@@ -8371,13 +8371,23 @@ __MWOPC_PART_BEGIN__ /simulink/windowsInfo.xml
           <P Name="IsActive" Class="logical">1</P>
           <P Name="IsTabbed" Class="logical">1</P>
           <P Name="ViewObjType" Class="char">SimulinkSubsys</P>
+          <P Name="LoadSaveID" Class="char">7625</P>
+          <P Name="Extents" Class="double">[1875.0, 743.0]</P>
+          <P Name="ZoomFactor" Class="double">1.0</P>
+          <P Name="Offset" Class="double">[209.02098679338178, -132.87569492872268]</P>
+          <P Name="SceneRectInView" Class="double">[209.02098679338178, -132.87569492872268, 1500.0, 594.4]</P>
+        </Object>
+        <Object ObjectID="6">
+          <P Name="IsActive" Class="logical">0</P>
+          <P Name="IsTabbed" Class="logical">0</P>
+          <P Name="ViewObjType" Class="char">SimulinkSubsys</P>
           <P Name="LoadSaveID" Class="char">8102</P>
           <P Name="Extents" Class="double">[1875.0, 743.0]</P>
           <P Name="ZoomFactor" Class="double">1.0</P>
           <P Name="Offset" Class="double">[-179.89999999999998, 0.0]</P>
           <P Name="SceneRectInView" Class="double">[-179.89999999999998, 0.0, 1500.0, 594.4]</P>
         </Object>
-        <Object ObjectID="6">
+        <Object ObjectID="7">
           <P Name="IsActive" Class="logical">0</P>
           <P Name="IsTabbed" Class="logical">0</P>
           <P Name="ViewObjType" Class="char">SimulinkSubsys</P>
@@ -8386,16 +8396,6 @@ __MWOPC_PART_BEGIN__ /simulink/windowsInfo.xml
           <P Name="ZoomFactor" Class="double">0.78885793871866283</P>
           <P Name="Offset" Class="double">[-834.874337923729, 31.252824858757037]</P>
           <P Name="SceneRectInView" Class="double">[-834.874337923729, 31.252824858757037, 1901.4830508474579, 753.49435028248593]</P>
-        </Object>
-        <Object ObjectID="7">
-          <P Name="IsActive" Class="logical">0</P>
-          <P Name="IsTabbed" Class="logical">0</P>
-          <P Name="ViewObjType" Class="char">SimulinkSubsys</P>
-          <P Name="LoadSaveID" Class="char">7625</P>
-          <P Name="Extents" Class="double">[1875.0, 743.0]</P>
-          <P Name="ZoomFactor" Class="double">1.0</P>
-          <P Name="Offset" Class="double">[209.02098679338178, -132.87569492872268]</P>
-          <P Name="SceneRectInView" Class="double">[209.02098679338178, -132.87569492872268, 1500.0, 594.4]</P>
         </Object>
         <Object ObjectID="8">
           <P Name="IsActive" Class="logical">0</P>
@@ -8810,6 +8810,18 @@ __MWOPC_PART_BEGIN__ /simulink/windowsInfo.xml
       </Array>
       <Array PropName="DockComponentsInfo" Type="Simulink.DockComponentInfo" Dimension="1*2">
         <Object ObjectID="49">
+          <P Name="Type" Class="char">GLUE2:PropertyInspector</P>
+          <P Name="ID" Class="char">Property Inspector</P>
+          <P Name="Visible" Class="logical">0</P>
+          <P Name="CreateCallback" Class="char"/>
+          <P Name="UserData" Class="char"/>
+          <P Name="Floating" Class="logical">0</P>
+          <P Name="DockPosition" Class="char">Right</P>
+          <P Name="Width" Class="int32">512</P>
+          <P Name="Height" Class="int32">384</P>
+          <P Name="Minimized" Class="char">Unset</P>
+        </Object>
+        <Object ObjectID="50">
           <P Name="Type" Class="char">Simulink:Editor:ReferencedFiles</P>
           <P Name="ID" Class="char">Referenced Files</P>
           <P Name="Visible" Class="logical">0</P>
@@ -8818,18 +8830,6 @@ __MWOPC_PART_BEGIN__ /simulink/windowsInfo.xml
 </P>
           <P Name="Floating" Class="logical">0</P>
           <P Name="DockPosition" Class="char">Left</P>
-          <P Name="Width" Class="int32">512</P>
-          <P Name="Height" Class="int32">384</P>
-          <P Name="Minimized" Class="char">Unset</P>
-        </Object>
-        <Object ObjectID="50">
-          <P Name="Type" Class="char">GLUE2:PropertyInspector</P>
-          <P Name="ID" Class="char">Property Inspector</P>
-          <P Name="Visible" Class="logical">0</P>
-          <P Name="CreateCallback" Class="char"/>
-          <P Name="UserData" Class="char"/>
-          <P Name="Floating" Class="logical">0</P>
-          <P Name="DockPosition" Class="char">Right</P>
           <P Name="Width" Class="int32">512</P>
           <P Name="Height" Class="int32">384</P>
           <P Name="Minimized" Class="char">Unset</P>
