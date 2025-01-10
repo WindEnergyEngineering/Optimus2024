@@ -16,7 +16,6 @@ Parameter                           = DefaultParameter_FBv1_ADv14(Parameter);
 
 if TestFlag == 1 
 
-    f_3P            = Parameter.CPC.Omega_g_rated/2/pi; % [Hz]      3P under rated conditions. Here the TD is active
     f_Tower         = 0.28;                             % [Hz]      Eigenfrequency of the Tower
 
     % LP Design
@@ -48,7 +47,7 @@ if TestFlag == 1
     xline(f_Tower*2*pi)
 
     % Lag
-    phase_target_deg = -90;             %[deg]
+    phase_target_deg = -70;             %[deg]
     [z,p] = calculate_lag_compensator(f_Tower,phase_target_deg);
     T_1 = -0.125;
     T_2 = -100;
@@ -110,17 +109,17 @@ if TestFlag == 1
     H_HP.OutputName = 'x2_dotdot';
     
     H_Lag.InputName = 'x2_dotdot';
-    H_Lag.OutputName = 'Theta';
+    H_Lag.OutputName = 'Theta_TD';
     
-    H_PA.InputName = 'Theta_sum';  % Input to Pitch Actuator is the sum of Theta (TD-Filter) and Theta_c (Out of CPC)
-    H_PA.OutputName = 'y';
+    H_PA.InputName = 'Theta_TD';  % Input to Pitch Actuator is the sum of Theta (TD-Filter) and Theta_c (Out of CPC)
+    H_PA.OutputName = 'Theta';
     
     % Define the summing junction
-    SumBlock = sumblk('Theta_sum = Theta + Theta_c');
+    %SumBlock = sumblk('Theta_c = Theta_TD + Theta_PI');
     
     % Connect all systems
     % Specify overall system inputs as {'x_dotdot', 'Theta_c'} and outputs as {'y'}
-    Sys = connect(H_LP, H_HP, H_Lag, H_PA, SumBlock, {'x_dotdot'}, {'y'});
+    Sys = connect(H_LP, H_HP, H_Lag, H_PA, {'x_dotdot'}, {'Theta'});
     
     % Bode plot
     figure
