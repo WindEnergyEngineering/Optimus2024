@@ -19,7 +19,7 @@ if TestFlag == 1
     f_Tower         = 0.28;                             % [Hz]      Eigenfrequency of the Tower
 
     % LP Design
-    f_c_LP = 0.5;
+    f_c_LP = f_Tower;%0.5;
     w_0_LP = f_c_LP*2*pi;
     num_LP = [w_0_LP];
     denum_LP = [1 w_0_LP];
@@ -33,7 +33,7 @@ if TestFlag == 1
     xline(f_Tower*2*pi)
 
     % HP Design
-    f_c_HP = 0.2;
+    f_c_HP = f_Tower;%0.2;
     w_0_HP = f_c_HP*2*pi;
     num_HP = [1 0];
     denum_HP = [1 w_0_HP];
@@ -47,7 +47,7 @@ if TestFlag == 1
     xline(f_Tower*2*pi)
 
     % Lag
-    phase_target_deg = -70;             %[deg]
+    phase_target_deg = -30;             %[deg]
     [z,p] = calculate_lag_compensator(f_Tower,phase_target_deg);
     T_1 = -0.125;
     T_2 = -100;
@@ -65,28 +65,6 @@ if TestFlag == 1
     figure
     hold on
     pzmap(H_Lag)
-
-%     % Lead-Lag 
-%     tau_1 = 0.01;
-%     tau_2 = 35;%28.2;
-%     tau_3 = 8;%5;
-%     tau_4 = 0.5;
-%     H_LL = tf([tau_1*tau_3 tau_1+tau_3 1],[tau_2*tau_4 tau_2+tau_4 1])
-%     disp('--- LL-Filter ---------------------------------------------')
-%     damp(H_LL)
-%     disp('---------------------------------------------------------------------')
-%     figure
-%     grid on
-%     bode(H_LL)
-%     
-%     % PZ map
-%     figure
-%     hold on
-%     pzmap(H_LL)
-%     z1 = -100;
-%     z2 = -0.2;
-%     p1 = -0.125;%-2;%-1.7762;
-%     p2 = -2.86e-2;%-0.0355;
 
     % Pitch Actuator (PT-2)
     omega = Parameter.PitchActuator.omega;
@@ -114,12 +92,11 @@ if TestFlag == 1
     H_PA.InputName = 'Theta_TD';  % Input to Pitch Actuator is the sum of Theta (TD-Filter) and Theta_c (Out of CPC)
     H_PA.OutputName = 'Theta';
     
-    % Define the summing junction
-    %SumBlock = sumblk('Theta_c = Theta_TD + Theta_PI');
+    
     
     % Connect all systems
     % Specify overall system inputs as {'x_dotdot', 'Theta_c'} and outputs as {'y'}
-    Sys = connect(H_LP, H_HP, H_Lag, H_PA, {'x_dotdot'}, {'Theta'});
+    Sys = connect(H_LP,  H_HP, H_Lag , H_PA, {'x_dotdot'}, {'Theta'});
     
     % Bode plot
     figure
@@ -150,51 +127,36 @@ if TestFlag ==2
     Parameter.IC.M_g          	        = interp1(SteadyStates.v_0,SteadyStates.M_g     ,URef,'linear','extrap');
 
     % Processing SLOW
-    FlagFiltertype = 1; 
-    Parameter.TD.gain = 0;
-    TDFlag = 0;
-    simout_pure = sim('FBv1_SLOW2DOF_with_TowerDamper.mdl');
-    Parameter.TD.gain = 0.0424;
-    simoutClassic = sim('FBv1_SLOW2DOF_with_TowerDamper.mdl');
-    
-    t = simoutClassic.tout;
-    x_dotdot = simoutClassic.logsout.get('y').Values.x_T_dotdot.Data;
-    x_dot = simoutClassic.logsout.get('y').Values.x_T_dot.Data;
 
-    Parameter.TD.gain = 0.00085;
-    TDFlag = 1;
-    FlagFiltertype = 1;             % Lead-Lag:= 1; Lag:= 0
-    simout = sim('FBv1_SLOW2DOF_with_TowerDamper.mdl');
-    x_dot_est = simout.logsout.get('logTD').Values.x_dot_est.Data;
+    % No TD but real PA (Pitch Actuator)
+    Parameter.TD.gain = 0;
+    simout_pure = sim('FBv1_SLOW2DOF_TD_PA.mdl');
     
-    FlagFiltertype = 0;             % Lead-Lag:= 1; Lag:= 0
-    simout_lag = sim('FBv1_SLOW2DOF_with_TowerDamper.mdl');
-    x_dot_est_lag = simout.logsout.get('logTD').Values.x_dot_est.Data;
+    % No PA Integrator
+    Parameter.TD.gain = 0.0424;
+    simout_ideal = sim('FBv1_SLOW2DOF_with_TowerDamper.mdl');
+    
+    t = simout_ideal.tout;
+    x_dotdot = simout_ideal.logsout.get('y').Values.x_T_dotdot.Data;
+    x_dot = simout_ideal.logsout.get('y').Values.x_T_dot.Data;
+
+    % PA + Lag filter string
+    %Parameter.TD.gain = 0.00085;
+    Parameter.TD.gain = Parameter.TD.gain / 15;
+    simout_lag = sim('FBv1_SLOW2DOF_TD_PA.mdl');
+    x_dot_lag = simout_lag.logsout.get('y').Values.x_T_dot.Data;
 
     % Plot Results
-    figure
-    title('Tower Damper Estimated Tower-Top-Speed')
-    hold on; grid on;
-    plot(t,simoutClassic.logsout.get('logTD').Values.x_dot_est.Data)
-    %plot(simout.tout,x_dot_est.*0.01)
-    plot(simout_lag.tout,x_dot_est_lag) %.*0.01
-    plot(t,x_dotdot)
-    ylabel('$\dot x_T$ [m/s]','Interpreter','latex')
-    xlabel('$t$ [s]','Interpreter','latex')
-    xlim([0 60])
-    legend('Integrator speed estimation','Lag-Compensator speed estimation','acceleration reference',Location='best')
-    
     figure
     title('Tower Top Speed (1 m/s Wind Step Response)')
     hold on; grid on;
     plot(simout_pure.tout,simout_pure.logsout.get('y').Values.x_T_dot.Data)
     plot(t,x_dot)
-    %plot(simout.tout,simout.logsout.get('y').Values.x_T_dot.Data)
-    plot(simout_lag.tout,simout_lag.logsout.get('y').Values.x_T_dot.Data)
+    plot(simout_lag.tout,x_dot_lag)
     ylabel('$\dot x_T$ [m/s]','Interpreter','latex')
     xlabel('$t$ [s]','Interpreter','latex')
     xlim([0 40])
-    legend('No TD','TD: Integrator','TD: Lag-Compensator',Location='best')
+    legend('No TD','TD: Integrator NO PA','TD: Lag-Compensator',Location='best')
 end
 
 %% Test TD: Turbulent Wind
@@ -218,18 +180,13 @@ if TestFlag ==3
     Parameter.IC.M_g                    = interp1(SteadyStates.v_0,SteadyStates.M_g     ,OP,'linear','extrap');
     
     % Processing SLOW
-    FlagFiltertype = 1;             % Lead-Lag:= 1; Lag:= 0
     Parameter.TD.gain = 0;
-    TDFlag = 0;
-    simout_pure = sim('FBv1_SLOW2DOF_with_TowerDamper.mdl');
+    simout_pure = sim('FBv1_SLOW2DOF_TD_PA.mdl');
     Parameter.TD.gain = 0.0424;
-    simoutClassic = sim('FBv1_SLOW2DOF_with_TowerDamper.mdl');
-    Parameter.TD.gain = 0.00085;
-    TDFlag = 1;
-    simout = sim('FBv1_SLOW2DOF_with_TowerDamper.mdl');
-    t = simoutClassic.tout;
-    FlagFiltertype = 0;             % Lead-Lag:= 1; Lag:= 0
-    simout_lag = sim('FBv1_SLOW2DOF_with_TowerDamper.mdl');
+    simout_ideal = sim('FBv1_SLOW2DOF_with_TowerDamper.mdl');
+    Parameter.TD.gain = Parameter.TD.gain / 15;    
+    simout_lag = sim('FBv1_SLOW2DOF_TD_PA.mdl');
+    t = simout_ideal.tout;
 
     % Spectrum analysis
     % estimate spectra
@@ -238,24 +195,22 @@ if TestFlag ==3
     nDataPerBlock           = round(length(t)/nBlocks);
     M_yT_pure               = simout_pure.logsout.get('y').Values.M_yT.Data;
     [S_M_yT_pure,~]         = pwelch(detrend(M_yT_pure,  'constant'),nDataPerBlock,[],[],SamplingFrequency);
-    M_yT_ref                = simoutClassic.logsout.get('y').Values.M_yT.Data;
+    M_yT_ref                = simout_ideal.logsout.get('y').Values.M_yT.Data;
     [S_M_yT_ref,~]          = pwelch(detrend(M_yT_ref,  'constant'),nDataPerBlock,[],[],SamplingFrequency);
     M_yT_est_lag            = simout_lag.logsout.get('y').Values.M_yT.Data;
-    [S_M_yT_est_lag,~]      = pwelch(detrend(M_yT_est_lag,  'constant'),nDataPerBlock,[],[],SamplingFrequency);
-    M_yT_est                = simout.logsout.get('y').Values.M_yT.Data;
-    [S_M_yT_est,f_est]      = pwelch(detrend(M_yT_est,  'constant'),nDataPerBlock,[],[],SamplingFrequency);
+    [S_M_yT_est_lag,f_est]      = pwelch(detrend(M_yT_est_lag,  'constant'),nDataPerBlock,[],[],SamplingFrequency);
+    
     
     figure
     hold on;grid on;box on
     title('Spectrum of the Tower Base Bending Moment')
     plot(f_est,S_M_yT_pure)
     plot(f_est,S_M_yT_ref)
-%     plot(f_est,S_M_yT_est)
     plot(f_est,S_M_yT_est_lag)
     set(gca,'xScale','log')
     set(gca,'yScale','log')
     ylabel('[(Nm)^2/Hz]')
-    legend('No TD','TD: Integrator','TD: Lag-Compensator','Location','best')
+    legend('No TD','TD: Integrator NO PA','TD: Lag-Compensator','Location','best')
     xlabel('frequency [Hz]')
 end
 
