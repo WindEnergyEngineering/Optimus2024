@@ -5,7 +5,7 @@
 % 3: Turbulent Test
 clearvars;close all;clc;
 
-TestFlag = 3;
+TestFlag = 2;
 
 % Default Parameter Turbine and Controller
 Parameter                           = DefaultParameter_SLOW2DOF;
@@ -47,7 +47,7 @@ if TestFlag == 1
     xline(f_Tower*2*pi)
 
     % Lag
-    phase_target_deg = -30;             %[deg]
+    phase_target_deg = -37.75;             %[deg]
     [z,p] = calculate_lag_compensator(f_Tower,phase_target_deg);
     T_1 = -0.125;
     T_2 = -100;
@@ -141,8 +141,8 @@ if TestFlag ==2
     x_dot = simout_ideal.logsout.get('y').Values.x_T_dot.Data;
 
     % PA + Lag filter string
-    %Parameter.TD.gain = 0.00085;
-    Parameter.TD.gain = Parameter.TD.gain / 15;
+    % Parameter.TD.gain = 0.00085;
+    Parameter.TD.gain = Parameter.TD.gain * 0.06;
     simout_lag = sim('FBv1_SLOW2DOF_TD_PA.mdl');
     x_dot_lag = simout_lag.logsout.get('y').Values.x_T_dot.Data;
 
@@ -156,7 +156,7 @@ if TestFlag ==2
     ylabel('$\dot x_T$ [m/s]','Interpreter','latex')
     xlabel('$t$ [s]','Interpreter','latex')
     xlim([0 40])
-    legend('No TD','TD: Integrator NO PA','TD: Lag-Compensator',Location='best')
+    legend('No TD','TD: Integrator NO PA','TD: Lag-Compensator',Location='best')%legend('No Tower Damper','Ideal Tower Damper',Location='northeast')
 end
 
 %% Test TD: Turbulent Wind
@@ -206,11 +206,11 @@ if TestFlag ==3
     title('Spectrum of the Tower Base Bending Moment')
     plot(f_est,S_M_yT_pure)
     plot(f_est,S_M_yT_ref)
-    plot(f_est,S_M_yT_est_lag)
+%     plot(f_est,S_M_yT_est_lag)
     set(gca,'xScale','log')
     set(gca,'yScale','log')
     ylabel('[(Nm)^2/Hz]')
-    legend('No TD','TD: Integrator NO PA','TD: Lag-Compensator','Location','best')
+    legend('No Tower Damper','Ideal Tower Damper',Location='northeast')%legend('No TD','TD: Integrator NO PA','TD: Lag-Compensator','Location','best')
     xlabel('frequency [Hz]')
 end
 

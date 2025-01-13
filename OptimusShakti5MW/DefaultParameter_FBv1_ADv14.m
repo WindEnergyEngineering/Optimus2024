@@ -51,9 +51,9 @@ Parameter.TD.RealTD.Enable              = 1;
 Parameter.TD.LowPass.f_cutoff           = 0.5;          % [Hz]
 Parameter.TD.HighPass.f_cutoff          = 0.2;          % [Hz]
 % Lead-Lag-Compensator
-Parameter.TD.LeadLagCompensator.Pole1   = -2.7727;%-0.125;
+Parameter.TD.LeadLagCompensator.Pole1   = -2.0798;%-0.125;
 Parameter.TD.LeadLagCompensator.Pole2   = -2.86e-2;
-Parameter.TD.LeadLagCompensator.Zero1   = -42.0808;%-100;
+Parameter.TD.LeadLagCompensator.Zero1   = -40.5960;%-100;
 Parameter.TD.LeadLagCompensator.Zero2   = -0.2;
                              
 %% helper functions
