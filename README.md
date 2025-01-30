@@ -7,7 +7,10 @@ This is the repository of the Wind Turbine development project from the 3. semes
 ```md
 Optimus2024
  ┣ .git
- ┣ IEA-3.4-130-RWT
+ ┣ ControllerDesignTools --> handy scripts for controller design
+ ┣ FAST-Simulations --> FAST model for load simulations
+ ┣ IEA3p4MW --> Base Simulink model
+ ┣ OptimusShakti5MW --> Simulink model
  ┣ PresentationTemplate
  ┣ .gitignore
  ┗ README.md
