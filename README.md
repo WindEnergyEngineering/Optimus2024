@@ -11,7 +11,6 @@ Optimus2024
  ┣ FAST-Simulations --> FAST model for load simulations
  ┣ IEA3p4MW --> Base Simulink model
  ┣ OptimusShakti5MW --> Simulink model
- ┣ PresentationTemplate
  ┣ .gitignore
  ┗ README.md
 ```
