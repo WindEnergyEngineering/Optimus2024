@@ -3,6 +3,7 @@
 
 ### LaTeX ###
 ## Core latex/pdflatex auxiliary files:
+*.bts
 *.aux
 *.lof
 *.log
@@ -590,3 +591,16 @@ $RECYCLE.BIN/
 *.lnk
 
 # End of https://www.toptal.com/developers/gitignore/api/windows,macos,linux,matlab,python,latex
+/IEA-3.4-130-RWT/IEA_HH140_D178/Turbsim files
+/IEA-3.4-130-RWT/IEA_HH140_D178/Turbsim files
+/IEA-3.4-130-RWT/IEA_HH140_D178/Turbsim files
+IEA-3.4-130-RWT/Optimus_HH140_D178/DLC_4_2/Outputs/DL42/2024-05-06_FASTOutViewer_V2-03.xlsx
+IEA-3.4-130-RWT/Optimus_HH140_D178/DLC_4_2/Outputs/DL42/2024-05-06_FASTOutViewer_V2-03.xlsx
+IEA-3.4-130-RWT/IEA_HH140_D178/DLC_4_2/Outputs/DL42/2024-05-06_FASTOutViewer_V2-03.xlsx
+*.xlsx
+/IEA-3.4-130-RWT/NREL-Tools
+*.wnd
+/IEA-3.4-130-RWT/IEA_HH140_D178/DLC_4_2/Turbsim files
+IEA-3.4-130-RWT/IEA_HH140_D178/DLC_4_2/Outputs/DLC42/New CTRL same channels as Carlo.rar
+IEA-3.4-130-RWT/IEA_HH140_D178/Turbsim files/Turbsim/TurbSim.inp
+IEA-3.4-130-RWT/Optimus_HH140_D178/Turbsim files/Turbsim/TurbSim.inp
